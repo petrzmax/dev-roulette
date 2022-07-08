@@ -1,0 +1,12 @@
+.bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    text-align: left;
+    color: white;
+}

@@ -1,0 +1,21 @@
+.circle {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    align-content: center;
+  }
+
+.text {
+    margin: auto;
+    font-weight:500;
+    color: white;
+    font-size: 30px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+}
