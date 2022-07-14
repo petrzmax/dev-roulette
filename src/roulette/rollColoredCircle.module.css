@@ -1,0 +1,13 @@
+.circle {
+    display: flex;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    align-content: center;
+}
+
+.text {
+    font-weight:500;
+    color: white;
+    margin: auto;
+}

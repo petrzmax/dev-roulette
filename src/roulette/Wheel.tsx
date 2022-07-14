@@ -8,7 +8,7 @@ export default function Wheel(props: wheelProps) {
       <div className={css.bar}>
         {getRouletteNumberSequence().map((value, index) => (
           <div className={`${css.tile} ${getFieldColor(value)}`} key={index}>
-            {value}
+            <p>{value}</p>
           </div>
         ))}
       </div>
