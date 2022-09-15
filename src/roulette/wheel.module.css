@@ -1,12 +1,22 @@
-.bar {
-    overflow: hidden;
-    white-space: nowrap;
+.rouletteBar {
+  overflow: hidden;
 }
 
-.tile {
-    display: inline-block;
-    width: 5em;
-    height: 5em;
-    text-align: left;
-    color: white;
+.tileContainer {
+  display: flex;
+  overflow: visible;
+  white-space: nowrap;
+  position: relative;
+  height: 5em;
+  width: 100%;
+}
+
+.tileContainer > div {
+  float: left;
+  width: 5em;
+  min-width: 5em;
+  height: 5em;
+  text-align: left;
+  color: white;
+  top: 0px;
 }

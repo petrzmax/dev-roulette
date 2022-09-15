@@ -1,6 +1,6 @@
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 
-export default function ManualBetPanel() {
+export default function AmountPanel() {
   return (
     <Card bg="light">
       <Card.Body>

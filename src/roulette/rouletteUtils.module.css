@@ -1,11 +1,11 @@
 .red {
-    background-color: #e92c28;
+    background-color: #e92c28 !important;
 }
 
 .green {
-    background-color: #009e3a;
+    background-color: #009e3a !important;
 }
 
 .black {
-    background-color: #424242;
+    background-color: #424242 !important;
 }
