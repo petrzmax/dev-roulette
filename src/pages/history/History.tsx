@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import RollColoredCircle from "../roulette/RollColoredCircle";
+import ColoredCircle from "../home/components/historyBar/coloredCircle/ColoredCircle";
 
 export default function History() {
   const data: historyProps[] = [
@@ -39,7 +39,7 @@ export default function History() {
             <td>{value.id}</td>
             <td>{value.seed}</td>
             <td>
-              <RollColoredCircle rolledNumber={value.result} />
+              <ColoredCircle rolledNumber={value.result} />
             </td>
             <td>{value.rollDate}</td>
           </tr>

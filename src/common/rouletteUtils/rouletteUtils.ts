@@ -1,10 +1,22 @@
 import css from "./rouletteUtils.module.css";
 
+const ROULETTE_NUMBER_SEQUENCE: ReadonlyArray<number> = [
+  0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24,
+  16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
+];
+
 export function getRouletteNumberSequence(): ReadonlyArray<number> {
-  return [
-    0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5,
-    24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
+  return ROULETTE_NUMBER_SEQUENCE;
+}
+
+export function getRandomRouletteNumber(): number {
+  return ROULETTE_NUMBER_SEQUENCE[
+    Math.floor(Math.random() * ROULETTE_NUMBER_SEQUENCE.length)
   ];
+}
+
+export function getNumberIndexByValue(value: number) {
+  return ROULETTE_NUMBER_SEQUENCE.findIndex((x) => x === value);
 }
 
 // In number ranges from 1 to 10 and 19 to 28, odd numbers are red and even are black.

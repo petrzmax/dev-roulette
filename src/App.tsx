@@ -2,8 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Menu from "./Menu";
-import Router from "./route-config";
+import Menu from "./common/menu/Menu";
+import Router from "./setup/router/Router";
 
 function App() {
   return (
