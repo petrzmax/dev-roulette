@@ -1,46 +1,49 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Card } from "react-bootstrap";
+import useSound from "use-sound";
+import clickSound from "../../../../assets/sounds/click.mp3";
 import {
   getFieldColor,
   getNumberIndexByValue,
   getRandomRouletteNumber,
   getRouletteNumberSequence,
-} from "../../../../common/rouletteUtils/rouletteUtils";
-import css from "./Wheel.module.css";
+} from "../../../../common/utils/rouletteUtils/rouletteUtils";
+import css from "./RouletteWheel.module.css";
 
 const CONTAINER_REPETITIONS = 5;
 
-export default function Wheel(props: wheelProps) {
+export default function RouletteWheel(props: wheelProps) {
+  const [playClick] = useSound(clickSound);
   const control = useAnimation();
   const rouletteBarRef = useRef<any>();
+  const defaultTransition = {
+    type: "tween",
+    duration: 10,
+  };
+
   let rouletteBarWidth: number;
+  let currentPosition: number;
 
   let initialPosition: { x: string } = { x: "" };
 
   useEffect(() => {
     window.addEventListener("resize", updateRouletteBarWidth);
-    updateRouletteBarWidth();
-    initialPosition = {
-      x: `calc(${positionToEM(getRandomStartPosition())} + ${
-        rouletteBarWidth / 2
-      }px)`,
-    };
-    control.start(initialPosition);
+    rouletteBarWidth = rouletteBarRef.current.clientWidth;
+    //setTransition({ type: "tween", duration: 0 });
+
+    currentPosition = getRandomStartPosition();
+    initialPosition = calculateAnimationForPosition(currentPosition);
+
+    control.set(initialPosition);
 
     return () => window.removeEventListener("resize", updateRouletteBarWidth);
   }, []);
 
-  const transition = {
-    type: "tween",
-    duration: 2,
-  };
-
   function updateRouletteBarWidth(): void {
     rouletteBarWidth = rouletteBarRef.current.clientWidth;
-    control.start({
-      x: `calc(${initialPosition} + ${rouletteBarWidth / 2}px)`,
-    });
+    control.set(calculateAnimationForPosition(currentPosition));
+    playClick();
   }
 
   function getRouletteTiles() {
@@ -71,17 +74,24 @@ export default function Wheel(props: wheelProps) {
     return `-${(offset + position) * tileSize}em`;
   }
 
+  function calculateAnimationForPosition(position: number) {
+    return {
+      x: `calc(${positionToEM(position)} + ${rouletteBarWidth / 2}px)`,
+    };
+  }
+
   return (
     <Card bg="light">
       <div
         className={css.rouletteBar}
         ref={rouletteBarRef}
-        onClick={() => control.start({ x: "-300em" })}
+        onClick={() => control.start({ x: 0 })}
       >
         <motion.div
           className={css.tileContainer}
+          initial={false}
           animate={control}
-          transition={transition}
+          transition={defaultTransition}
         >
           {getRouletteTiles()}
         </motion.div>

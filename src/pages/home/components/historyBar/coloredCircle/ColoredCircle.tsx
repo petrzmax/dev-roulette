@@ -1,4 +1,4 @@
-import { getFieldColor } from "../../../../../common/rouletteUtils/rouletteUtils";
+import { getFieldColor } from "../../../../../common/utils/rouletteUtils/rouletteUtils";
 import css from "./ColoredCircle.module.css";
 
 export default function ColoredCircle(props: rollColoredCircleProps) {
