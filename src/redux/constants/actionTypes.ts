@@ -1,0 +1,5 @@
+export const ActionTypes = {
+  GET_SESSION: "GET_SESSION",
+  GET_HISTORY: "GET_HISTORY",
+  GET_ROULETTE_STATE: "GET_ROULETTE_STATE",
+};
