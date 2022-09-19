@@ -5,11 +5,13 @@ import useSound from "use-sound";
 import clickSound from "../../../../assets/sounds/click.mp3";
 import {
   getFieldColor,
-  getNumberIndexByValue,
-  getRandomRouletteNumber,
   getRouletteNumberSequence,
 } from "../../../../common/utils/rouletteUtils/rouletteUtils";
 import css from "./RouletteWheel.module.css";
+import {
+  calculateAnimationForPosition,
+  getRandomStartPosition,
+} from "./rouletteWheelUtils";
 
 const CONTAINER_REPETITIONS = 5;
 
@@ -30,10 +32,12 @@ export default function RouletteWheel(props: wheelProps) {
   useEffect(() => {
     window.addEventListener("resize", updateRouletteBarWidth);
     rouletteBarWidth = rouletteBarRef.current.clientWidth;
-    //setTransition({ type: "tween", duration: 0 });
 
     currentPosition = getRandomStartPosition();
-    initialPosition = calculateAnimationForPosition(currentPosition);
+    initialPosition = calculateAnimationForPosition(
+      currentPosition,
+      rouletteBarWidth
+    );
 
     control.set(initialPosition);
 
@@ -42,7 +46,9 @@ export default function RouletteWheel(props: wheelProps) {
 
   function updateRouletteBarWidth(): void {
     rouletteBarWidth = rouletteBarRef.current.clientWidth;
-    control.set(calculateAnimationForPosition(currentPosition));
+    control.set(
+      calculateAnimationForPosition(currentPosition, rouletteBarWidth)
+    );
     playClick();
   }
 
@@ -58,26 +64,6 @@ export default function RouletteWheel(props: wheelProps) {
       );
     }
     return tiles;
-  }
-
-  // Nie random, tylko ustawi się na poprzednio wyrzuconym numerku
-  function getRandomStartPosition(): number {
-    const number = getRandomRouletteNumber();
-    console.log("Random number: " + number);
-    const initialIndex = getNumberIndexByValue(number);
-    return initialIndex + Math.random();
-  }
-
-  function positionToEM(position: number): string {
-    const tileSize = 5;
-    const offset = getRouletteNumberSequence().length;
-    return `-${(offset + position) * tileSize}em`;
-  }
-
-  function calculateAnimationForPosition(position: number) {
-    return {
-      x: `calc(${positionToEM(position)} + ${rouletteBarWidth / 2}px)`,
-    };
   }
 
   return (
