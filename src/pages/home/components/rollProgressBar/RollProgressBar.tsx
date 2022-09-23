@@ -8,6 +8,8 @@ export default function RollProgressBar() {
   const MAX: number = 30;
   let timer: number = 0;
 
+  /// to się może przydać https://www.npmjs.com/package/react-timer-hook
+
   useEffect(() => {
     const interval = setInterval(() => {
       setValue((oldValue) => {

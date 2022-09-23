@@ -1,15 +1,42 @@
-import { Col, Container, Row } from "react-bootstrap";
+import axios, { AxiosResponse } from "axios";
+import { useEffect } from "react";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { urlRoulette } from "../../common/endpoints";
+import { isEmpty } from "../../common/utils/rouletteUtils/typeScriptUtils";
+import { setRouletteState } from "../../redux/actions/rouletteActions";
+import { rouletteDto } from "../../redux/reducers/rouletteReducer";
+import { RootState, useAppDispatch } from "../../redux/store";
 import BetAmountPanel from "./components/betAmountPanel/BetAmountPanel";
 import HistoryBar from "./components/historyBar/HistoryBar";
 import ManualBetPanel from "./components/manualBetPanel/ManualBetPanel";
 import RouletteWheel from "./components/rouletteWheel/RouletteWheel";
 
 export default function Home() {
-  return (
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    fetchRouletteState();
+  }, []);
+
+  function fetchRouletteState(): void {
+    axios.get(urlRoulette).then((response: AxiosResponse<rouletteDto>) => {
+      dispatch(setRouletteState(response.data));
+    });
+  }
+
+  const selectRollHistory = useSelector(
+    (state: RootState) => state.roulette.rollHistory
+  );
+
+  return isEmpty(selectRollHistory) ? (
+    // TODO: Wyśrodkować
+    <Spinner animation={"border"} />
+  ) : (
     <>
       {/* <RollProgressBar /> */}
-      <RouletteWheel spinResult={10} />
-      <HistoryBar lastRolls={[2, 4, 0, 4, 5, 6, 12, 1, 14, 9]} />
+      <RouletteWheel />
+      <HistoryBar />
       <BetAmountPanel />
       <Container className="g-0">
         <Row className="g-3">

@@ -9,13 +9,7 @@ export function getRouletteNumberSequence(): ReadonlyArray<number> {
   return ROULETTE_NUMBER_SEQUENCE;
 }
 
-export function getRandomRouletteNumber(): number {
-  return ROULETTE_NUMBER_SEQUENCE[
-    Math.floor(Math.random() * ROULETTE_NUMBER_SEQUENCE.length)
-  ];
-}
-
-export function getNumberIndexByValue(value: number) {
+export function getPositionByRollValue(value: number) {
   return ROULETTE_NUMBER_SEQUENCE.findIndex((x) => x === value);
 }
 

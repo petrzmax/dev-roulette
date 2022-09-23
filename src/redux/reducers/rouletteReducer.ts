@@ -1,22 +1,44 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getRouletteState, getSession } from "./../actions/rouletteActions";
+import {
+  getSession,
+  setRouletteState,
+  setTileCoverageFactor,
+} from "./../actions/rouletteActions";
 
 const initialState: rouletteState = {
-  lastRolls: [],
-  timeToRoll: 0,
+  rollHistory: [],
+  timeToNextRoll: 0,
+  tileCoverageFactor: 0,
 };
 
 export const rouletteReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getSession, (state, action) => {
-      state.timeToRoll++;
+      state.timeToNextRoll++;
     })
-    .addCase(getRouletteState, (state, action) => {
-      state.timeToRoll++;
-    });
+    .addCase(setRouletteState, (state, action) => {
+      return {
+        ...state,
+        rollHistory: action.payload.rollHistory,
+        timeToNextRoll: action.payload.timeToRoll,
+      };
+    })
+    .addCase(setTileCoverageFactor, (state, action) => {
+      return {
+        ...state,
+        tileCoverageFactor: action.payload,
+      };
+    })
+    .addDefaultCase((state, action) => {});
 });
 
 export interface rouletteState {
-  lastRolls: number[];
+  rollHistory: number[];
+  timeToNextRoll: number;
+  tileCoverageFactor: number;
+}
+
+export interface rouletteDto {
+  rollHistory: number[];
   timeToRoll: number;
 }
