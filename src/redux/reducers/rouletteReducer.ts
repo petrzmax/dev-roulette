@@ -8,7 +8,7 @@ import {
 const initialState: rouletteState = {
   rollHistory: [],
   timeToNextRoll: 0,
-  tileCoverageFactor: 0,
+  tileCoverageFactor: Math.random(),
 };
 
 export const rouletteReducer = createReducer(initialState, (builder) => {

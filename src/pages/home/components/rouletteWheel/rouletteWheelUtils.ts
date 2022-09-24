@@ -1,11 +1,30 @@
+import { TILE_SIZE } from "../../../../common/constants";
 import {
-  getPositionByRollValue,
+  getPositionByRoll,
   getRouletteNumberSequence,
 } from "../../../../common/utils/rouletteUtils/rouletteUtils";
 
+export function calculateRollAnimation(animationData: rollAnimationData) {
+  return {
+    x: `calc(${transformRollToEM(animationData)} + ${
+      animationData.rouletteBarWidth / 2
+    }px)`,
+  };
+}
 
-export function positionToEM(position: number): string {
-  const tileSize = 5; // TODO - move to constant, make it available to css
+export function transformRollToEM(transformData: transformRollData): string {
   const offset = getRouletteNumberSequence().length;
-  return `-${(offset + position) * tileSize}em`;
+  const positionWithTileCoverage =
+    getPositionByRoll(transformData.roll) + transformData.tileCoverageFactor;
+
+  return `-${(offset + positionWithTileCoverage) * TILE_SIZE}em`;
+}
+
+export interface rollAnimationData extends transformRollData {
+  rouletteBarWidth: number;
+}
+
+interface transformRollData {
+  roll: number;
+  tileCoverageFactor: number;
 }

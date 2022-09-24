@@ -9,7 +9,7 @@ export function getRouletteNumberSequence(): ReadonlyArray<number> {
   return ROULETTE_NUMBER_SEQUENCE;
 }
 
-export function getPositionByRollValue(value: number) {
+export function getPositionByRoll(value: number) {
   return ROULETTE_NUMBER_SEQUENCE.findIndex((x) => x === value);
 }
 
