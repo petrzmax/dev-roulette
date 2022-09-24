@@ -4,7 +4,7 @@ import {
   getRouletteNumberSequence,
 } from "../../../../common/utils/rouletteUtils/rouletteUtils";
 
-export function calculateRollAnimation(animationData: rollAnimationData) {
+export function calculateAnimation(animationData: rollAnimationData) {
   return {
     x: `calc(${transformRollToEM(animationData)} + ${
       animationData.rouletteBarWidth / 2

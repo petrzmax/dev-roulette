@@ -4,19 +4,15 @@ import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import useSound from "use-sound";
 import clickSound from "../../../../assets/sounds/click.mp3";
-import { setTileCoverageFactor } from "../../../../redux/actions/rouletteActions";
 import { RootState, useAppDispatch } from "../../../../redux/store";
 import RouletteTiles from "./components/RouletteTiles";
 import css from "./RouletteWheel.module.css";
-import {
-  calculateRollAnimation,
-  rollAnimationData,
-} from "./rouletteWheelUtils";
+import { calculateAnimation, rollAnimationData } from "./rouletteWheelUtils";
 
 export default function RouletteWheel() {
   const dispatch = useAppDispatch();
   const [playClick] = useSound(clickSound);
-  const wheelAnimationControl = useAnimation();
+  const animationController = useAnimation();
   const rouletteBarRef = useRef<any>();
 
   let rouletteBarWidth: number;
@@ -40,19 +36,18 @@ export default function RouletteWheel() {
   function initialize(): () => void {
     window.addEventListener("resize", updateRouletteBarWidth);
     rouletteBarWidth = rouletteBarRef.current.clientWidth;
-
-    wheelAnimationControl.set(calculateRollAnimation(getRollAnimationData()));
+    animationController.set(calculateAnimation(getAnimationData()));
 
     return () => window.removeEventListener("resize", updateRouletteBarWidth);
   }
 
   function updateRouletteBarWidth(): void {
     rouletteBarWidth = rouletteBarRef.current.clientWidth;
-    wheelAnimationControl.set(calculateRollAnimation(getRollAnimationData()));
+    animationController.set(calculateAnimation(getAnimationData()));
     playClick();
   }
 
-  function getRollAnimationData(): rollAnimationData {
+  function getAnimationData(): rollAnimationData {
     return {
       roll: selectLastRoll,
       rouletteBarWidth: rouletteBarWidth,
@@ -62,15 +57,10 @@ export default function RouletteWheel() {
 
   return (
     <Card bg="light">
-      <div
-        className={css.rouletteBar}
-        ref={rouletteBarRef}
-        onClick={() => dispatch(setTileCoverageFactor(Math.random()))}
-      >
+      <div className={css.rouletteBar} ref={rouletteBarRef}>
         <motion.div
           className={css.tileContainer}
-          initial={false}
-          animate={wheelAnimationControl}
+          animate={animationController}
           transition={defaultTransition}
         >
           <RouletteTiles />
