@@ -1,10 +1,16 @@
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
 
 export default function BetAmountPanel() {
+  const selectBalance = useSelector(
+    (state: RootState) => state.session.balance
+  );
+
   return (
     <Card bg="light">
       <Card.Body>
-        <Card.Title className="text-start">Balance: 5000</Card.Title>
+        <Card.Title className="text-start">Balance: {selectBalance}</Card.Title>
         <InputGroup className="mb-2">
           <Button variant="outline-primary">Clear</Button>
           <Button variant="outline-primary">Last</Button>

@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getSession, setRouletteState } from "./../actions/rouletteActions";
+import { setRouletteState } from "./../actions/rouletteActions";
 
 const initialState: rouletteState = {
   rollHistory: [],
@@ -9,9 +9,6 @@ const initialState: rouletteState = {
 
 export const rouletteReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(getSession, (state, action) => {
-      // TODO
-    })
     .addCase(setRouletteState, (state, action) => {
       return {
         ...state,

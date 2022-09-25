@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { rouletteReducer } from "./reducers/rouletteReducer";
+import sessionReducer from "./reducers/sessionReducer";
 
 const reducer = {
+  session: sessionReducer,
   roulette: rouletteReducer,
 };
 
