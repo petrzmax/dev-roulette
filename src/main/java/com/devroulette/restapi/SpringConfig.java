@@ -7,5 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 @EnableCaching
+//@EnableJpaRepositories(enableDefaultTransactions = false)
+//@EnableTransactionManagement
 public class SpringConfig {
 }
