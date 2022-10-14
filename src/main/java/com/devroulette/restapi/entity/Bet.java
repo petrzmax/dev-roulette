@@ -3,10 +3,7 @@ package com.devroulette.restapi.entity;
 import com.devroulette.restapi.constant.BetType;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -15,6 +12,7 @@ import javax.persistence.Table;
 @Table(name = "BETS")
 public class Bet extends AbstractEntity {
     @NonNull
+    @Enumerated(EnumType.STRING) // It will consume much db more memory. Use only for testing
     private BetType betType;
     @NonNull
     private Long amount;
@@ -38,9 +36,12 @@ public class Bet extends AbstractEntity {
 
     public Boolean isVictory() {
         if (this.roll != null) {
-            String betType = this.betType.toString();
-            return betType.equals(this.getRoll().getColor()) || betType.equals(this.getRoll().getType());
+            return this.betType.equals(this.roll.getColor()) || this.betType.equals(this.roll.getType());
         }
         throw new IllegalStateException("This bet has no Roll assigned!");
+    }
+
+    public Long getPrize() {
+        return this.betType.getPrize(this.amount);
     }
 }

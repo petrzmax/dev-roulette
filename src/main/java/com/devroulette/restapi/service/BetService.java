@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BetService {
-
     private final BetRepository betRepository;
     private final UserRepository userRepository;
     private final BetQueryService betQueryService;
@@ -36,16 +35,10 @@ public class BetService {
         betsToProcess.forEach(bet -> {
             bet.setRoll(roll);
             bet.markAsProcessed();
-            User user = bet.getUser();
 
             if (bet.isVictory()) {
-                switch (bet.getBetType()) {
-                    case RED -> user.transfer(bet.getAmount() * 2);
-                    case BLACK -> user.transfer(bet.getAmount() * 2);
-                    case GREEN -> user.transfer(bet.getAmount() * 36);
-                    case EVEN -> user.transfer(bet.getAmount() * 2);
-                    case ODD -> user.transfer(bet.getAmount() * 2);
-                }
+                User user = bet.getUser();
+                user.transfer(bet.getPrize());
                 this.userRepository.save(user);
             }
         });

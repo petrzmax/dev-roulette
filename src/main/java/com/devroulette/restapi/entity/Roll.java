@@ -1,6 +1,6 @@
 package com.devroulette.restapi.entity;
 
-import com.devroulette.restapi.utils.RouletteUtils;
+import com.devroulette.restapi.constant.BetType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -26,11 +26,24 @@ public class Roll extends AbstractEntity {
     @CreationTimestamp
     private Timestamp timestamp;
 
-    public String getColor() {
-        return RouletteUtils.getNumberColor(this.result);
+    public BetType getColor() {
+        if (this.result == 0) {
+            return BetType.GREEN;
+        }
+        if ((this.result >= 1 && this.result <= 10) || (this.result >= 19 && this.result <= 28)) {
+            return this.isEven() ? BetType.BLACK : BetType.RED;
+        }
+        if ((this.result >= 11 && this.result <= 18) || (this.result >= 29 && this.result <= 36)) {
+            return this.isEven() ? BetType.RED : BetType.BLACK;
+        }
+        throw new IllegalStateException("The number is out of roulette range!");
     }
 
-    public String getType() {
-        return RouletteUtils.isEven(this.result) ? "EVEN" : "ODD";
+    private boolean isEven() {
+        return this.result != 0 && this.result % 2 == 0;
+    }
+
+    public BetType getType() {
+        return this.isEven() ? BetType.EVEN : BetType.ODD;
     }
 }
