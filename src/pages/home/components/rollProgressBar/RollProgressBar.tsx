@@ -1,36 +1,54 @@
-import { useEffect, useState } from "react";
-import { Card, ProgressBar } from "react-bootstrap";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect } from "react";
+import { Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useTimer } from "react-timer-hook";
+import { fetchRouletteState } from "../../../../redux/actions/rouletteActions";
+import { fetchSession } from "../../../../redux/actions/sessionActions";
+import { RootState, useAppDispatch } from "../../../../redux/store";
 import css from "./rollProgressBar.module.css";
 
 export default function RollProgressBar() {
-  const [value, setValue] = useState(0);
-  const [timeRemaining, setTimeRemaining] = useState(30);
-  const MAX: number = 30;
-  let timer: number = 0;
+  const dispatch = useAppDispatch();
+  const animationController = useAnimation();
 
-  /// to się może przydać https://www.npmjs.com/package/react-timer-hook
+  const selectNextRollTimeStamp = useSelector(
+    (state: RootState) => state.roulette.nextRollTimeStamp
+  );
+
+  let expiryTimestamp: Date;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setValue((oldValue) => {
-        const newValue = oldValue + 1;
-        if (newValue === 100) {
-          clearInterval(interval);
-        }
-        return newValue;
-      });
-    }, 1000);
-  }, []);
+    expiryTimestamp = new Date(selectNextRollTimeStamp);
+    restart(expiryTimestamp);
+    animationController.set({ width: "0%" });
+    animationController.start(
+      { width: "100%" },
+      {
+        type: "tween",
+        duration: Math.abs(
+          expiryTimestamp.getSeconds() - new Date().getSeconds()
+        ),
+      }
+    );
+  }, [selectNextRollTimeStamp]);
+
+  const onTimerExpire = () => {
+    dispatch(fetchRouletteState());
+    dispatch(fetchSession());
+  };
+
+  expiryTimestamp = new Date(selectNextRollTimeStamp);
+  const { seconds, isRunning, start, pause, resume, restart } = useTimer({
+    expiryTimestamp,
+    onExpire: onTimerExpire,
+  });
 
   return (
     <Card bg="light">
-      <ProgressBar now={value} max={MAX} />
       <div>
-        <progress
-          className={css.rollProgressBar}
-          value={value}
-          max={MAX}
-        ></progress>
+        <motion.div className={css.progressBar} animate={animationController} />
+        <p className={css.message}>Rolling in {seconds}...</p>
       </div>
     </Card>
   );

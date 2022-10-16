@@ -1,10 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { BetType } from "./../../common/constants";
 import { setRouletteState } from "./../actions/rouletteActions";
 
-const initialState: rouletteState = {
+const initialState: RouletteState = {
   rollHistory: [],
   tileCoverageFactor: 0,
-  nextRollTimeStamp: 0,
+  nextRollTimeStamp: "",
 };
 
 export const rouletteReducer = createReducer(initialState, (builder) => {
@@ -20,14 +21,19 @@ export const rouletteReducer = createReducer(initialState, (builder) => {
     .addDefaultCase((state, action) => {});
 });
 
-export interface rouletteState {
+export interface RouletteState {
   rollHistory: number[];
   tileCoverageFactor: number;
-  nextRollTimeStamp: number;
+  nextRollTimeStamp: string;
 }
 
-export interface rouletteDto {
+export interface RouletteDto {
   rollHistory: number[];
   tileCoverageFactor: number;
-  nextRollTimeStamp: number;
+  nextRollTimeStamp: string;
+}
+
+export interface BetDto {
+  betType: BetType;
+  amount: number;
 }

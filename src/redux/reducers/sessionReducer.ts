@@ -1,27 +1,32 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { setSessionState } from "../actions/sessionActions";
+import { setSession } from "../actions/sessionActions";
+import { reduceBalance } from "./../actions/sessionActions";
 
-const initialState: sessionState = {
+const initialState: SessionState = {
   token: "",
   balance: 0,
 };
 
 const sessionReducer = createReducer(initialState, (builder) => {
-  builder.addCase(setSessionState, (state, action) => {
-    return {
-      ...state,
-      token: action.payload.token,
-      balance: action.payload.balance,
-    };
-  });
+  builder
+    .addCase(setSession, (state, action) => {
+      return {
+        ...state,
+        token: action.payload.token,
+        balance: action.payload.balance,
+      };
+    })
+    .addCase(reduceBalance, (state, action) => {
+      return { ...state, balance: state.balance - action.payload };
+    });
 });
 
-export interface sessionState {
+export interface SessionState {
   token: string;
   balance: number;
 }
 
-export interface sessionDto {
+export interface SessionDto {
   token: string;
   balance: number;
 }

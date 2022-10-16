@@ -1,29 +1,26 @@
-import axios, { AxiosResponse } from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { urlRoulette } from "../../common/endpoints";
+import { BetType } from "../../common/constants";
 import { isEmpty } from "../../common/utils/rouletteUtils/typeScriptUtils";
-import { setRouletteState } from "../../redux/actions/rouletteActions";
-import { rouletteDto } from "../../redux/reducers/rouletteReducer";
+import { fetchRouletteState } from "../../redux/actions/rouletteActions";
+import { fetchSession } from "../../redux/actions/sessionActions";
 import { RootState, useAppDispatch } from "../../redux/store";
 import BetAmountPanel from "./components/betAmountPanel/BetAmountPanel";
 import HistoryBar from "./components/historyBar/HistoryBar";
 import ManualBetPanel from "./components/manualBetPanel/ManualBetPanel";
+import RollProgressBar from "./components/rollProgressBar/RollProgressBar";
 import RouletteWheel from "./components/rouletteWheel/RouletteWheel";
+import { BetContext } from "./context/BetContext";
 
 export default function Home() {
   const dispatch = useAppDispatch();
+  const [betAmount, setBetAmount] = useState(0);
 
   useEffect(() => {
-    fetchRouletteState();
+    dispatch(fetchSession());
+    dispatch(fetchRouletteState());
   }, []);
-
-  function fetchRouletteState(): void {
-    axios.get(urlRoulette).then((response: AxiosResponse<rouletteDto>) => {
-      dispatch(setRouletteState(response.data));
-    });
-  }
 
   const selectRollHistory = useSelector(
     (state: RootState) => state.roulette.rollHistory
@@ -34,23 +31,25 @@ export default function Home() {
     <Spinner animation={"border"} />
   ) : (
     <>
-      {/* <RollProgressBar /> */}
+      <RollProgressBar />
       <RouletteWheel />
       <HistoryBar />
-      <BetAmountPanel />
-      <Container className="g-0">
-        <Row className="g-3">
-          <Col>
-            <ManualBetPanel text="Red" color="red" />
-          </Col>
-          <Col>
-            <ManualBetPanel text="0" color="red" />
-          </Col>
-          <Col>
-            <ManualBetPanel text="Black" color="red" />
-          </Col>
-        </Row>
-      </Container>
+      <BetContext.Provider value={{ betAmount, setBetAmount }}>
+        <BetAmountPanel />
+        <Container className="g-0">
+          <Row className="g-3">
+            <Col>
+              <ManualBetPanel text="Red" betType={BetType.RED} />
+            </Col>
+            <Col>
+              <ManualBetPanel text="0" betType={BetType.GREEN} />
+            </Col>
+            <Col>
+              <ManualBetPanel text="Black" betType={BetType.BLACK} />
+            </Col>
+          </Row>
+        </Container>
+      </BetContext.Provider>
     </>
   );
 }
