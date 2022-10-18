@@ -1,10 +1,10 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { setSession } from "../actions/sessionActions";
-import { reduceBalance } from "./../actions/sessionActions";
+import { createReducer } from '@reduxjs/toolkit';
+import { setSession } from '../actions/sessionActions';
+import { reduceBalance } from './../actions/sessionActions';
 
 const initialState: SessionState = {
-  token: "",
-  balance: 0,
+  token: '',
+  balance: 0
 };
 
 const sessionReducer = createReducer(initialState, (builder) => {
@@ -13,7 +13,7 @@ const sessionReducer = createReducer(initialState, (builder) => {
       return {
         ...state,
         token: action.payload.token,
-        balance: action.payload.balance,
+        balance: action.payload.balance
       };
     })
     .addCase(reduceBalance, (state, action) => {

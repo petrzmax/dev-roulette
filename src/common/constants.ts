@@ -7,5 +7,5 @@ export enum BetType {
   GREEN,
   EVEN,
   ODD,
-  CUSTOM,
+  CUSTOM
 }

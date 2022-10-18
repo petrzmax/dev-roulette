@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { BetType } from "../../common/constants";
-import { isEmpty } from "../../common/utils/rouletteUtils/typeScriptUtils";
-import { fetchRouletteState } from "../../redux/actions/rouletteActions";
-import { fetchSession } from "../../redux/actions/sessionActions";
-import { RootState, useAppDispatch } from "../../redux/store";
-import BetAmountPanel from "./components/betAmountPanel/BetAmountPanel";
-import HistoryBar from "./components/historyBar/HistoryBar";
-import ManualBetPanel from "./components/manualBetPanel/ManualBetPanel";
-import RollProgressBar from "./components/rollProgressBar/RollProgressBar";
-import RouletteWheel from "./components/rouletteWheel/RouletteWheel";
-import { BetContext } from "./context/BetContext";
+import { useEffect, useState } from 'react';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { BetType } from '../../common/constants';
+import { isEmpty } from '../../common/utils/rouletteUtils/typeScriptUtils';
+import { fetchRouletteState } from '../../redux/actions/rouletteActions';
+import { fetchSession } from '../../redux/actions/sessionActions';
+import { RootState, useAppDispatch } from '../../redux/store';
+import BetAmountPanel from './components/betAmountPanel/BetAmountPanel';
+import HistoryBar from './components/historyBar/HistoryBar';
+import ManualBetPanel from './components/manualBetPanel/ManualBetPanel';
+import RollProgressBar from './components/rollProgressBar/RollProgressBar';
+import RouletteWheel from './components/rouletteWheel/RouletteWheel';
+import { BetContext } from './context/BetContext';
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -22,13 +22,11 @@ export default function Home() {
     dispatch(fetchRouletteState());
   }, []);
 
-  const selectRollHistory = useSelector(
-    (state: RootState) => state.roulette.rollHistory
-  );
+  const selectRollHistory = useSelector((state: RootState) => state.roulette.rollHistory);
 
   return isEmpty(selectRollHistory) ? (
     // TODO: Wyśrodkować
-    <Spinner animation={"border"} />
+    <Spinner animation={'border'} />
   ) : (
     <>
       <RollProgressBar />

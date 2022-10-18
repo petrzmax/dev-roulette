@@ -1,21 +1,15 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { AxiosResponse } from "axios";
-import { call, put } from "redux-saga/effects";
-import { setRouletteState } from "../actions/rouletteActions";
-import { BetDto, RouletteDto } from "../reducers/rouletteReducer";
-import { reduceBalance, setSession } from "./../actions/sessionActions";
-import { SessionDto } from "./../reducers/sessionReducer";
-import {
-  requestFetchRouletteState,
-  requestFetchSession,
-  requestPostRouletteBet,
-} from "./requests";
+import { PayloadAction } from '@reduxjs/toolkit';
+import { AxiosResponse } from 'axios';
+import { call, put } from 'redux-saga/effects';
+import { setRouletteState } from '../actions/rouletteActions';
+import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
+import { reduceBalance, setSession } from './../actions/sessionActions';
+import { SessionDto } from './../reducers/sessionReducer';
+import { requestFetchRouletteState, requestFetchSession, requestPostRouletteBet } from './requests';
 
 export function* handleFetchRouletteState() {
   try {
-    const response: AxiosResponse<RouletteDto> = yield call(
-      requestFetchRouletteState
-    );
+    const response: AxiosResponse<RouletteDto> = yield call(requestFetchRouletteState);
 
     yield put(setRouletteState(response.data));
   } catch (error) {

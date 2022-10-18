@@ -1,39 +1,39 @@
-import { Table } from "react-bootstrap";
+import { Table } from 'react-bootstrap';
 
 export default function Ranking() {
   const data: rankingProps[] = [
     {
-      username: "tester 1",
-      botname: "Doubler",
+      username: 'tester 1',
+      botname: 'Doubler',
       score: 500,
       wins: 56,
       totalBets: 120,
       firstRollId: 12,
-      lastRollId: 1211,
+      lastRollId: 1211
     },
     {
-      username: "tester 2",
-      botname: "Analizator",
+      username: 'tester 2',
+      botname: 'Analizator',
       score: 600,
       wins: 45,
       totalBets: 23,
       firstRollId: 43,
-      lastRollId: 34535,
+      lastRollId: 34535
     },
     {
-      username: "tester 3",
-      botname: "IA",
+      username: 'tester 3',
+      botname: 'IA',
       score: 23,
       wins: 43,
       totalBets: 234,
       firstRollId: 54,
-      lastRollId: 23445,
-    },
+      lastRollId: 23445
+    }
   ];
 
   const column = [
-    { title: "#", field: "position" },
-    { title: "Username", field: "username" },
+    { title: '#', field: 'position' },
+    { title: 'Username', field: 'username' }
   ];
 
   return (

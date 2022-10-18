@@ -1,12 +1,12 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
-import { Card } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { useTimer } from "react-timer-hook";
-import { fetchRouletteState } from "../../../../redux/actions/rouletteActions";
-import { fetchSession } from "../../../../redux/actions/sessionActions";
-import { RootState, useAppDispatch } from "../../../../redux/store";
-import css from "./rollProgressBar.module.css";
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
+import { Card } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useTimer } from 'react-timer-hook';
+import { fetchRouletteState } from '../../../../redux/actions/rouletteActions';
+import { fetchSession } from '../../../../redux/actions/sessionActions';
+import { RootState, useAppDispatch } from '../../../../redux/store';
+import css from './rollProgressBar.module.css';
 
 export default function RollProgressBar() {
   const dispatch = useAppDispatch();
@@ -21,14 +21,12 @@ export default function RollProgressBar() {
   useEffect(() => {
     expiryTimestamp = new Date(selectNextRollTimeStamp);
     restart(expiryTimestamp);
-    animationController.set({ width: "0%" });
+    animationController.set({ width: '0%' });
     animationController.start(
-      { width: "100%" },
+      { width: '100%' },
       {
-        type: "tween",
-        duration: Math.abs(
-          expiryTimestamp.getSeconds() - new Date().getSeconds()
-        ),
+        type: 'tween',
+        duration: Math.abs(expiryTimestamp.getSeconds() - new Date().getSeconds())
       }
     );
   }, [selectNextRollTimeStamp]);
@@ -41,7 +39,7 @@ export default function RollProgressBar() {
   expiryTimestamp = new Date(selectNextRollTimeStamp);
   const { seconds, isRunning, start, pause, resume, restart } = useTimer({
     expiryTimestamp,
-    onExpire: onTimerExpire,
+    onExpire: onTimerExpire
   });
 
   return (

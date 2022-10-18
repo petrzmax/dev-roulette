@@ -1,7 +1,7 @@
-import Container from "react-bootstrap/esm/Container";
-import Nav from "react-bootstrap/esm/Nav";
-import Navbar from "react-bootstrap/esm/Navbar";
-import { NavLink } from "react-router-dom";
+import Container from 'react-bootstrap/esm/Container';
+import Nav from 'react-bootstrap/esm/Nav';
+import Navbar from 'react-bootstrap/esm/Navbar';
+import { NavLink } from 'react-router-dom';
 
 export default function Menu() {
   return (

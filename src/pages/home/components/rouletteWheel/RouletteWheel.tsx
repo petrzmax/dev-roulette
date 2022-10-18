@@ -1,13 +1,13 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { Card } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import useSound from "use-sound";
-import clickSound from "../../../../assets/sounds/click.mp3";
-import { RootState, useAppDispatch } from "../../../../redux/store";
-import RouletteTiles from "./components/RouletteTiles";
-import css from "./RouletteWheel.module.css";
-import { calculateAnimation, rollAnimationData } from "./rouletteWheelUtils";
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { Card } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import useSound from 'use-sound';
+import clickSound from '../../../../assets/sounds/click.mp3';
+import { RootState, useAppDispatch } from '../../../../redux/store';
+import RouletteTiles from './components/RouletteTiles';
+import css from './RouletteWheel.module.css';
+import { calculateAnimation, rollAnimationData } from './rouletteWheelUtils';
 
 export default function RouletteWheel() {
   const dispatch = useAppDispatch();
@@ -18,13 +18,12 @@ export default function RouletteWheel() {
   let rouletteBarWidth: number;
 
   const defaultTransition = {
-    type: "tween",
-    duration: 10,
+    type: 'tween',
+    duration: 10
   };
 
   const selectLastRoll = useSelector(
-    (state: RootState) =>
-      state.roulette.rollHistory[state.roulette.rollHistory.length - 1]
+    (state: RootState) => state.roulette.rollHistory[state.roulette.rollHistory.length - 1]
   );
 
   const selectTileCoverageFactor = useSelector(
@@ -34,11 +33,11 @@ export default function RouletteWheel() {
   useEffect(initialize, []);
 
   function initialize(): () => void {
-    window.addEventListener("resize", updateRouletteBarWidth);
+    window.addEventListener('resize', updateRouletteBarWidth);
     rouletteBarWidth = rouletteBarRef.current.clientWidth;
     animationController.set(calculateAnimation(getAnimationData()));
 
-    return () => window.removeEventListener("resize", updateRouletteBarWidth);
+    return () => window.removeEventListener('resize', updateRouletteBarWidth);
   }
 
   function updateRouletteBarWidth(): void {
@@ -51,7 +50,7 @@ export default function RouletteWheel() {
     return {
       roll: selectLastRoll,
       rouletteBarWidth: rouletteBarWidth,
-      tileCoverageFactor: selectTileCoverageFactor,
+      tileCoverageFactor: selectTileCoverageFactor
     };
   }
 

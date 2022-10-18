@@ -1,8 +1,8 @@
-import css from "./rouletteUtils.module.css";
+import css from './rouletteUtils.module.css';
 
 const ROULETTE_NUMBER_SEQUENCE: ReadonlyArray<number> = [
-  0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24,
-  16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
+  0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14,
+  31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26
 ];
 
 export function getRouletteNumberSequence(): ReadonlyArray<number> {
@@ -25,7 +25,7 @@ export function getFieldColor(value: number): string {
   } else if ((value >= 11 && value <= 18) || (value >= 29 && value <= 36)) {
     result = isEven(value) ? css.red : css.black;
   } else {
-    throw new Error("The number is out of roulette range!");
+    throw new Error('The number is out of roulette range!');
   }
 
   return result;

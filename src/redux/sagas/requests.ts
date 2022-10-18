@@ -1,37 +1,32 @@
-import axios from "axios";
-import {
-  rollHistoryUrl,
-  rouletteBetUrl,
-  rouletteUrl,
-  sessionUrl,
-} from "../../common/endpoints";
-import { BetDto } from "./../reducers/rouletteReducer";
+import axios from 'axios';
+import { rollHistoryUrl, rouletteBetUrl, rouletteUrl, sessionUrl } from '../../common/endpoints';
+import { BetDto } from './../reducers/rouletteReducer';
 
 export function requestFetchSession() {
   return axios.request({
-    method: "get",
-    url: sessionUrl,
+    method: 'get',
+    url: sessionUrl
   });
 }
 
 export function requestFetchRouletteState() {
   return axios.request({
-    method: "get",
-    url: rouletteUrl,
+    method: 'get',
+    url: rouletteUrl
   });
 }
 
 export function requestPostRouletteBet(betDto: BetDto) {
   return axios.request({
-    method: "post",
+    method: 'post',
     url: rouletteBetUrl,
-    data: betDto,
+    data: betDto
   });
 }
 
 export function requestFetchRollHistory() {
   return axios.request({
-    method: "get",
-    url: rollHistoryUrl,
+    method: 'get',
+    url: rollHistoryUrl
   });
 }

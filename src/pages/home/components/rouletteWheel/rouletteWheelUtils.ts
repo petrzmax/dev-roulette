@@ -1,14 +1,12 @@
-import { TILE_SIZE } from "../../../../common/constants";
+import { TILE_SIZE } from '../../../../common/constants';
 import {
   getPositionByRoll,
-  getRouletteNumberSequence,
-} from "../../../../common/utils/rouletteUtils/rouletteUtils";
+  getRouletteNumberSequence
+} from '../../../../common/utils/rouletteUtils/rouletteUtils';
 
 export function calculateAnimation(animationData: rollAnimationData) {
   return {
-    x: `calc(${transformRollToEM(animationData)} + ${
-      animationData.rouletteBarWidth / 2
-    }px)`,
+    x: `calc(${transformRollToEM(animationData)} + ${animationData.rouletteBarWidth / 2}px)`
   };
 }
 

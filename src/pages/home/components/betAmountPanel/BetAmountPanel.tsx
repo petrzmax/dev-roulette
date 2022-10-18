@@ -1,15 +1,13 @@
-import { useContext, useRef } from "react";
-import { Button, Card, Form, InputGroup } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/store";
-import { BetContext } from "../../context/BetContext";
+import { useContext, useRef } from 'react';
+import { Button, Card, Form, InputGroup } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+import { BetContext } from '../../context/BetContext';
 
 export default function BetAmountPanel() {
   const { betAmount, setBetAmount } = useContext(BetContext);
 
-  const selectBalance = useSelector(
-    (state: RootState) => state.session.balance
-  );
+  const selectBalance = useSelector((state: RootState) => state.session.balance);
 
   const amountInputRef = useRef<any>();
 
@@ -19,7 +17,7 @@ export default function BetAmountPanel() {
 
   const clearAmountInput = () => {
     setBetAmount(0);
-    amountInputRef.current.value = "";
+    amountInputRef.current.value = '';
   };
 
   return (
@@ -31,46 +29,25 @@ export default function BetAmountPanel() {
             Clear
           </Button>
           <Button variant="outline-primary">Last</Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(betAmount + 1)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(betAmount + 1)}>
             +1
           </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(betAmount + 10)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(betAmount + 10)}>
             +10
           </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(betAmount + 100)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(betAmount + 100)}>
             +100
           </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(betAmount + 1000)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(betAmount + 1000)}>
             +1000
           </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(betAmount / 2)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(betAmount / 2)}>
             1/2
           </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(betAmount * 2)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(betAmount * 2)}>
             x2
           </Button>
-          <Button
-            variant="outline-primary"
-            onClick={() => setBetAmount(selectBalance)}
-          >
+          <Button variant="outline-primary" onClick={() => setBetAmount(selectBalance)}>
             Max
           </Button>
         </InputGroup>

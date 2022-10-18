@@ -1,21 +1,21 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import createSagaMiddleware from "redux-saga";
-import { rouletteReducer } from "./reducers/rouletteReducer";
-import sessionReducer from "./reducers/sessionReducer";
-import { watcherSaga } from "./sagas/rootSaga";
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { rouletteReducer } from './reducers/rouletteReducer';
+import sessionReducer from './reducers/sessionReducer';
+import { watcherSaga } from './sagas/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
   session: sessionReducer,
-  roulette: rouletteReducer,
+  roulette: rouletteReducer
 };
 
 const store = configureStore({
   reducer,
   middleware: [sagaMiddleware],
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== 'production'
 });
 
 sagaMiddleware.run(watcherSaga);
