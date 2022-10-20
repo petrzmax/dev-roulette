@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { call, put } from 'redux-saga/effects';
 import { setRouletteState } from '../actions/rouletteActions';
 import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
@@ -10,10 +10,9 @@ import { requestFetchRouletteState, requestFetchSession, requestPostRouletteBet 
 export function* handleFetchRouletteState() {
   try {
     const response: AxiosResponse<RouletteDto> = yield call(requestFetchRouletteState);
-
     yield put(setRouletteState(response.data));
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 }
 
@@ -22,7 +21,7 @@ export function* handlePostRouletteBet(action: PayloadAction<BetDto, string>) {
     yield call(requestPostRouletteBet, action.payload);
     yield put(reduceBalance(action.payload.amount));
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
 }
 
@@ -31,6 +30,14 @@ export function* handleFetchSession() {
     const response: AxiosResponse<SessionDto> = yield call(requestFetchSession);
     yield put(setSession(response.data));
   } catch (error) {
-    console.log(error);
+    handleAxiosError(error);
   }
+}
+
+function handleAxiosError(error: unknown): void {
+  if (axios.isAxiosError(error)) {
+    console.log(error.response);
+    return;
+  }
+  console.log(error);
 }
