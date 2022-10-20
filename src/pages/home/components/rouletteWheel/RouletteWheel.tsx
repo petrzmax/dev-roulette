@@ -1,4 +1,4 @@
-import { motion, useAnimation } from 'framer-motion';
+import { motion, Transition, useAnimation } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -17,9 +17,14 @@ export default function RouletteWheel() {
 
   let rouletteBarWidth: number;
 
-  const defaultTransition = {
-    type: 'tween',
-    duration: 10
+  const defaultTransition: Transition = {
+    type: 'spring',
+    stiffness: 100,
+    damping: 50,
+    mass: 1,
+    velocity: 2,
+    restSpeed: 0.01,
+    restDelta: 0.01
   };
 
   const selectLastRoll = useSelector(

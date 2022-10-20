@@ -26,6 +26,7 @@ export default function RollProgressBar() {
       { width: '100%' },
       {
         type: 'tween',
+        ease: 'linear',
         duration: Math.abs(expiryTimestamp.getSeconds() - new Date().getSeconds())
       }
     );
