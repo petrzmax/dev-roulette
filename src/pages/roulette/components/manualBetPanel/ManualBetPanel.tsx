@@ -7,7 +7,7 @@ import { BetContext } from '../../context/BetContext';
 
 export default function ManualBetPanel(props: ManualBetPanelProps) {
   const dispatch = useAppDispatch();
-  const { betAmount, setBetAmount } = useContext(BetContext);
+  const { betAmount } = useContext(BetContext);
 
   function makeBet(): void {
     dispatch(postRouletteBet({ amount: betAmount, betType: props.betType }));

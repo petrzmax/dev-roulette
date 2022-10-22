@@ -1,5 +1,5 @@
 import { Table } from 'react-bootstrap';
-import ColoredCircle from '../home/components/historyBar/coloredCircle/ColoredCircle';
+import ColoredCircle from '../roulette/components/historyBar/coloredCircle/ColoredCircle';
 
 export default function History() {
   const data: historyProps[] = [

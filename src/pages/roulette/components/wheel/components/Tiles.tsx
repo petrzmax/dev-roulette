@@ -5,7 +5,7 @@ import {
 } from '../../../../../common/utils/rouletteUtils/rouletteUtils';
 import { repeatArray } from '../../../../../common/utils/rouletteUtils/typeScriptUtils';
 
-export default function RouletteTiles() {
+export default function Tiles() {
   return (
     <>
       {repeatArray(getRouletteNumberSequence(), CONTAINER_REPETITIONS).map((value, index) => (

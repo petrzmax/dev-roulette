@@ -18,7 +18,7 @@ export const rouletteReducer = createReducer(initialState, (builder) => {
         nextRollTimeStamp: action.payload.nextRollTimeStamp
       };
     })
-    .addDefaultCase((state, action) => {});
+    .addDefaultCase(() => undefined);
 });
 
 export interface RouletteState {

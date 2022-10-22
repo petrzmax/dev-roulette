@@ -11,7 +11,9 @@ export function calculateAnimation(animationData: rollAnimationData) {
 }
 
 export function transformRollToEM(transformData: transformRollData): string {
-  const offset = getRouletteNumberSequence().length;
+  // TODO
+  const offset = transformData.offset ? transformData.offset : getRouletteNumberSequence().length;
+
   const positionWithTileCoverage =
     getPositionByRoll(transformData.roll) + transformData.tileCoverageFactor;
 
@@ -23,6 +25,7 @@ export interface rollAnimationData extends transformRollData {
 }
 
 interface transformRollData {
+  offset?: number;
   roll: number;
   tileCoverageFactor: number;
 }

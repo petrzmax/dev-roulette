@@ -10,10 +10,10 @@ import BetAmountPanel from './components/betAmountPanel/BetAmountPanel';
 import HistoryBar from './components/historyBar/HistoryBar';
 import ManualBetPanel from './components/manualBetPanel/ManualBetPanel';
 import RollProgressBar from './components/rollProgressBar/RollProgressBar';
-import RouletteWheel from './components/rouletteWheel/RouletteWheel';
+import Wheel from './components/wheel/Wheel';
 import { BetContext } from './context/BetContext';
 
-export default function Home() {
+export default function Roulette() {
   const dispatch = useAppDispatch();
   const [betAmount, setBetAmount] = useState(0);
 
@@ -30,7 +30,7 @@ export default function Home() {
   ) : (
     <>
       <RollProgressBar />
-      <RouletteWheel />
+      <Wheel />
       <HistoryBar />
       <BetContext.Provider value={{ betAmount, setBetAmount }}>
         <BetAmountPanel />
