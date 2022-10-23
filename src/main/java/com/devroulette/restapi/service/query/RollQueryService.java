@@ -1,6 +1,9 @@
 package com.devroulette.restapi.service.query;
 
+import com.devroulette.restapi.dto.RollDto;
 import com.devroulette.restapi.entity.Roll;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -19,4 +22,12 @@ public interface RollQueryService extends JpaRepository<Roll, Long> {
      * @return last roll tile coverage
      */
     Float getLastRollTileCoverage();
+
+    /**
+     * Gets paginated Roll History
+     *
+     * @param pageable contains pagination information
+     * @return Page of RollDto
+     */
+    Page<RollDto> getPaginatedRollHistory(Pageable pageable);
 }

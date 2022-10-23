@@ -9,6 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 public class RouletteDto {
     private List<Integer> rollHistory;
-    private float tileCoverageFactor;
+    private Float tileCoverageFactor;
     private String nextRollTimeStamp;
 }

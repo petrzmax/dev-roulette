@@ -1,0 +1,23 @@
+package com.devroulette.restapi.restController;
+
+import com.devroulette.restapi.service.RollService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/roll")
+@RequiredArgsConstructor
+public class RollRestController {
+    private final RollService rollService;
+
+    @GetMapping("history/{page}/{pageSize}")
+    public ResponseEntity getRollHistory(@PathVariable Integer page, @PathVariable Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return new ResponseEntity(this.rollService.getRollHistoryWithPagination(pageable), HttpStatus.OK);
+    }
+}
