@@ -8,8 +8,6 @@ import com.devroulette.restapi.repository.BetRepository;
 import com.devroulette.restapi.repository.UserRepository;
 import com.devroulette.restapi.service.query.BetQueryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +18,14 @@ public class BetService {
     private final BetRepository betRepository;
     private final UserRepository userRepository;
     private final BetQueryService betQueryService;
+    private final AuthenticatedUserService authorizedUserService;
 
     public void bet(BetDto betDto) throws IllegalArgumentException {
 
-        // TODO Move to smth like AuthenticatedUserService, analyse if saving this user is safe
-        // in terms of many same requests
+        // TODO analyse if saving this user is safe in terms of many same requests
         // https://www.baeldung.com/get-user-in-spring-security
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        User currentUser = this.userRepository.findById(user.getId()).get();
+        long userId = this.authorizedUserService.getUser().getId();
+        User currentUser = this.userRepository.findById(userId).get();
 
 
         // if current user balance is enough
