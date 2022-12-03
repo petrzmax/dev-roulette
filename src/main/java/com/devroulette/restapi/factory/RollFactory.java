@@ -18,6 +18,7 @@ public class RollFactory {
         // TODO logging?
         System.out.println("Rolled: " + rollResult + " tileCoverage: " + tileCoverageFactor);
 
+        // TODO make it use real seed
         return new Roll(currentTimeSeed.toString(), rollResult, tileCoverageFactor);
     }
 }

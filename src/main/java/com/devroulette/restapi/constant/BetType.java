@@ -11,9 +11,9 @@ public enum BetType {
     ODD(2),
     CUSTOM(36);
 
-    private final Integer prizeMultiplier;
+    private final int prizeMultiplier;
 
-    public Long getPrize(Long amount) {
+    public long getPrize(long amount) {
         return this.prizeMultiplier * amount;
     }
 }

@@ -20,9 +20,9 @@ public class Roll extends AbstractEntity {
     @NonNull
     private String seed;
     @NonNull
-    private Integer result;
+    private int result;
     @NonNull
-    private Float tileCoverageFactor;
+    private float tileCoverageFactor;
     @CreationTimestamp
     private Timestamp timestamp;
 

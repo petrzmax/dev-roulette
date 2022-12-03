@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "BETS")
 public class Bet extends AbstractEntity {
     @NonNull
-    @Enumerated(EnumType.STRING) // It will consume much db more memory. Use only for testing
+    @Enumerated(EnumType.STRING) // It will consume much more db memory. Use only for testing
     private BetType betType;
     @NonNull
     private Long amount;
@@ -27,21 +27,20 @@ public class Bet extends AbstractEntity {
     @JoinColumn(name = "roll_id")
     private Roll roll;
 
-    @NonNull
-    private Boolean processed = false;
+    private boolean processed = false;
 
     public void markAsProcessed() {
         this.processed = true;
     }
 
-    public Boolean isVictory() {
+    public boolean isVictory() {
         if (this.roll != null) {
             return this.betType.equals(this.roll.getColor()) || this.betType.equals(this.roll.getType());
         }
         throw new IllegalStateException("This bet has no Roll assigned!");
     }
 
-    public Long getPrize() {
+    public long getPrize() {
         return this.betType.getPrize(this.amount);
     }
 }
