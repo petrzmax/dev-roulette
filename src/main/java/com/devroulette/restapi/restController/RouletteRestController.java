@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/roulette")
 @RequiredArgsConstructor
 public class RouletteRestController {
-
     private final RouletteService rouletteService;
     private final BetService betService;
 
