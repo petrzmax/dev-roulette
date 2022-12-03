@@ -14,10 +14,10 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.loadUsers();
+//        this.loadUsers();
     }
 
     private void loadUsers() {
-        this.userRepository.save(new User("test", "test@test.pl", true, 5000L));
+        this.userRepository.save(new User("test@test.pl", true, 5000L));
     }
 }

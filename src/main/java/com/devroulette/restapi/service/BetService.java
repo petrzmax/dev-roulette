@@ -8,6 +8,8 @@ import com.devroulette.restapi.repository.BetRepository;
 import com.devroulette.restapi.repository.UserRepository;
 import com.devroulette.restapi.service.query.BetQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +22,24 @@ public class BetService {
     private final BetQueryService betQueryService;
 
     public void bet(BetDto betDto) throws IllegalArgumentException {
-        // TODO it's dummy implementation
-        User currentUser = this.userRepository.findById(1L).get();
+
+        // TODO Move to smth like AuthenticatedUserService, analyse if saving this user is safe
+        // in terms of many same requests
+        // https://www.baeldung.com/get-user-in-spring-security
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        User currentUser = this.userRepository.findById(user.getId()).get();
+
+
         // if current user balance is enough
         currentUser.pay(betDto.getAmount());
         Bet bet = new Bet(betDto.getBetType(), betDto.getAmount(), currentUser);
         this.betRepository.save(bet);
         this.userRepository.save(currentUser);
+        System.out.println("Bet created. Amount: " + betDto.getAmount() + " type: " + betDto.getBetType());
     }
 
+    // TODO probably move to some BetProcessor class
     public void processBets(Roll roll) {
         List<Bet> betsToProcess = this.betQueryService.getAllNotProcessedBets();
 
