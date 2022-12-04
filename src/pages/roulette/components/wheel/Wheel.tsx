@@ -23,8 +23,8 @@ export default function Wheel() {
     damping: 50,
     mass: 1,
     velocity: 2,
-    restSpeed: 0.05,
-    restDelta: 0.05
+    restSpeed: 0.04,
+    restDelta: 0.04
   };
 
   const selectLastRoll = useSelector(
