@@ -1,11 +1,12 @@
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_BE_URL;
+const apiURL = baseURL + '/api';
 
 // Roulette
-export const rouletteUrl = `${baseURL}/roulette/state`;
-export const rouletteBetUrl = `${baseURL}/roulette/bet`;
+export const rouletteUrl = `${apiURL}/roulette/state`;
+export const rouletteBetUrl = `${apiURL}/roulette/bet`;
 
 // Roll
-export const rollHistoryUrl = `${baseURL}/roll/history`;
+export const rollHistoryUrl = `${apiURL}/roll/history`;
 
 // Session
-export const sessionUrl = `${baseURL}/session`;
+export const sessionUrl = `${apiURL}/session`;
