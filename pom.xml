@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dev-roulette</groupId>
-    <artifactId>rest-api</artifactId>
+    <artifactId>dev-roulette</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rest-api</name>
-    <description>DevRoulette BE</description>
+    <name>DevRoulette</name>
+    <description>DevRoulette</description>
     <properties>
         <java.version>18</java.version>
         <!-- versions -->
