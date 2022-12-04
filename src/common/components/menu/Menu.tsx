@@ -1,9 +1,39 @@
+import { GoogleLogin } from '@react-oauth/google';
 import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { login, logout } from '../../../redux/actions/sessionActions';
+import { RootState, useAppDispatch } from '../../../redux/store';
 
 export default function Menu() {
+  const dispatch = useAppDispatch();
+  const selectIsUserLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+
+  function loginButtonHandler(): JSX.Element {
+    if (selectIsUserLoggedIn) {
+      return (
+        <a href="#" onClick={() => dispatch(logout())}>
+          Logout
+        </a>
+      );
+    } else {
+      return (
+        <GoogleLogin
+          // ux_mode="redirect"
+          onSuccess={(credentialResponse) => {
+            dispatch(login(credentialResponse));
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+          auto_select
+        />
+      );
+    }
+  }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -36,7 +66,8 @@ export default function Menu() {
 
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text></Navbar.Text>
-          Signed in as: <a href="#login"> Radek Brzomen</a>
+
+          {loginButtonHandler()}
         </Navbar.Collapse>
       </Container>
     </Navbar>

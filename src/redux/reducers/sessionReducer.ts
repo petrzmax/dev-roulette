@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setSession } from '../actions/sessionActions';
+import { clearSession, setIsUserLoggedIn, setSession } from '../actions/sessionActions';
 import { reduceBalance } from './../actions/sessionActions';
 
 const initialState: SessionState = {
-  token: '',
+  isLoggedIn: false,
   balance: 0
 };
 
@@ -12,22 +12,27 @@ const sessionReducer = createReducer(initialState, (builder) => {
     .addCase(setSession, (state, action) => {
       return {
         ...state,
-        token: action.payload.token,
         balance: action.payload.balance
       };
     })
+    .addCase(setIsUserLoggedIn, (state, action) => {
+      return {
+        ...state,
+        isLoggedIn: action.payload
+      };
+    })
+    .addCase(clearSession, () => initialState)
     .addCase(reduceBalance, (state, action) => {
       return { ...state, balance: state.balance - action.payload };
     });
 });
 
 export interface SessionState {
-  token: string;
+  isLoggedIn: boolean;
   balance: number;
 }
 
 export interface SessionDto {
-  token: string;
   balance: number;
 }
 

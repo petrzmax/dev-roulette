@@ -16,6 +16,8 @@ export default function RollProgressBar() {
     (state: RootState) => state.roulette.nextRollTimeStamp
   );
 
+  const selectIsLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+
   let expiryTimestamp: Date;
 
   useEffect(() => {
@@ -34,7 +36,8 @@ export default function RollProgressBar() {
 
   const onTimerExpire = () => {
     dispatch(fetchRouletteState());
-    dispatch(fetchSession());
+
+    if (selectIsLoggedIn) dispatch(fetchSession());
   };
 
   expiryTimestamp = new Date(selectNextRollTimeStamp);

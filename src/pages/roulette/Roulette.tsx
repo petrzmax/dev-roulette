@@ -17,12 +17,14 @@ export default function Roulette() {
   const dispatch = useAppDispatch();
   const [betAmount, setBetAmount] = useState(0);
 
+  const selectRollHistory = useSelector((state: RootState) => state.roulette.rollHistory);
+  const selectIsLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+
   useEffect(() => {
-    dispatch(fetchSession());
+    // TODO Not working, it's checked before state is changed
+    if (selectIsLoggedIn) dispatch(fetchSession());
     dispatch(fetchRouletteState());
   }, []);
-
-  const selectRollHistory = useSelector((state: RootState) => state.roulette.rollHistory);
 
   return isEmpty(selectRollHistory) ? (
     // TODO: Wyśrodkować
