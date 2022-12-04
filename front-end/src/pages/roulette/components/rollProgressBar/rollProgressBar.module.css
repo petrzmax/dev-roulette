@@ -1,0 +1,17 @@
+.progressBar {
+  display: flex;
+  width: 0%;
+  height: 3rem;
+  background-color: #f9524e;
+}
+
+.message {
+  position: absolute;
+  text-align: center;
+  line-height: 3rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  top: 0;
+  left: 0;
+  right: 0;
+}
