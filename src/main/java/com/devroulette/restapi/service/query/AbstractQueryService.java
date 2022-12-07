@@ -1,12 +1,11 @@
 package com.devroulette.restapi.service.query;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import lombok.Getter;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
 
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public abstract class AbstractQueryService<T> extends SimpleJpaRepository<T, Long> {

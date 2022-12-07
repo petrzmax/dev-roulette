@@ -4,9 +4,9 @@ import com.devroulette.restapi.entity.Bet;
 import com.devroulette.restapi.entity.QBet;
 import com.devroulette.restapi.service.query.AbstractQueryService;
 import com.devroulette.restapi.service.query.BetQueryService;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.stream.Collectors;
 

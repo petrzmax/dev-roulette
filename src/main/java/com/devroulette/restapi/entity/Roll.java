@@ -1,14 +1,14 @@
 package com.devroulette.restapi.entity;
 
 import com.devroulette.restapi.constant.BetType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Entity

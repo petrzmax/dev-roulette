@@ -1,9 +1,8 @@
 package com.devroulette.restapi.entity;
 
 import com.devroulette.restapi.constant.BetType;
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Entity
 @Getter

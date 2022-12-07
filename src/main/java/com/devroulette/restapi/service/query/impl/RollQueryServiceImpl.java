@@ -6,12 +6,12 @@ import com.devroulette.restapi.entity.Roll;
 import com.devroulette.restapi.service.query.AbstractQueryService;
 import com.devroulette.restapi.service.query.RollQueryService;
 import com.querydsl.core.types.Projections;
+import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
