@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.Optional;
 
 @Component
@@ -27,7 +26,6 @@ public class JwtToUserConverter implements Converter<Jwt, UsernamePasswordAuthen
         Optional<User> optionalUser = this.userRepository.findByUsername(email);
         User user = optionalUser.isPresent() ? optionalUser.get() : this.userFactory.createNewUser(email);
 
-        // TODO set authorities basing on user role?
-        return new UsernamePasswordAuthenticationToken(user, jwt, Collections.EMPTY_LIST);
+        return new UsernamePasswordAuthenticationToken(user, jwt, user.getAuthorities());
     }
 }

@@ -1,5 +1,6 @@
 package com.devroulette.restapi.restController;
 
+import com.devroulette.restapi.constant.Endpoints;
 import com.devroulette.restapi.dto.BetDto;
 import com.devroulette.restapi.dto.RouletteDto;
 import com.devroulette.restapi.service.BetService;
@@ -10,13 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/roulette")
+@RequestMapping(Endpoints.ROULETTE)
 @RequiredArgsConstructor
 public class RouletteRestController {
     private final RouletteService rouletteService;
     private final BetService betService;
 
-    @GetMapping("/state")
+    @GetMapping()
     public ResponseEntity<RouletteDto> getRouletteState() {
         return new ResponseEntity<>(this.rouletteService.getCurrentRouletteState(), HttpStatus.OK);
     }

@@ -1,5 +1,7 @@
 package com.devroulette.restapi.config;
 
+import com.devroulette.restapi.constant.Endpoints;
+import com.devroulette.restapi.constant.Role;
 import com.devroulette.restapi.security.CORSCustomizer;
 import com.devroulette.restapi.security.JwtToUserConverter;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +27,8 @@ public class WebSecurityConfig {
         this.corsCustomizer.corsCustomizer(http);
 
         http.authorizeRequests()
-                .requestMatchers("/api/roulette/state").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers(Endpoints.ROULETTE).permitAll()
+                .requestMatchers(Endpoints.ADMIN + "/**").hasAuthority(Role.ADMIN)
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt((jwt) -> jwt.jwtAuthenticationConverter(this.jwtToUserConverter)))
