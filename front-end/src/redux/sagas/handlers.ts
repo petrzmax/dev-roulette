@@ -8,6 +8,7 @@ import { setRouletteState } from '../actions/rouletteActions';
 import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
 import {
   clearSession,
+  fetchSession,
   reduceBalance,
   setAccessTokenInCookie,
   setIsUserLoggedIn,
@@ -63,10 +64,10 @@ export function* handleSetAccessTokenInCookie(action: PayloadAction<string>) {
 }
 
 export function* handleLogin(action: PayloadAction<CredentialResponse>) {
-  yield put(setIsUserLoggedIn(true));
-
   if (action.payload.credential) {
     yield put(setAccessTokenInCookie(action.payload.credential));
+    yield put(setIsUserLoggedIn(true));
+    yield put(fetchSession());
   }
 }
 
