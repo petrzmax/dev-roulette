@@ -13,12 +13,10 @@ import Router from './setup/router/Router';
 
 function App() {
   const dispatch = useAppDispatch();
-  // TODO move to environment variables
-  const clientId = 'clientId';
 
   useEffect(initialize, []);
 
-  function initialize() {
+  function initialize(): void {
     const cookies = new Cookies();
     if (cookies.get(ACCESS_TOKEN_COOKIE_NAME)) {
       dispatch(setIsUserLoggedIn(true));
@@ -26,7 +24,7 @@ function App() {
   }
 
   return (
-    <GoogleOAuthProvider clientId={clientId}>
+    <GoogleOAuthProvider clientId={String(process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID)}>
       <BrowserRouter>
         <Menu />
         <Container>
