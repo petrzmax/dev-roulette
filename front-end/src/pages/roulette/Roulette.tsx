@@ -5,7 +5,9 @@ import { BetType } from '../../common/constants';
 import { isEmpty } from '../../common/utils/rouletteUtils/typeScriptUtils';
 import { fetchRouletteState } from '../../redux/actions/rouletteActions';
 import { fetchSession } from '../../redux/actions/sessionActions';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { selectRollHistory } from '../../redux/reducers/rouletteReducer';
+import { selectIsLoggedIn } from '../../redux/reducers/sessionReducer';
+import { useAppDispatch } from '../../redux/store';
 import BetAmountPanel from './components/betAmountPanel/BetAmountPanel';
 import HistoryBar from './components/historyBar/HistoryBar';
 import ManualBetPanel from './components/manualBetPanel/ManualBetPanel';
@@ -17,16 +19,16 @@ export default function Roulette() {
   const dispatch = useAppDispatch();
   const [betAmount, setBetAmount] = useState(0);
 
-  const selectRollHistory = useSelector((state: RootState) => state.roulette.rollHistory);
-  const selectIsLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+  const rollHistory = useSelector(selectRollHistory);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     // TODO Not working, it's checked before state is changed
-    if (selectIsLoggedIn) dispatch(fetchSession());
+    if (isLoggedIn) dispatch(fetchSession());
     dispatch(fetchRouletteState());
   }, []);
 
-  return isEmpty(selectRollHistory) ? (
+  return isEmpty(rollHistory) ? (
     // TODO: Wyśrodkować
     <Spinner animation={'border'} />
   ) : (

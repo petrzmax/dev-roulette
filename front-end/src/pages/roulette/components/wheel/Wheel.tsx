@@ -4,7 +4,11 @@ import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import useSound from 'use-sound';
 import clickSound from '../../../../assets/sounds/click.mp3';
-import { RootState, useAppDispatch } from '../../../../redux/store';
+import {
+  selectLastRoll,
+  selectTileCoverageFactor
+} from '../../../../redux/reducers/rouletteReducer';
+import { useAppDispatch } from '../../../../redux/store';
 import Tiles from './components/Tiles';
 import css from './Wheel.module.css';
 import { calculateAnimation, rollAnimationData } from './WheelUtils';
@@ -17,6 +21,9 @@ export default function Wheel() {
   const tileContainerRef = useRef<HTMLDivElement>(null);
   const [tempBool, setTempBool] = useState(false);
 
+  const lastRoll = useSelector(selectLastRoll);
+  const tileCoverageFactor = useSelector(selectTileCoverageFactor);
+
   const defaultTransition: Transition = {
     type: 'spring',
     stiffness: 100,
@@ -27,19 +34,11 @@ export default function Wheel() {
     restDelta: 0.04
   };
 
-  const selectLastRoll = useSelector(
-    (state: RootState) => state.roulette.rollHistory[state.roulette.rollHistory.length - 1]
-  );
-
-  const selectTileCoverageFactor = useSelector(
-    (state: RootState) => state.roulette.tileCoverageFactor
-  );
-
   useEffect(() => {
     if (tempBool) {
       animationController.start(calculateAnimation(getAnimationData(74)));
     }
-  }, [selectLastRoll]);
+  }, [lastRoll]);
 
   useEffect(() => {
     updateRoulettePosition();
@@ -56,9 +55,9 @@ export default function Wheel() {
   function getAnimationData(offset?: number): rollAnimationData {
     return {
       offset: offset,
-      roll: selectLastRoll,
+      roll: lastRoll,
       rouletteBarWidth: rouletteBarRef.current!.clientWidth,
-      tileCoverageFactor: selectTileCoverageFactor
+      tileCoverageFactor: tileCoverageFactor
     };
   }
 

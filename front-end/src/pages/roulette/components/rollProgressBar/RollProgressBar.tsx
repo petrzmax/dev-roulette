@@ -5,23 +5,22 @@ import { useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { fetchRouletteState } from '../../../../redux/actions/rouletteActions';
 import { fetchSession } from '../../../../redux/actions/sessionActions';
-import { RootState, useAppDispatch } from '../../../../redux/store';
+import { selectNextRollTimeStamp } from '../../../../redux/reducers/rouletteReducer';
+import { selectIsLoggedIn } from '../../../../redux/reducers/sessionReducer';
+import { useAppDispatch } from '../../../../redux/store';
 import css from './rollProgressBar.module.css';
 
 export default function RollProgressBar() {
   const dispatch = useAppDispatch();
   const animationController = useAnimation();
 
-  const selectNextRollTimeStamp = useSelector(
-    (state: RootState) => state.roulette.nextRollTimeStamp
-  );
-
-  const selectIsLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+  const nextRollTimeStamp = useSelector(selectNextRollTimeStamp);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   let expiryTimestamp: Date;
 
   useEffect(() => {
-    expiryTimestamp = new Date(selectNextRollTimeStamp);
+    expiryTimestamp = new Date(nextRollTimeStamp);
     restart(expiryTimestamp);
     animationController.set({ width: '0%' });
     animationController.start(
@@ -32,15 +31,15 @@ export default function RollProgressBar() {
         duration: Math.abs(expiryTimestamp.getSeconds() - new Date().getSeconds())
       }
     );
-  }, [selectNextRollTimeStamp]);
+  }, [nextRollTimeStamp]);
 
   const onTimerExpire = () => {
     dispatch(fetchRouletteState());
 
-    if (selectIsLoggedIn) dispatch(fetchSession());
+    if (isLoggedIn) dispatch(fetchSession());
   };
 
-  expiryTimestamp = new Date(selectNextRollTimeStamp);
+  expiryTimestamp = new Date(nextRollTimeStamp);
   const { seconds, isRunning, start, pause, resume, restart } = useTimer({
     expiryTimestamp,
     onExpire: onTimerExpire

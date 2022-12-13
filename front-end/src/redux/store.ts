@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { rouletteReducer } from './reducers/rouletteReducer';
+import rouletteReducer from './reducers/rouletteReducer';
 import sessionReducer from './reducers/sessionReducer';
 import { watcherSaga } from './sagas/rootSaga';
 

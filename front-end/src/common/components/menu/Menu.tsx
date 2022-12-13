@@ -5,14 +5,15 @@ import Navbar from 'react-bootstrap/esm/Navbar';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { login, logout } from '../../../redux/actions/sessionActions';
-import { RootState, useAppDispatch } from '../../../redux/store';
+import { selectIsLoggedIn } from '../../../redux/reducers/sessionReducer';
+import { useAppDispatch } from '../../../redux/store';
 
 export default function Menu() {
   const dispatch = useAppDispatch();
-  const selectIsUserLoggedIn = useSelector((state: RootState) => state.session.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   function loginButtonHandler(): JSX.Element {
-    if (selectIsUserLoggedIn) {
+    if (isLoggedIn) {
       return (
         <a href="#" onClick={() => dispatch(logout())}>
           Logout

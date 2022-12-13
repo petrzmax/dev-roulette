@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { clearSession, setIsUserLoggedIn, setSession } from '../actions/sessionActions';
+import { RootState } from '../store';
 import { reduceBalance } from './../actions/sessionActions';
 
 const initialState: SessionState = {
@@ -35,5 +36,9 @@ export interface SessionState {
 export interface SessionDto {
   balance: number;
 }
+
+// Selectors
+export const selectIsLoggedIn = (state: RootState) => state.session.isLoggedIn;
+export const selectBalance = (state: RootState) => state.session.balance;
 
 export default sessionReducer;

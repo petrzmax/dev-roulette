@@ -1,11 +1,11 @@
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
+import { selectRollHistory } from '../../../../redux/reducers/rouletteReducer';
 import ColoredCircle from './coloredCircle/ColoredCircle';
 import css from './HistoryBar.module.css';
 
 export default function HistoryBar() {
-  const selectRollHistory = useSelector((state: RootState) => state.roulette.rollHistory);
+  const rollHistory = useSelector(selectRollHistory);
 
   return (
     <Card bg="light">
@@ -14,8 +14,6 @@ export default function HistoryBar() {
   );
 
   function mapHistory() {
-    return selectRollHistory.map((value, index) => (
-      <ColoredCircle key={index} rolledNumber={value} />
-    ));
+    return rollHistory.map((value, index) => <ColoredCircle key={index} rolledNumber={value} />);
   }
 }

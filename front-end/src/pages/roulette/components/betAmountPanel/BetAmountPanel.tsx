@@ -1,13 +1,13 @@
 import { useContext, useRef } from 'react';
 import { Button, Card, Form, InputGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
+import { selectBalance } from '../../../../redux/reducers/sessionReducer';
 import { BetContext } from '../../context/BetContext';
 
 export default function BetAmountPanel() {
   const { betAmount, setBetAmount } = useContext(BetContext);
 
-  const selectBalance = useSelector((state: RootState) => state.session.balance);
+  const balance = useSelector(selectBalance);
 
   const amountInputRef = useRef<any>();
 
@@ -23,7 +23,7 @@ export default function BetAmountPanel() {
   return (
     <Card bg="light">
       <Card.Body>
-        <Card.Title className="text-start">Balance: {selectBalance}</Card.Title>
+        <Card.Title className="text-start">Balance: {balance}</Card.Title>
         <InputGroup className="mb-2">
           <Button variant="outline-primary" onClick={clearAmountInput}>
             Clear
@@ -47,7 +47,7 @@ export default function BetAmountPanel() {
           <Button variant="outline-primary" onClick={() => setBetAmount(betAmount * 2)}>
             x2
           </Button>
-          <Button variant="outline-primary" onClick={() => setBetAmount(selectBalance)}>
+          <Button variant="outline-primary" onClick={() => setBetAmount(balance)}>
             Max
           </Button>
         </InputGroup>
@@ -58,7 +58,7 @@ export default function BetAmountPanel() {
           value={betAmount}
           onChange={handleAmountChange}
           min="0"
-          max={selectBalance}
+          max={balance}
           step={1}
           ref={amountInputRef}
         />
