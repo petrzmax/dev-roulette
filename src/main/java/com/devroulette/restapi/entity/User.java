@@ -1,5 +1,7 @@
 package com.devroulette.restapi.entity;
 
+import com.devroulette.restapi.constant.ErrorMessages;
+import com.mysema.commons.lang.Assert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -57,16 +59,18 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     public void transfer(long amount) {
+        Assert.isTrue(amount > 0, ErrorMessages.NEGATIVE_AMOUNT);
+
         this.balance += amount;
         System.out.println("Balance increased by: " + amount);
     }
 
     public void pay(long amount) throws IllegalArgumentException {
-        if (this.balance >= amount) {
-            this.balance -= amount;
-            System.out.println("Balance decreased by: " + amount);
-        } else {
-            throw new IllegalArgumentException("Not enough balance");
-        }
+        Assert.isTrue(amount > 0, ErrorMessages.NEGATIVE_AMOUNT);
+        Assert.isTrue(this.balance >= amount, ErrorMessages.NOT_ENOUGH_BALANCE);
+
+        this.balance -= amount;
+
+        System.out.println("Balance decreased by: " + amount);
     }
 }
