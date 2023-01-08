@@ -10,6 +10,7 @@ import com.devroulette.restapi.service.query.BetQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,17 +40,19 @@ public class BetService {
     // TODO probably move to some BetProcessor class
     public void processBets(Roll roll) {
         List<Bet> betsToProcess = this.betQueryService.getAllNotProcessedBets();
+        List<User> updatedUsers = new ArrayList<>();
 
         betsToProcess.forEach(bet -> {
             bet.setRoll(roll);
-            bet.markAsProcessed();
 
             if (bet.isVictory()) {
                 User user = bet.getUser();
                 user.transfer(bet.getPrize());
-                this.userRepository.save(user);
+                updatedUsers.add(user);
             }
         });
+
+        this.userRepository.saveAll(updatedUsers);
         this.betRepository.saveAll(betsToProcess);
     }
 }
