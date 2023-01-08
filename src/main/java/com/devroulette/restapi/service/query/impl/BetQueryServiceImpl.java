@@ -23,7 +23,7 @@ public class BetQueryServiceImpl extends AbstractQueryService<Bet> implements Be
         return this.getQueryFactory()
                 .select(BET)
                 .from(BET)
-                .where(BET.processed.isFalse())
+                .where(BET.roll.isNull())
                 .stream()
                 .collect(Collectors.toList());
     }

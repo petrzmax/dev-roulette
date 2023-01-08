@@ -7,6 +7,7 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "BETS")
 public class Bet extends AbstractEntity {
@@ -14,7 +15,7 @@ public class Bet extends AbstractEntity {
     @Enumerated(EnumType.STRING) // It will consume much more db memory. Use only for testing
     private BetType betType;
     @NonNull
-    private Long amount;
+    private long amount;
 
     @NonNull
     @OneToOne
@@ -25,12 +26,6 @@ public class Bet extends AbstractEntity {
     @OneToOne
     @JoinColumn(name = "roll_id")
     private Roll roll;
-
-    private boolean processed = false;
-
-    public void markAsProcessed() {
-        this.processed = true;
-    }
 
     public boolean isVictory() {
         if (this.roll != null) {
