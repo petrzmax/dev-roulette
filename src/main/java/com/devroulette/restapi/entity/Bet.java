@@ -1,6 +1,7 @@
 package com.devroulette.restapi.entity;
 
 import com.devroulette.restapi.constant.BetType;
+import com.devroulette.restapi.constant.ErrorMessages;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,7 +32,7 @@ public class Bet extends AbstractEntity {
         if (this.roll != null) {
             return this.betType.equals(this.roll.getColor()) || this.betType.equals(this.roll.getType());
         }
-        throw new IllegalStateException("This bet has no Roll assigned!");
+        throw new IllegalStateException(ErrorMessages.ROLL_NOT_ASSIGNED);
     }
 
     public long getPrize() {
