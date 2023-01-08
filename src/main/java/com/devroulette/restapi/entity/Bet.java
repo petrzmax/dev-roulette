@@ -23,6 +23,10 @@ public class Bet extends AbstractEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "bot_id")
+    private Bot bot;
+
     @Setter
     @OneToOne
     @JoinColumn(name = "roll_id")
