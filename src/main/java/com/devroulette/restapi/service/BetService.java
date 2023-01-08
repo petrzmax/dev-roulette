@@ -25,11 +25,8 @@ public class BetService {
 
         // TODO analyse if saving this user is safe in terms of many same requests
         // https://www.baeldung.com/get-user-in-spring-security
-        long userId = this.authorizedUserService.getUser().getId();
-        User currentUser = this.userRepository.findById(userId).get();
+        User currentUser = this.authorizedUserService.getUser();
 
-
-        // if current user balance is enough
         currentUser.pay(betDto.getAmount());
         Bet bet = new Bet(betDto.getBetType(), betDto.getAmount(), currentUser);
         this.betRepository.save(bet);
