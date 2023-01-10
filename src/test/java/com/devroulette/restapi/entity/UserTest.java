@@ -1,10 +1,12 @@
 package com.devroulette.restapi.entity;
 
 import com.devroulette.restapi.constant.ErrorMessages;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class UserTest {
 
@@ -24,7 +26,7 @@ class UserTest {
         user.transfer(OPERATION_AMOUNT);
 
         // then
-        Assertions.assertThat(user.getBalance()).isEqualTo(resultBalance);
+        assertThat(user.getBalance()).isEqualTo(resultBalance);
     }
 
     @ParameterizedTest
@@ -34,7 +36,7 @@ class UserTest {
         User user = new User(USERNAME, START_BALANCE, ROLE);
 
         // when & then
-        Assertions.assertThatThrownBy(() -> user.transfer(amount))
+        assertThatThrownBy(() -> user.transfer(amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.NEGATIVE_AMOUNT);
     }
@@ -49,7 +51,7 @@ class UserTest {
         user.pay(OPERATION_AMOUNT);
 
         // then
-        Assertions.assertThat(user.getBalance()).isEqualTo(resultBalance);
+        assertThat(user.getBalance()).isEqualTo(resultBalance);
     }
 
     @Test
@@ -58,7 +60,7 @@ class UserTest {
         User user = new User(USERNAME, START_BALANCE, ROLE);
 
         // when & then
-        Assertions.assertThatThrownBy(() -> user.pay(START_BALANCE + 1))
+        assertThatThrownBy(() -> user.pay(START_BALANCE + 1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.NOT_ENOUGH_BALANCE);
     }
@@ -70,7 +72,7 @@ class UserTest {
         User user = new User(USERNAME, START_BALANCE, ROLE);
 
         // when & then
-        Assertions.assertThatThrownBy(() -> user.pay(amount))
+        assertThatThrownBy(() -> user.pay(amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.NEGATIVE_AMOUNT);
     }
