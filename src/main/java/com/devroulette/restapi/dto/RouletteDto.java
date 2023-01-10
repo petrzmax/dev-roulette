@@ -1,14 +1,9 @@
 package com.devroulette.restapi.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
-public class RouletteDto {
-    private List<Integer> rollHistory;
-    private Float tileCoverageFactor;
-    private String nextRollTimeStamp;
+public record RouletteDto(
+        List<Integer> rollHistory,
+        float tileCoverageFactor,
+        String nextRollTimeStamp) {
 }

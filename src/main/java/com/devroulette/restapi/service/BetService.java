@@ -27,11 +27,11 @@ public class BetService {
         // https://www.baeldung.com/get-user-in-spring-security
         User currentUser = this.authorizedUserService.getUser();
 
-        currentUser.pay(betDto.getAmount());
-        Bet bet = new Bet(betDto.getBetType(), betDto.getAmount(), currentUser);
+        currentUser.pay(betDto.amount());
+        Bet bet = new Bet(betDto.betType(), betDto.amount(), currentUser);
         this.betRepository.save(bet);
         this.userRepository.save(currentUser);
-        System.out.println("Bet created. Amount: " + betDto.getAmount() + " type: " + betDto.getBetType());
+        System.out.println("Bet created. Amount: " + betDto.amount() + " type: " + betDto.betType());
     }
 
     // TODO probably move to some BetProcessor class
