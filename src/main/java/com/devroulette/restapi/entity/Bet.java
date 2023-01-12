@@ -33,7 +33,7 @@ public class Bet extends AbstractEntity {
 
     public boolean isVictory() {
         if (this.roll != null) {
-            return this.betType.equals(this.roll.getColor()) || this.betType.equals(this.roll.getType());
+            return this.betType.equals(this.roll.getColor()) || this.betType.equals(this.roll.getParity());
         }
         throw new IllegalStateException(ErrorMessages.ROLL_NOT_ASSIGNED);
     }

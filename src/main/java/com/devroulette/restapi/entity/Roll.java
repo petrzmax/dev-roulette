@@ -51,7 +51,11 @@ public class Roll extends AbstractEntity {
         return this.result != 0 && this.result % 2 == 0;
     }
 
-    public BetType getType() {
+    public BetType getParity() {
+        if (this.result == 0) {
+            return BetType.GREEN;
+        }
+
         return this.isEven() ? BetType.EVEN : BetType.ODD;
     }
 }
