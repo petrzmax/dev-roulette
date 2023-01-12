@@ -8,7 +8,6 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "BETS")
 public class Bet extends AbstractEntity {

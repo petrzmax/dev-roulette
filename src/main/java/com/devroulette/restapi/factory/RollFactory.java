@@ -9,16 +9,16 @@ import java.util.Random;
 @Component
 public class RollFactory {
     public Roll createRandomRoll() {
-        Long currentTimeSeed = System.currentTimeMillis();
+        long currentTimeSeed = System.currentTimeMillis();
         Random generator = new Random(currentTimeSeed);
 
-        Integer rollResult = generator.nextInt(0, RouletteUtils.ROULETTE_NUMBER_SEQUENCE.size());
-        Float tileCoverageFactor = generator.nextFloat();
+        int rollResult = generator.nextInt(0, RouletteUtils.ROULETTE_NUMBER_SEQUENCE.size());
+        float tileCoverageFactor = generator.nextFloat();
 
         // TODO logging?
         System.out.println("Rolled: " + rollResult + " tileCoverage: " + tileCoverageFactor);
 
         // TODO make it use real seed
-        return new Roll(currentTimeSeed.toString(), rollResult, tileCoverageFactor);
+        return new Roll(String.valueOf(currentTimeSeed), rollResult, tileCoverageFactor);
     }
 }

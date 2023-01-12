@@ -19,14 +19,14 @@ class UserTest {
     @Test
     void transferWithPositiveAmountShouldIncreaseUserBalance() {
         // given
-        long resultBalance = START_BALANCE + OPERATION_AMOUNT;
+        long expectedBalance = START_BALANCE + OPERATION_AMOUNT;
         User user = new User(USERNAME, START_BALANCE, ROLE);
 
         // when
         user.transfer(OPERATION_AMOUNT);
 
         // then
-        assertThat(user.getBalance()).isEqualTo(resultBalance);
+        assertThat(user.getBalance()).isEqualTo(expectedBalance);
     }
 
     @ParameterizedTest
@@ -44,14 +44,14 @@ class UserTest {
     @Test
     void payWithPositiveAmountShouldDecreaseUserBalance() {
         // given
-        long resultBalance = START_BALANCE - OPERATION_AMOUNT;
+        long expectedBalance = START_BALANCE - OPERATION_AMOUNT;
         User user = new User(USERNAME, START_BALANCE, ROLE);
 
         // when
         user.pay(OPERATION_AMOUNT);
 
         // then
-        assertThat(user.getBalance()).isEqualTo(resultBalance);
+        assertThat(user.getBalance()).isEqualTo(expectedBalance);
     }
 
     @Test
