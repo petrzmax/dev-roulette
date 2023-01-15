@@ -33,7 +33,7 @@ public class RouletteRestController {
     @ExceptionHandler
     public ResponseEntity<RouletteErrorDto> handleException(IllegalArgumentException e) {
 
-        RouletteErrorDto errorResponse = new RouletteErrorDto(e.getMessage());
+        RouletteErrorDto errorResponse = new RouletteErrorDto(e.getMessage(), System.currentTimeMillis());
         return new ResponseEntity(errorResponse, HttpStatus.PRECONDITION_FAILED);
     }
 }
