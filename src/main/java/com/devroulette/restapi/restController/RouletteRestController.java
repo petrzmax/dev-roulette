@@ -3,6 +3,7 @@ package com.devroulette.restapi.restController;
 import com.devroulette.restapi.constant.Endpoints;
 import com.devroulette.restapi.dto.BetDto;
 import com.devroulette.restapi.dto.RouletteDto;
+import com.devroulette.restapi.dto.RouletteErrorDto;
 import com.devroulette.restapi.service.BetService;
 import com.devroulette.restapi.service.RouletteService;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +25,15 @@ public class RouletteRestController {
 
     @PostMapping("bet")
     public ResponseEntity bet(@RequestBody BetDto betDto) {
-        // TODO return account balance after bet & bet id? To allow bet cancel?
-        // TODO BetDto validation
-        try {
-            this.betService.bet(betDto);
-            return new ResponseEntity(HttpStatus.ACCEPTED);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.PRECONDITION_FAILED);
-        }
+        // TODO return bet id? To allow bet cancel?
+        this.betService.bet(betDto);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<RouletteErrorDto> handleException(IllegalArgumentException e) {
+
+        RouletteErrorDto errorResponse = new RouletteErrorDto(e.getMessage());
+        return new ResponseEntity(errorResponse, HttpStatus.PRECONDITION_FAILED);
     }
 }

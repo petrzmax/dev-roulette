@@ -21,7 +21,7 @@ public class BetService {
     private final BetQueryService betQueryService;
     private final AuthenticatedUserService authorizedUserService;
 
-    public void bet(BetDto betDto) throws IllegalArgumentException {
+    public void bet(BetDto betDto) {
 
         // TODO analyse if saving this user is safe in terms of many same requests
         // https://www.baeldung.com/get-user-in-spring-security

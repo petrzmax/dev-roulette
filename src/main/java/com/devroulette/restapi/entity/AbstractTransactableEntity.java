@@ -23,7 +23,7 @@ public abstract class AbstractTransactableEntity extends AbstractEntity {
         System.out.println("Balance increased by: " + amount);
     }
 
-    public void pay(long amount) throws IllegalArgumentException {
+    public void pay(long amount) {
         Assert.isTrue(amount > 0, ErrorMessages.NEGATIVE_AMOUNT);
         Assert.isTrue(this.balance >= amount, ErrorMessages.NOT_ENOUGH_BALANCE);
 
