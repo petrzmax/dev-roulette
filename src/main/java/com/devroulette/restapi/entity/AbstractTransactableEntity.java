@@ -5,22 +5,26 @@ import com.mysema.commons.lang.Assert;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
 
 @Getter
 @MappedSuperclass
 @NoArgsConstructor
-@RequiredArgsConstructor
 public abstract class AbstractTransactableEntity extends AbstractEntity {
-    @NonNull
     private long balance;
+
+    public AbstractTransactableEntity(long balance) {
+        this.balance = balance;
+    }
 
     public void transfer(long amount) {
         Assert.isTrue(amount > 0, ErrorMessages.NEGATIVE_AMOUNT);
 
         this.balance += amount;
-        System.out.println("Balance increased by: " + amount);
+
+        LoggerFactory.getLogger(this.getClass()).info(
+                String.format("%1$s with ID: %2$d balance increased by: %3$d",
+                        this.getClass().getSimpleName(), this.getId(), amount));
     }
 
     public void pay(long amount) {
@@ -29,6 +33,8 @@ public abstract class AbstractTransactableEntity extends AbstractEntity {
 
         this.balance -= amount;
 
-        System.out.println("Balance decreased by: " + amount);
+        LoggerFactory.getLogger(this.getClass()).info(
+                String.format("%1$s with ID: %2$d balance decreased by: %3$d",
+                        this.getClass().getSimpleName(), this.getId(), amount));
     }
 }
