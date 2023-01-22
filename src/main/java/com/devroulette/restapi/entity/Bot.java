@@ -6,12 +6,14 @@ import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "BOTS")
 public class Bot extends AbstractTransactableEntity {
     @NonNull
     private String name;
-    @Setter
     private String scriptBody;
+    private boolean enabled;
+    private String errorMessage;
 }
