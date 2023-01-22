@@ -19,7 +19,7 @@ public class RollFactory {
         int rollResult = generator.nextInt(0, RouletteUtils.ROULETTE_NUMBER_SEQUENCE.size());
         float tileCoverageFactor = generator.nextFloat();
 
-        LOG.info("Rolled: " + rollResult + " tileCoverage: " + tileCoverageFactor);
+        LOG.info(String.format("Rolled: %1$d, tileCoverage: %2$f", rollResult, tileCoverageFactor));
 
         // TODO make it use real seed
         return new Roll(String.valueOf(currentTimeSeed), rollResult, tileCoverageFactor);
