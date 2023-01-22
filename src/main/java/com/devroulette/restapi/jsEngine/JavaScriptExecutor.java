@@ -31,7 +31,11 @@ public class JavaScriptExecutor {
     }
 
     public Value execute(String script) {
-        Engine engine = Engine.newBuilder().option("js.ecmascript-version", "2020").build();
+        Engine engine = Engine.newBuilder()
+                .option("js.ecmascript-version", "2020")
+                .option("engine.WarnInterpreterOnly", "false")
+                .build();
+
         Context context = Context.newBuilder(JS).engine(engine).build();
         Source source = Source.create(JS, script);
 
