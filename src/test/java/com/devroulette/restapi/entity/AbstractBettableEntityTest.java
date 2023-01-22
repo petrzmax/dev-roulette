@@ -12,32 +12,23 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class BetTest {
+class AbstractBettableEntityTest {
 
     private final static long BET_AMOUNT = 100;
-    private final static User USER = new User();
 
     @Test
-    void betCreationShouldThrowExceptionWhenBetTypeIsNull() {
+    void bettableEntityCreationShouldThrowExceptionWhenBetTypeIsNull() {
         // when & then
-        assertThatThrownBy(() -> new Bet(null, BET_AMOUNT, USER))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessages.FIELD_IS_NULL);
-    }
-
-    @Test
-    void betCreationShouldThrowExceptionWhenUserIsNull() {
-        // when & then
-        assertThatThrownBy(() -> new Bet(BetType.GREEN, BET_AMOUNT, null))
+        assertThatThrownBy(() -> new BettableEntity(null, BET_AMOUNT))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.FIELD_IS_NULL);
     }
 
     @ParameterizedTest
     @ValueSource(longs = {0, -1})
-    void betCreationShouldThrowExceptionWhenAmountIsLowerOrEqualZero(long amount) {
+    void bettableEntityCreationShouldThrowExceptionWhenAmountIsLowerOrEqualZero(long amount) {
         // when & then
-        assertThatThrownBy(() -> new Bet(BetType.GREEN, amount, USER))
+        assertThatThrownBy(() -> new BettableEntity(BetType.GREEN, amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.NEGATIVE_AMOUNT);
     }
@@ -45,7 +36,7 @@ class BetTest {
     @Test
     void isVictoryShouldReturnTrueWhenBetIsWinning() {
         // given
-        Bet bet = new Bet(BetType.GREEN, BET_AMOUNT, USER);
+        BettableEntity bet = new BettableEntity(BetType.GREEN, BET_AMOUNT);
         Roll roll = mock(Roll.class);
         when(roll.getColor()).thenReturn(BetType.GREEN);
 
@@ -58,7 +49,7 @@ class BetTest {
     @Test
     void isVictoryShouldThrowExceptionWhenBetHasNoRollAssigned() {
         // given
-        Bet bet = new Bet();
+        BettableEntity bet = new BettableEntity();
 
         // when & then
         assertThatThrownBy(() -> bet.isVictory())
@@ -70,7 +61,7 @@ class BetTest {
     @CsvSource({"GREEN,36", "EVEN,2", "ODD,2", "RED,2", "BLACK,2"})
     void getPrizeShouldReturnProperlyCalculatedPrize(BetType betType, int prizeMultiplier) {
         // given
-        Bet bet = new Bet(betType, BET_AMOUNT, USER);
+        BettableEntity bet = new BettableEntity(betType, BET_AMOUNT);
         long expectedPrize = BET_AMOUNT * prizeMultiplier;
 
         // when
@@ -78,5 +69,14 @@ class BetTest {
 
         // then
         assertThat(result).isEqualTo(expectedPrize);
+    }
+
+    private class BettableEntity extends AbstractBettableEntity {
+        public BettableEntity() {
+        }
+
+        public BettableEntity(BetType betType, long amount) {
+            super(betType, amount);
+        }
     }
 }

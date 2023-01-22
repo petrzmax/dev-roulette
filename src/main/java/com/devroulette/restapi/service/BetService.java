@@ -1,13 +1,15 @@
 package com.devroulette.restapi.service;
 
 import com.devroulette.restapi.dto.BetDto;
-import com.devroulette.restapi.entity.Bet;
 import com.devroulette.restapi.entity.Roll;
 import com.devroulette.restapi.entity.User;
-import com.devroulette.restapi.repository.BetRepository;
+import com.devroulette.restapi.entity.UserBet;
+import com.devroulette.restapi.repository.UserBetRepository;
 import com.devroulette.restapi.repository.UserRepository;
-import com.devroulette.restapi.service.query.BetQueryService;
+import com.devroulette.restapi.service.query.UserBetQueryService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +18,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BetService {
-    private final BetRepository betRepository;
+    private static final Logger LOG = LoggerFactory.getLogger(BetService.class);
+
+    private final UserBetRepository userBetRepository;
     private final UserRepository userRepository;
-    private final BetQueryService betQueryService;
+    private final UserBetQueryService userBetQueryService;
     private final AuthenticatedUserService authorizedUserService;
 
     public void bet(BetDto betDto) {
@@ -28,15 +32,17 @@ public class BetService {
         User currentUser = this.authorizedUserService.getUser();
 
         currentUser.pay(betDto.amount());
-        Bet bet = new Bet(betDto.betType(), betDto.amount(), currentUser);
-        this.betRepository.save(bet);
+        UserBet userBet = new UserBet(betDto.betType(), betDto.amount(), currentUser);
+        this.userBetRepository.save(userBet);
         this.userRepository.save(currentUser);
-        System.out.println("Bet created. Amount: " + betDto.amount() + " type: " + betDto.betType());
+
+        LOG.info(String.format("Bet created by User with ID: %1$d. Amount: %2$d, type: %3$s",
+                currentUser.getId(), betDto.amount(), betDto.betType()));
     }
 
     // TODO probably move to some BetProcessor class
     public void processBets(Roll roll) {
-        List<Bet> betsToProcess = this.betQueryService.getAllNotProcessedBets();
+        List<UserBet> betsToProcess = this.userBetQueryService.getAllNotProcessedBets();
         List<User> updatedUsers = new ArrayList<>();
 
         betsToProcess.forEach(bet -> {
@@ -50,6 +56,6 @@ public class BetService {
         });
 
         this.userRepository.saveAll(updatedUsers);
-        this.betRepository.saveAll(betsToProcess);
+        this.userBetRepository.saveAll(betsToProcess);
     }
 }
