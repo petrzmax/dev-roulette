@@ -1,6 +1,7 @@
 package com.devroulette.restapi.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @Entity
 @Getter
@@ -22,10 +22,23 @@ public class User extends AbstractTransactableEntity implements UserDetails {
     @NonNull
     private String role;
 
+    // TODO Cascade settings
+    @OneToMany(mappedBy = "user")
+    private List<Bot> bots;
+
     public User(String username, long balance, String role) {
         super(balance);
         this.username = username;
         this.role = role;
+    }
+
+    public void addBot(Bot bot) {
+        if (Objects.isNull(this.bots)) {
+            this.bots = new ArrayList<>();
+        }
+
+        this.bots.add(bot);
+        bot.setUser(this);
     }
 
     @Override

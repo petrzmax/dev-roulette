@@ -21,6 +21,7 @@ public class BetProcessorService {
     private final UserBetRepository userBetRepository;
     private final UserRepository userRepository;
 
+    // TODO Probably could be refactored - AbstractBettableEntity could have AbstractTransactableEntity etc.
     public void processUserBets(Roll roll) {
         List<UserBet> betsToProcess = this.userBetQueryService.getAllNotProcessedBets();
         List<User> updatedUsers = new ArrayList<>();
