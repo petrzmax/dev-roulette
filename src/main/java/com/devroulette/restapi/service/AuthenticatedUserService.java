@@ -1,5 +1,6 @@
 package com.devroulette.restapi.service;
 
+import com.devroulette.restapi.constant.ErrorMessages;
 import com.devroulette.restapi.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -18,6 +19,6 @@ public class AuthenticatedUserService {
             return (User) authentication.getPrincipal();
         }
 
-        throw new AuthenticationCredentialsNotFoundException("There is no authenticated user");
+        throw new AuthenticationCredentialsNotFoundException(ErrorMessages.NO_AUTHENTICATED_USER);
     }
 }

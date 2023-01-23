@@ -2,7 +2,7 @@ package com.devroulette.restapi.restController;
 
 import com.devroulette.restapi.constant.Endpoints;
 import com.devroulette.restapi.constant.RouletteWorkflowState;
-import com.devroulette.restapi.service.RouletteService;
+import com.devroulette.restapi.controller.RouletteController;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminPanelRestController {
     private static final Logger LOG = LoggerFactory.getLogger(AdminPanelRestController.class);
 
-    private final RouletteService rouletteService;
+    private final RouletteController rouletteController;
 
     @PostMapping("start")
     public ResponseEntity start() {
-        this.rouletteService.setState(RouletteWorkflowState.ROLLING);
+        this.rouletteController.setState(RouletteWorkflowState.ROLLING);
         LOG.info("Roulette started!");
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @PostMapping("stop")
     public ResponseEntity stop() {
-        this.rouletteService.setState(RouletteWorkflowState.STOPPED);
+        this.rouletteController.setState(RouletteWorkflowState.STOPPED);
         LOG.info("Roulette stopped!");
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
