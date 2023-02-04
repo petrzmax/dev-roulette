@@ -1,4 +1,4 @@
-import axios, { AxiosRequestHeaders } from 'axios';
+import axios, { RawAxiosRequestHeaders } from 'axios';
 import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
 import { rollHistoryUrl, rouletteBetUrl, rouletteUrl, sessionUrl } from '../../common/endpoints';
@@ -37,12 +37,12 @@ export function requestFetchRollHistory() {
   });
 }
 
-const headers: AxiosRequestHeaders = {
+const headers: RawAxiosRequestHeaders = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*'
 };
 
-function getAuthenticatedHeader(): AxiosRequestHeaders {
+function getAuthenticatedHeader(): RawAxiosRequestHeaders {
   const cookies = new Cookies();
   const token = cookies.get(ACCESS_TOKEN_COOKIE_NAME);
   return token ? { ...headers, Authorization: 'Bearer ' + token } : headers;
