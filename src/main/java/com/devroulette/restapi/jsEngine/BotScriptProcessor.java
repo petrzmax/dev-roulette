@@ -16,6 +16,9 @@ public class BotScriptProcessor {
     private final BotScriptCompiler scriptBuilder = new BotScriptCompiler();
     private final JavaScriptExecutor scriptExecutor = new JavaScriptExecutor();
 
+    // TODO Multithreading
+    // https://www.geeksforgeeks.org/multithreading-in-java/
+
     public void processBots() {
         Iterable<Bot> botsToProcess = this.botRepository.findAllByEnabledIsTrue();
 
@@ -25,6 +28,7 @@ public class BotScriptProcessor {
             value.getArraySize();
 
             // TODO Handle many array elements, exceptions & refactor
+            // Empty array as bet skip,
 
             Value test = value.getArrayElement(0);
             long amount = test.getMember("amount").asLong();
