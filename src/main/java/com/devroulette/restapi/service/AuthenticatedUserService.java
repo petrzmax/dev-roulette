@@ -21,4 +21,8 @@ public class AuthenticatedUserService {
 
         throw new AuthenticationCredentialsNotFoundException(ErrorMessages.NO_AUTHENTICATED_USER);
     }
+
+    public long getUserId() {
+        return this.getUser().getId();
+    }
 }
