@@ -8,7 +8,6 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserBetQueryServiceImpl extends AbstractQueryService<UserBet> implements UserBetQueryService {
@@ -24,7 +23,6 @@ public class UserBetQueryServiceImpl extends AbstractQueryService<UserBet> imple
                 .select(BET)
                 .from(BET)
                 .where(BET.roll.isNull())
-                .stream()
-                .collect(Collectors.toList());
+                .stream().toList();
     }
 }
