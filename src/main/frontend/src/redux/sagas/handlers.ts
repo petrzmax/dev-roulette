@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
 import { setRouletteState } from '../actions/rouletteActions';
 import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
+import { setBots } from './../actions/botsActions';
 import {
   clearSession,
   fetchSession,
@@ -14,8 +15,14 @@ import {
   setIsUserLoggedIn,
   setSession
 } from './../actions/sessionActions';
+import { BotDto } from './../reducers/botsReducer';
 import { SessionDto } from './../reducers/sessionReducer';
-import { requestFetchRouletteState, requestFetchSession, requestPostRouletteBet } from './requests';
+import {
+  requestFetchBots,
+  requestFetchRouletteState,
+  requestFetchSession,
+  requestPostRouletteBet
+} from './requests';
 
 export function* handleFetchRouletteState() {
   try {
@@ -75,6 +82,15 @@ export function* handleLogout() {
   const cookies = new Cookies();
   cookies.remove(ACCESS_TOKEN_COOKIE_NAME);
   yield put(clearSession());
+}
+
+export function* handleFetchBots() {
+  try {
+    const response: AxiosResponse<BotDto[]> = yield call(requestFetchBots);
+    yield put(setBots(response.data));
+  } catch (error) {
+    handleAxiosError(error);
+  }
 }
 
 // TODO move to better suiting place if it will be needed

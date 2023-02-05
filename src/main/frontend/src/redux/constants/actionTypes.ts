@@ -4,6 +4,11 @@ export const RouletteActionTypes = {
   POST_ROULETTE_BET: '[Roulette page] Post roulette bet'
 };
 
+export const BotsActionTypes = {
+  FETCH_BOTS: '[Bots page] Fetch bots',
+  SET_BOTS: '[Bots page] Set bots'
+};
+
 export const SessionActionTypes = {
   FETCH_SESSION: '[Login card] Fetch session state',
   SET_SESSION: '[Login card] Set session state',

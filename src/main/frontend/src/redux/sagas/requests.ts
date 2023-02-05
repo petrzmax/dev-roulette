@@ -1,7 +1,13 @@
 import axios, { RawAxiosRequestHeaders } from 'axios';
 import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
-import { rollHistoryUrl, rouletteBetUrl, rouletteUrl, sessionUrl } from '../../common/endpoints';
+import {
+  botsUrl,
+  rollHistoryUrl,
+  rouletteBetUrl,
+  rouletteUrl,
+  sessionUrl
+} from '../../common/endpoints';
 import { BetDto } from './../reducers/rouletteReducer';
 
 export function requestFetchSession() {
@@ -34,6 +40,14 @@ export function requestFetchRollHistory() {
     method: 'get',
     headers: headers,
     url: rollHistoryUrl
+  });
+}
+
+export function requestFetchBots() {
+  return axios.request({
+    method: 'get',
+    headers: getAuthenticatedHeader(),
+    url: botsUrl
   });
 }
 
