@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
 import { setRouletteState } from '../actions/rouletteActions';
 import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
-import { setBots } from './../actions/botsActions';
+import { clearBots, fetchBots, setBots } from './../actions/botsActions';
 import {
   clearSession,
   fetchSession,
@@ -75,6 +75,7 @@ export function* handleLogin(action: PayloadAction<CredentialResponse>) {
     yield put(setAccessTokenInCookie(action.payload.credential));
     yield put(setIsUserLoggedIn(true));
     yield put(fetchSession());
+    yield put(fetchBots());
   }
 }
 
@@ -82,6 +83,7 @@ export function* handleLogout() {
   const cookies = new Cookies();
   cookies.remove(ACCESS_TOKEN_COOKIE_NAME);
   yield put(clearSession());
+  yield put(clearBots());
 }
 
 export function* handleFetchBots() {

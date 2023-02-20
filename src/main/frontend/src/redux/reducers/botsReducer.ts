@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { setBots } from './../actions/botsActions';
+import { clearBots, setBots } from './../actions/botsActions';
 
 const initialState: BotsState = {
   bots: []
@@ -14,6 +14,7 @@ const botsReducer = createReducer(initialState, (builder) => {
         bots: action.payload
       };
     })
+    .addCase(clearBots, () => initialState)
     .addDefaultCase(() => undefined);
 });
 

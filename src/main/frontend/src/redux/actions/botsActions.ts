@@ -4,3 +4,4 @@ import { BotDto } from './../reducers/botsReducer';
 
 export const fetchBots = createAction(BotsActionTypes.FETCH_BOTS);
 export const setBots = createAction<BotDto[]>(BotsActionTypes.SET_BOTS);
+export const clearBots = createAction(BotsActionTypes.CLEAR_BOTS);
