@@ -1,13 +1,13 @@
 import { useContext, useRef } from 'react';
 import { Button, Card, Form, InputGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectBalance } from '../../../../redux/reducers/sessionReducer';
+import { selectUserBalance } from '../../../../redux/reducers/userReducer';
 import { BetContext } from '../../context/BetContext';
 
 export default function BetAmountPanel() {
   const { betAmount, setBetAmount } = useContext(BetContext);
 
-  const balance = useSelector(selectBalance);
+  const balance = useSelector(selectUserBalance);
 
   const amountInputRef = useRef<any>();
 

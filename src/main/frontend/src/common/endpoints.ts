@@ -11,5 +11,5 @@ export const botsUrl = `${apiURL}/bots`;
 // Roll
 export const rollHistoryUrl = `${apiURL}/roll/history`;
 
-// Session
-export const sessionUrl = `${apiURL}/session`;
+// User
+export const userUrl = `${apiURL}/user`;

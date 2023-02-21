@@ -4,8 +4,8 @@ import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { login, logout } from '../../../redux/actions/sessionActions';
-import { selectIsLoggedIn } from '../../../redux/reducers/sessionReducer';
+import { login, logout } from '../../../redux/actions/userActions';
+import { selectIsLoggedIn } from '../../../redux/reducers/userReducer';
 import { useAppDispatch } from '../../../redux/store';
 
 export default function Menu() {

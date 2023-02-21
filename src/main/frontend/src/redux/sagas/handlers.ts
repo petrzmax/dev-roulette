@@ -5,22 +5,22 @@ import { call, put } from 'redux-saga/effects';
 import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
 import { setRouletteState } from '../actions/rouletteActions';
-import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
-import { clearBots, fetchBots, setBots } from './../actions/botsActions';
 import {
-  clearSession,
-  fetchSession,
+  clearUserData,
+  fetchUserData,
   reduceBalance,
   setAccessTokenInCookie,
   setIsUserLoggedIn,
-  setSession
-} from './../actions/sessionActions';
+  setUserData
+} from '../actions/userActions';
+import { BetDto, RouletteDto } from '../reducers/rouletteReducer';
+import { UserDataDto } from '../reducers/userReducer';
+import { clearBots, fetchBots, setBots } from './../actions/botsActions';
 import { BotDto } from './../reducers/botsReducer';
-import { SessionDto } from './../reducers/sessionReducer';
 import {
   requestFetchBots,
   requestFetchRouletteState,
-  requestFetchSession,
+  requestFetchUserData,
   requestPostRouletteBet
 } from './requests';
 
@@ -42,10 +42,10 @@ export function* handlePostRouletteBet(action: PayloadAction<BetDto, string>) {
   }
 }
 
-export function* handleFetchSession() {
+export function* handleFetchUserData() {
   try {
-    const response: AxiosResponse<SessionDto> = yield call(requestFetchSession);
-    yield put(setSession(response.data));
+    const response: AxiosResponse<UserDataDto> = yield call(requestFetchUserData);
+    yield put(setUserData(response.data));
   } catch (error) {
     handleAxiosError(error);
   }
@@ -74,7 +74,7 @@ export function* handleLogin(action: PayloadAction<CredentialResponse>) {
   if (action.payload.credential) {
     yield put(setAccessTokenInCookie(action.payload.credential));
     yield put(setIsUserLoggedIn(true));
-    yield put(fetchSession());
+    yield put(fetchUserData());
     yield put(fetchBots());
   }
 }
@@ -82,7 +82,7 @@ export function* handleLogin(action: PayloadAction<CredentialResponse>) {
 export function* handleLogout() {
   const cookies = new Cookies();
   cookies.remove(ACCESS_TOKEN_COOKIE_NAME);
-  yield put(clearSession());
+  yield put(clearUserData());
   yield put(clearBots());
 }
 

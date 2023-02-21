@@ -1,5 +1,5 @@
 package com.devroulette.restapi.dto;
 
-public record SessionDto(
+public record UserDataDto(
         long balance) {
 }

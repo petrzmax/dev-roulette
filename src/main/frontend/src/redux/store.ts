@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import botsReducer from './reducers/botsReducer';
 import rouletteReducer from './reducers/rouletteReducer';
-import sessionReducer from './reducers/sessionReducer';
+import userReducer from './reducers/userReducer';
 import { watcherSaga } from './sagas/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
-  session: sessionReducer,
   roulette: rouletteReducer,
+  user: userReducer,
   bots: botsReducer
 };
 

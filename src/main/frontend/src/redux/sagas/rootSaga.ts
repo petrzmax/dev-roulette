@@ -1,10 +1,10 @@
 import { takeEvery } from 'redux-saga/effects';
-import { RouletteActionTypes, SessionActionTypes } from '../constants/actionTypes';
+import { RouletteActionTypes, UserActionTypes } from '../constants/actionTypes';
 import { BotsActionTypes } from './../constants/actionTypes';
 import {
   handleFetchBots,
   handleFetchRouletteState,
-  handleFetchSession,
+  handleFetchUserData,
   handleLogin,
   handleLogout,
   handlePostRouletteBet,
@@ -12,11 +12,11 @@ import {
 } from './handlers';
 
 export function* watcherSaga() {
-  // Session
-  yield takeEvery(SessionActionTypes.FETCH_SESSION, handleFetchSession);
-  yield takeEvery(SessionActionTypes.SET_ACCESS_TOKEN_IN_COOKIE, handleSetAccessTokenInCookie);
-  yield takeEvery(SessionActionTypes.LOGIN, handleLogin);
-  yield takeEvery(SessionActionTypes.LOGOUT, handleLogout);
+  // User
+  yield takeEvery(UserActionTypes.FETCH_USER_DATA, handleFetchUserData);
+  yield takeEvery(UserActionTypes.SET_ACCESS_TOKEN_IN_COOKIE, handleSetAccessTokenInCookie);
+  yield takeEvery(UserActionTypes.LOGIN, handleLogin);
+  yield takeEvery(UserActionTypes.LOGOUT, handleLogout);
 
   // Bots
   yield takeEvery(BotsActionTypes.FETCH_BOTS, handleFetchBots);

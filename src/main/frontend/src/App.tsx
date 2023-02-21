@@ -8,7 +8,7 @@ import './App.css';
 import Menu from './common/components/menu/Menu';
 import { ACCESS_TOKEN_COOKIE_NAME } from './common/constants';
 import { fetchRouletteState } from './redux/actions/rouletteActions';
-import { fetchSession, setIsUserLoggedIn } from './redux/actions/sessionActions';
+import { fetchUserData, setIsUserLoggedIn } from './redux/actions/userActions';
 import { useAppDispatch } from './redux/store';
 import Router from './setup/router/Router';
 
@@ -24,7 +24,7 @@ function App() {
     if (cookies.get(ACCESS_TOKEN_COOKIE_NAME)) {
       // TODO Validate if token is valid, before setting loggedIn flag.
       dispatch(setIsUserLoggedIn(true));
-      dispatch(fetchSession());
+      dispatch(fetchUserData());
     }
   }
 

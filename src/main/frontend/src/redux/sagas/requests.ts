@@ -6,15 +6,15 @@ import {
   rollHistoryUrl,
   rouletteBetUrl,
   rouletteUrl,
-  sessionUrl
+  userUrl
 } from '../../common/endpoints';
 import { BetDto } from './../reducers/rouletteReducer';
 
-export function requestFetchSession() {
+export function requestFetchUserData() {
   return axios.request({
     method: 'get',
     headers: getAuthenticatedHeader(),
-    url: sessionUrl
+    url: userUrl
   });
 }
 
