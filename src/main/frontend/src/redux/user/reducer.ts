@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setBots } from '../actions/botsActions';
 import { RootState } from '../store';
 import { clearUserData, reduceBalance, setIsUserLoggedIn, setUserData } from './actions';
 
@@ -14,19 +13,14 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(setUserData, (state, action) => {
       return {
         ...state,
-        balance: action.payload.balance
+        balance: action.payload.balance,
+        bots: action.payload.bots
       };
     })
     .addCase(setIsUserLoggedIn, (state, action) => {
       return {
         ...state,
         isLoggedIn: action.payload
-      };
-    })
-    .addCase(setBots, (state, action) => {
-      return {
-        ...state,
-        bots: action.payload
       };
     })
     .addCase(clearUserData, () => initialState)
@@ -44,6 +38,7 @@ export interface UserState {
 
 export interface UserDataDto {
   balance: number;
+  bots: BotDto[];
 }
 
 export interface BotDto {

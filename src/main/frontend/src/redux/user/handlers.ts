@@ -4,8 +4,7 @@ import { AxiosResponse } from 'axios';
 import { call, put } from 'redux-saga/effects';
 import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
-import { clearBots, fetchBots } from '../actions/botsActions';
-import { handleAxiosError } from '../sagas/handlers';
+import { handleAxiosError } from '../common/requestErrorHandler';
 import {
   clearUserData,
   fetchUserData,
@@ -30,7 +29,6 @@ export function* handleLogin(action: PayloadAction<CredentialResponse>) {
     yield put(setAccessTokenInCookie(action.payload.credential));
     yield put(setIsUserLoggedIn(true));
     yield put(fetchUserData());
-    yield put(fetchBots());
   }
 }
 
@@ -38,5 +36,15 @@ export function* handleLogout() {
   const cookies = new Cookies();
   cookies.remove(ACCESS_TOKEN_COOKIE_NAME);
   yield put(clearUserData());
-  yield put(clearBots());
+}
+
+export function* handleSetAccessTokenInCookie(action: PayloadAction<string>) {
+  const cookies = new Cookies();
+  // const decodedToken: GoogleToken = jwt_decode(action.payload);
+
+  // TODO security & expiration handling
+  cookies.set(ACCESS_TOKEN_COOKIE_NAME, action.payload, {
+    maxAge: 60 * 60
+  });
+  yield;
 }

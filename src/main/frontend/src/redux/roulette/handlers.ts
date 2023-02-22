@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put } from 'redux-saga/effects';
-import { handleAxiosError } from '../sagas/handlers';
+import { handleAxiosError } from '../common/requestErrorHandler';
 import { reduceBalance } from '../user/actions';
 import { setRouletteData } from './actions';
 import { BetDto, RouletteDto } from './reducer';
