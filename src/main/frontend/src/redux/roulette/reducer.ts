@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { BetType } from '../../common/constants';
 import { RootState } from '../store';
-import { BetType } from './../../common/constants';
-import { setRouletteState } from './../actions/rouletteActions';
+import { setRouletteData } from './actions';
 
 const initialState: RouletteState = {
   rollHistory: [],
@@ -11,7 +11,7 @@ const initialState: RouletteState = {
 
 const rouletteReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setRouletteState, (state, action) => {
+    .addCase(setRouletteData, (state, action) => {
       return {
         ...state,
         rollHistory: action.payload.rollHistory,

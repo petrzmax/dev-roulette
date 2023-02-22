@@ -1,17 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import botsReducer from './reducers/botsReducer';
-import rouletteReducer from './reducers/rouletteReducer';
-import userReducer from './reducers/userReducer';
+import rouletteReducer from './roulette/reducer';
 import { watcherSaga } from './sagas/rootSaga';
+import userReducer from './user/reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = {
   roulette: rouletteReducer,
-  user: userReducer,
-  bots: botsReducer
+  user: userReducer
 };
 
 const store = configureStore({

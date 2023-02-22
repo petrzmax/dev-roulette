@@ -1,16 +1,4 @@
-export const RouletteActionTypes = {
-  FETCH_ROULETTE_STATE: '[Roulette page] Fetch roulette state',
-  SET_ROULETTE_STATE: '[Roulette page] Set roulette state',
-  POST_ROULETTE_BET: '[Roulette page] Post roulette bet'
-};
-
-export const BotsActionTypes = {
-  FETCH_BOTS: '[Bots page] Fetch bots',
-  SET_BOTS: '[Bots page] Set bots',
-  CLEAR_BOTS: '[Login card] Clear bots state'
-};
-
-export const UserActionTypes = {
+const UserActionTypes = {
   FETCH_USER_DATA: '[Login card] Fetch user data',
   SET_USER_DATA: '[Login card] Set user data',
   CLEAR_USER_DATA: '[Login card] Clear user data',
@@ -20,3 +8,5 @@ export const UserActionTypes = {
   LOGIN: '[Menu bar] Login user',
   LOGOUT: '[Menu bar] Logout user'
 };
+
+export default UserActionTypes;

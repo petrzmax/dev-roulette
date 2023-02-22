@@ -4,10 +4,7 @@ import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import useSound from 'use-sound';
 import clickSound from '../../../../assets/sounds/click.mp3';
-import {
-  selectLastRoll,
-  selectTileCoverageFactor
-} from '../../../../redux/reducers/rouletteReducer';
+import { selectLastRoll, selectTileCoverageFactor } from '../../../../redux/roulette/reducer';
 import { useAppDispatch } from '../../../../redux/store';
 import Tiles from './components/Tiles';
 import css from './Wheel.module.css';

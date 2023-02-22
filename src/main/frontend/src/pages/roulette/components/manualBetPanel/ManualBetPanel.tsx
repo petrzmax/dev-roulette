@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { BetType } from '../../../../common/constants';
-import { postRouletteBet } from '../../../../redux/actions/rouletteActions';
+import { postRouletteBet } from '../../../../redux/roulette/actions';
 import { useAppDispatch } from '../../../../redux/store';
 import { BetContext } from '../../context/BetContext';
 

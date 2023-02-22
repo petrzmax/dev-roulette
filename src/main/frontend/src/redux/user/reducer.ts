@@ -1,15 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {
-  clearUserData,
-  reduceBalance,
-  setIsUserLoggedIn,
-  setUserData
-} from '../actions/userActions';
+import { setBots } from '../actions/botsActions';
 import { RootState } from '../store';
+import { clearUserData, reduceBalance, setIsUserLoggedIn, setUserData } from './actions';
 
 const initialState: UserState = {
   isLoggedIn: false,
-  balance: 0
+  balance: 0,
+  bots: []
 };
 
 const userReducer = createReducer(initialState, (builder) => {
@@ -26,23 +23,41 @@ const userReducer = createReducer(initialState, (builder) => {
         isLoggedIn: action.payload
       };
     })
+    .addCase(setBots, (state, action) => {
+      return {
+        ...state,
+        bots: action.payload
+      };
+    })
     .addCase(clearUserData, () => initialState)
     .addCase(reduceBalance, (state, action) => {
       return { ...state, balance: state.balance - action.payload };
-    });
+    })
+    .addDefaultCase(() => undefined);
 });
 
 export interface UserState {
   isLoggedIn: boolean;
   balance: number;
+  bots: BotDto[];
 }
 
 export interface UserDataDto {
   balance: number;
 }
 
+export interface BotDto {
+  id: number;
+  name: string;
+  scriptBody: string;
+  balance: number;
+  enabled: boolean;
+  errorMessage: string;
+}
+
 // Selectors
 export const selectIsLoggedIn = (state: RootState) => state.user.isLoggedIn;
 export const selectUserBalance = (state: RootState) => state.user.balance;
+export const selectBots = (state: RootState) => state.user.bots;
 
 export default userReducer;

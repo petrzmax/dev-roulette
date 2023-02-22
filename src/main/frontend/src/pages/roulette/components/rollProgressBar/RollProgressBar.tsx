@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
-import { fetchRouletteState } from '../../../../redux/actions/rouletteActions';
-import { fetchUserData } from '../../../../redux/actions/userActions';
-import { selectNextRollTimeStamp } from '../../../../redux/reducers/rouletteReducer';
-import { selectIsLoggedIn } from '../../../../redux/reducers/userReducer';
+import { fetchRouletteData } from '../../../../redux/roulette/actions';
+import { selectNextRollTimeStamp } from '../../../../redux/roulette/reducer';
 import { useAppDispatch } from '../../../../redux/store';
+import { fetchUserData } from '../../../../redux/user/actions';
+import { selectIsLoggedIn } from '../../../../redux/user/reducer';
 import css from './rollProgressBar.module.css';
 
 export default function RollProgressBar() {
@@ -34,7 +34,7 @@ export default function RollProgressBar() {
   }, [nextRollTimeStamp]);
 
   const onTimerExpire = () => {
-    dispatch(fetchRouletteState());
+    dispatch(fetchRouletteData());
 
     if (isLoggedIn) dispatch(fetchUserData());
   };

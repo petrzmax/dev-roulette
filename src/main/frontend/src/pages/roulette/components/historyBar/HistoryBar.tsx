@@ -1,6 +1,6 @@
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectRollHistory } from '../../../../redux/reducers/rouletteReducer';
+import { selectRollHistory } from '../../../../redux/roulette/reducer';
 import ColoredCircle from './coloredCircle/ColoredCircle';
 import css from './HistoryBar.module.css';
 
