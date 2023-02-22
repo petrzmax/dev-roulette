@@ -1,6 +1,6 @@
 import { FormCheck } from 'react-bootstrap';
 import { MdDelete, MdEditNote, MdPlayArrow } from 'react-icons/md';
-import { BotDto } from '../../../../redux/user/reducer';
+import { BotDto } from '../../../../redux/user/user.model';
 
 export default function Bot(props: BotProps) {
   return (

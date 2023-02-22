@@ -1,7 +1,7 @@
 import { CredentialResponse } from '@react-oauth/google';
 import { createAction } from '@reduxjs/toolkit';
 import UserActionTypes from './actionTypes';
-import { UserDataDto } from './reducer';
+import { UserDataDto } from './user.model';
 
 export const fetchUserData = createAction(UserActionTypes.FETCH_USER_DATA);
 export const setUserData = createAction<UserDataDto>(UserActionTypes.SET_USER_DATA);

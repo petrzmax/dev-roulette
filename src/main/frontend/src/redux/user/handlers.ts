@@ -12,8 +12,8 @@ import {
   setIsUserLoggedIn,
   setUserData
 } from './actions';
-import { UserDataDto } from './reducer';
 import { requestFetchUserData } from './requests';
+import { UserDataDto } from './user.model';
 
 export function* handleFetchUserData() {
   try {

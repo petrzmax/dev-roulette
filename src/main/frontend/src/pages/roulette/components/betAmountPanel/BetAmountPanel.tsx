@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react';
 import { Button, Card, Form, InputGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectUserBalance } from '../../../../redux/user/reducer';
+import { selectUserBalance } from '../../../../redux/user/selectors';
 import { BetContext } from '../../context/BetContext';
 
 export default function BetAmountPanel() {

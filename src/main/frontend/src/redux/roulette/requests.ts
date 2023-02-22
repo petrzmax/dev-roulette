@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { rouletteBetUrl, rouletteUrl } from '../../common/endpoints';
 import { getAuthenticatedHeader, headers } from '../common/requestHeaders';
-import { BetDto } from './reducer';
+import { BetDto } from './roulette.model';
 
 export function requestFetchRouletteData() {
   return axios.request({

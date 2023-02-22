@@ -4,10 +4,10 @@ import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { fetchRouletteData } from '../../../../redux/roulette/actions';
-import { selectNextRollTimeStamp } from '../../../../redux/roulette/reducer';
+import { selectNextRollTimeStamp } from '../../../../redux/roulette/selectors';
 import { useAppDispatch } from '../../../../redux/store';
 import { fetchUserData } from '../../../../redux/user/actions';
-import { selectIsLoggedIn } from '../../../../redux/user/reducer';
+import { selectIsLoggedIn } from '../../../../redux/user/selectors';
 import css from './rollProgressBar.module.css';
 
 export default function RollProgressBar() {

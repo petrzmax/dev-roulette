@@ -3,7 +3,7 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { BetType } from '../../common/constants';
 import { isEmpty } from '../../common/utils/rouletteUtils/typeScriptUtils';
-import { selectRollHistory } from '../../redux/roulette/reducer';
+import { selectRollHistory } from '../../redux/roulette/selectors';
 import BetAmountPanel from './components/betAmountPanel/BetAmountPanel';
 import HistoryBar from './components/historyBar/HistoryBar';
 import ManualBetPanel from './components/manualBetPanel/ManualBetPanel';

@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 import { clearUserData, reduceBalance, setIsUserLoggedIn, setUserData } from './actions';
+import { BotDto } from './user.model';
 
 const initialState: UserState = {
   isLoggedIn: false,
@@ -35,24 +35,5 @@ export interface UserState {
   balance: number;
   bots: BotDto[];
 }
-
-export interface UserDataDto {
-  balance: number;
-  bots: BotDto[];
-}
-
-export interface BotDto {
-  id: number;
-  name: string;
-  scriptBody: string;
-  balance: number;
-  enabled: boolean;
-  errorMessage: string;
-}
-
-// Selectors
-export const selectIsLoggedIn = (state: RootState) => state.user.isLoggedIn;
-export const selectUserBalance = (state: RootState) => state.user.balance;
-export const selectBots = (state: RootState) => state.user.bots;
 
 export default userReducer;

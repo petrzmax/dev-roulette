@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/store';
 import { login, logout } from '../../../redux/user/actions';
-import { selectIsLoggedIn } from '../../../redux/user/reducer';
+import { selectIsLoggedIn } from '../../../redux/user/selectors';
 
 export default function Menu() {
   const dispatch = useAppDispatch();

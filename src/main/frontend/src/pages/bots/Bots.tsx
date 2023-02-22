@@ -1,7 +1,7 @@
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../redux/store';
-import { selectBots } from '../../redux/user/reducer';
+import { selectBots } from '../../redux/user/selectors';
 import Bot from './components/bot/Bot';
 
 export default function Bots() {
