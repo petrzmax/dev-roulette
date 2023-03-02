@@ -1,0 +1,31 @@
+.button-base  {
+  font-size: 1.6rem;
+  padding: 0.1em;
+  margin: 0.1em;
+  border-radius: 20%;
+  color: white;
+
+  &:hover {
+    cursor: pointer;;
+}
+}
+
+.edit {
+  @extend .button-base;
+  background-color: dodgerblue;
+}
+
+.start {
+  @extend .button-base;
+  background-color: green;
+}
+
+.stop {
+  @extend .button-base;
+  background-color: orange;
+}
+
+.delete {
+  @extend .button-base;
+  background-color: crimson;
+}
