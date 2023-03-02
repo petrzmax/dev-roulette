@@ -1,10 +1,11 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
-// TODO Display error in meaningful way
+// TODO Pass and display more meaningful errors from BE
 export function handleAxiosError(error: unknown): void {
   if (axios.isAxiosError(error)) {
-    console.log(error.response);
-    return;
+    toast.error(error.message);
+  } else {
+    console.log(error);
   }
-  console.log(error);
 }

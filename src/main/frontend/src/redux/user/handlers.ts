@@ -1,9 +1,11 @@
 import { CredentialResponse } from '@react-oauth/google';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
+import toast from 'react-hot-toast';
 import { call, put } from 'redux-saga/effects';
 import Cookies from 'universal-cookie';
 import { ACCESS_TOKEN_COOKIE_NAME } from '../../common/constants';
+import { SIGNED_IN, SIGNED_OUT } from '../../common/messages';
 import { handleAxiosError } from '../common/requestErrorHandler';
 import {
   clearUserData,
@@ -29,12 +31,14 @@ export function* handleLogin(action: PayloadAction<CredentialResponse>) {
     yield put(setAccessTokenInCookie(action.payload.credential));
     yield put(setIsUserLoggedIn(true));
     yield put(fetchUserData());
+    toast.success(SIGNED_IN);
   }
 }
 
 export function* handleLogout() {
   const cookies = new Cookies();
   cookies.remove(ACCESS_TOKEN_COOKIE_NAME);
+  toast.success(SIGNED_OUT);
   yield put(clearUserData());
 }
 

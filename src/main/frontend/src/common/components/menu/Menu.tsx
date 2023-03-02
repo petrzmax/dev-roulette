@@ -2,11 +2,13 @@ import { GoogleLogin } from '@react-oauth/google';
 import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/esm/Nav';
 import Navbar from 'react-bootstrap/esm/Navbar';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/store';
 import { login, logout } from '../../../redux/user/actions';
 import { selectIsLoggedIn } from '../../../redux/user/selectors';
+import { LOGIN_FAILED } from '../../messages';
 
 export default function Menu() {
   const dispatch = useAppDispatch();
@@ -15,24 +17,31 @@ export default function Menu() {
   function loginButtonHandler(): JSX.Element {
     if (isLoggedIn) {
       return (
-        <a href="#" onClick={() => dispatch(logout())}>
-          Logout
-        </a>
-      );
-    } else {
-      return (
-        <GoogleLogin
-          // ux_mode="redirect"
-          onSuccess={(credentialResponse) => {
-            dispatch(login(credentialResponse));
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-          auto_select
-        />
+        <>
+          <a
+            href="#"
+            onClick={() => {
+              dispatch(logout());
+            }}
+          >
+            Logout
+          </a>
+        </>
       );
     }
+
+    return (
+      <GoogleLogin
+        // ux_mode="redirect"
+        onSuccess={(credentialResponse) => {
+          dispatch(login(credentialResponse));
+        }}
+        onError={() => {
+          toast.error(LOGIN_FAILED);
+        }}
+        auto_select
+      />
+    );
   }
 
   return (

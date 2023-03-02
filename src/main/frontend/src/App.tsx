@@ -2,6 +2,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import './App.css';
@@ -35,6 +36,7 @@ function App() {
         <Container>
           <Router />
         </Container>
+        <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
       </BrowserRouter>
     </GoogleOAuthProvider>
   );
