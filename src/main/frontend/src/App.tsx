@@ -11,12 +11,15 @@ import { ACCESS_TOKEN_COOKIE_NAME } from './common/constants';
 import { fetchRouletteData } from './redux/roulette/actions';
 import { useAppDispatch } from './redux/store';
 import { fetchUserData, setIsUserLoggedIn } from './redux/user/actions';
+import { initializeSSE } from './ServerSentEventsHandler';
 import Router from './setup/router/Router';
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(initializeApp, []);
+  // TODO Do as action, after receiving userdata?
+  useEffect(initializeSSE, []);
 
   function initializeApp(): void {
     const cookies = new Cookies();

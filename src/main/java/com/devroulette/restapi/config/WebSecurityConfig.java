@@ -27,7 +27,7 @@ public class WebSecurityConfig {
         this.corsCustomizer.corsCustomizer(http);
 
         http.authorizeRequests()
-                .requestMatchers(Endpoints.ROULETTE).permitAll()
+                .requestMatchers(Endpoints.ROULETTE, Endpoints.EVENTS + "/**").permitAll()
                 .requestMatchers(Endpoints.ADMIN + "/**").hasAuthority(Role.ADMIN)
                 .anyRequest().authenticated()
                 .and()

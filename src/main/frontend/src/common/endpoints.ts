@@ -1,6 +1,9 @@
 const baseURL = process.env.REACT_APP_BE_URL;
 const apiURL = baseURL + '/api';
 
+// SSE
+export const subscribeUrl = `${apiURL}/subscribe`;
+
 // Roulette
 export const rouletteUrl = `${apiURL}/roulette`;
 export const rouletteBetUrl = `${apiURL}/roulette/bet`;
