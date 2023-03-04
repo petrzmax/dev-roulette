@@ -1,6 +1,6 @@
 package com.devroulette.restapi.events.restController;
 
-import com.devroulette.restapi.constant.Endpoints;
+import com.devroulette.restapi.common.constant.Endpoints;
 import com.devroulette.restapi.events.service.EventsEmitterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
