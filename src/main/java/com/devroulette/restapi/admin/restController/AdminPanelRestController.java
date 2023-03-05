@@ -1,5 +1,6 @@
 package com.devroulette.restapi.admin.restController;
 
+import com.devroulette.restapi.admin.dto.MessageDto;
 import com.devroulette.restapi.common.constant.Endpoints;
 import com.devroulette.restapi.common.constant.RouletteWorkflowState;
 import com.devroulette.restapi.events.service.EventsEmitterService;
@@ -10,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,8 +38,8 @@ public class AdminPanelRestController {
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("dispatchEvent")
-    public void dispatchEvent(@RequestParam String data) {
-        this.emitterService.dispatchEvent(data);
+    @PostMapping("dispatchMessage")
+    public void dispatchMessage(@RequestBody MessageDto messageDto) {
+        this.emitterService.dispatchEvent(messageDto.type(), messageDto.message());
     }
 }

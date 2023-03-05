@@ -30,12 +30,27 @@ public class EventsEmitterService {
         return sseEmitter;
     }
 
-    public void dispatchEvent(String data) {
-        var test = event().data(data).id("TEST").name("test").build();
 
+    public void dispatchEvent(String name, String data) {
+        this.dispatchEvent(name, data, "");
+    }
+
+    public void dispatchEvent(String name, Object data, long id) {
+        this.dispatchEvent(name, data, String.valueOf(id));
+    }
+
+
+    public void dispatchEvent(String name, Object data, String id) {
+        SseEmitter.SseEventBuilder event = SseEmitter.event()
+                .id(id)
+                .name(name)
+                .data(data);
+
+        // ExecutorService?
+        // https://www.baeldung.com/spring-server-sent-events
         this.emitters.stream().forEach(emitter -> {
             try {
-                emitter.send(data);
+                emitter.send(event);
             } catch (IOException e) {
                 // If it's not present, remove it
                 this.emitters.remove(emitter);

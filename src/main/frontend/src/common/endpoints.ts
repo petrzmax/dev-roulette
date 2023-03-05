@@ -16,3 +16,6 @@ export const rollHistoryUrl = `${apiURL}/roll/history`;
 
 // User
 export const userUrl = `${apiURL}/user`;
+
+// Admin
+export const dispatchMessageUrl = `${apiURL}/admin/dispatchMessage`;

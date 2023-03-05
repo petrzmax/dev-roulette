@@ -71,6 +71,10 @@ export default function Menu() {
             <Nav.Link as={NavLink} to="/about">
               About
             </Nav.Link>
+            {/* TODO show if user is admin */}
+            <Nav.Link as={NavLink} to="/admin">
+              Admin
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
 

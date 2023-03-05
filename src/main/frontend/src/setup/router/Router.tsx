@@ -1,5 +1,6 @@
 import { useRoutes } from 'react-router-dom';
 import About from '../../pages/about/About';
+import Admin from '../../pages/admin/Admin';
 import Bots from '../../pages/bots/Bots';
 import History from '../../pages/history/History';
 import Ranking from '../../pages/ranking/Ranking';
@@ -15,6 +16,7 @@ export default function Router() {
     { path: '/ranking', element: Ranking() },
     { path: '/stats', element: Stats() },
     { path: '/about', element: About() },
+    { path: '/admin', element: Admin() },
 
     { path: '*', element: RedirectToHome() }
   ]);
