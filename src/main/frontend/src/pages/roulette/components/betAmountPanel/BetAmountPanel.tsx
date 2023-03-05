@@ -11,7 +11,7 @@ export default function BetAmountPanel() {
 
   const amountInputRef = useRef<any>();
 
-  const handleAmountChange = (event: any) => {
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBetAmount(parseInt(event.target.value));
   };
 
