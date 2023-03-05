@@ -8,18 +8,16 @@ import Cookies from 'universal-cookie';
 import './App.css';
 import Menu from './common/components/menu/Menu';
 import { ACCESS_TOKEN_COOKIE_NAME } from './common/constants';
+import ServerSentEventsHandler from './events/ServerSentEventsHandler';
 import { fetchRouletteData } from './redux/roulette/actions';
 import { useAppDispatch } from './redux/store';
 import { fetchUserData, setIsUserLoggedIn } from './redux/user/actions';
-import { initializeSSE } from './ServerSentEventsHandler';
 import Router from './setup/router/Router';
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(initializeApp, []);
-  // TODO Do as action, after receiving userdata?
-  useEffect(initializeSSE, []);
 
   function initializeApp(): void {
     const cookies = new Cookies();
@@ -33,15 +31,18 @@ function App() {
   }
 
   return (
-    <GoogleOAuthProvider clientId={String(process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID)}>
-      <BrowserRouter>
-        <Menu />
-        <Container>
-          <Router />
-        </Container>
-        <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
-      </BrowserRouter>
-    </GoogleOAuthProvider>
+    <>
+      <GoogleOAuthProvider clientId={String(process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID)}>
+        <BrowserRouter>
+          <Menu />
+          <Container>
+            <Router />
+          </Container>
+        </BrowserRouter>
+      </GoogleOAuthProvider>
+      <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
+      <ServerSentEventsHandler />
+    </>
   );
 }
 

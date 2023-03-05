@@ -1,10 +1,10 @@
 import { motion, ResolvedValues, Transition, useAnimation } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import useSound from 'use-sound';
 import clickSound from '../../../../assets/sounds/click.mp3';
+import { pushLastRollHistory } from '../../../../redux/roulette/actions';
 import { selectLastRoll, selectTileCoverageFactor } from '../../../../redux/roulette/selectors';
 import { useAppDispatch } from '../../../../redux/store';
 import Tiles from './components/Tiles';
@@ -66,8 +66,7 @@ export default function Wheel() {
   }
 
   function onComplete() {
-    // TODO
-    toast.success('Animation completed');
+    dispatch(pushLastRollHistory());
   }
 
   return (

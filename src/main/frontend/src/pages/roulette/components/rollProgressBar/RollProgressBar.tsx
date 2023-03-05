@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
-import { fetchRouletteData } from '../../../../redux/roulette/actions';
 import { selectNextRollTimeStamp } from '../../../../redux/roulette/selectors';
 import { useAppDispatch } from '../../../../redux/store';
 import { fetchUserData } from '../../../../redux/user/actions';
@@ -34,8 +33,7 @@ export default function RollProgressBar() {
   }, [nextRollTimeStamp]);
 
   const onTimerExpire = () => {
-    dispatch(fetchRouletteData());
-
+    // TODO do also using SSE?
     if (isLoggedIn) dispatch(fetchUserData());
   };
 

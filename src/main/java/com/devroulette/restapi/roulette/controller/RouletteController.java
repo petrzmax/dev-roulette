@@ -2,6 +2,8 @@ package com.devroulette.restapi.roulette.controller;
 
 import com.devroulette.restapi.bots.jsEngine.BotScriptProcessor;
 import com.devroulette.restapi.common.constant.RouletteWorkflowState;
+import com.devroulette.restapi.events.dto.RollEventDto;
+import com.devroulette.restapi.events.service.EventsEmitterService;
 import com.devroulette.restapi.roulette.bets.service.BetProcessorService;
 import com.devroulette.restapi.roulette.entity.Roll;
 import com.devroulette.restapi.roulette.factory.RollFactory;
@@ -25,6 +27,7 @@ public class RouletteController {
     private final RollFactory rollFactory;
     private final RollRepository rollRepository;
     private final BetProcessorService betProcessorService;
+    private final EventsEmitterService emitterService;
 
     // TODO Refactor - different handling of next toll timestamp, maybe store in db etc.
     public static String getNextRollTimeStamp() {
@@ -50,6 +53,10 @@ public class RouletteController {
             this.betProcessorService.processBotBets(roll);
 
             this.nextRollTimeStamp = ZonedDateTime.now().plusSeconds(30).format(DateTimeFormatter.ISO_INSTANT);
+
+            RollEventDto rollEventDto = new RollEventDto(roll.getResult(), roll.getTileCoverageFactor(), nextRollTimeStamp);
+            // TODO event / dto factory?
+            this.emitterService.dispatchEvent("roll", rollEventDto, roll.getId());
         }
     }
 }

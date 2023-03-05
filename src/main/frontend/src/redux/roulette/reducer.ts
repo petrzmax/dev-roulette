@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setRouletteData } from './actions';
+import { pushLastRollHistory, setRollEventData, setRouletteData } from './actions';
 
 const initialState: RouletteState = {
+  lastRoll: 0,
   rollHistory: [],
   tileCoverageFactor: 0,
   nextRollTimeStamp: ''
@@ -17,10 +18,25 @@ const rouletteReducer = createReducer(initialState, (builder) => {
         nextRollTimeStamp: action.payload.nextRollTimeStamp
       };
     })
+    .addCase(setRollEventData, (state, action) => {
+      return {
+        ...state,
+        lastRoll: action.payload.result,
+        tileCoverageFactor: action.payload.tileCoverageFactor,
+        nextRollTimeStamp: action.payload.nextRollTimeStamp
+      };
+    })
+    .addCase(pushLastRollHistory, (state, action) => {
+      return {
+        ...state,
+        rollHistory: [...state.rollHistory.slice(1), state.lastRoll]
+      };
+    })
     .addDefaultCase(() => undefined);
 });
 
 export interface RouletteState {
+  lastRoll: number;
   rollHistory: number[];
   tileCoverageFactor: number;
   nextRollTimeStamp: string;
