@@ -13,17 +13,17 @@ import org.springframework.stereotype.Component;
 public class BotScriptProcessor {
     private final BotRepository botRepository;
     private final BetService betService;
-    private final BotScriptCompiler scriptBuilder = new BotScriptCompiler();
+    private final BotScriptCompiler scriptCompiler = new BotScriptCompiler();
     private final JavaScriptExecutor scriptExecutor = new JavaScriptExecutor();
 
-    // TODO Multithreading
+    // TODO Multithreading, CompletableFuture
     // https://www.geeksforgeeks.org/multithreading-in-java/
 
     public void processBots() {
         Iterable<Bot> botsToProcess = this.botRepository.findAllByEnabledIsTrue();
 
         botsToProcess.forEach(bot -> {
-            String preparedBotScript = this.scriptBuilder.compile(bot);
+            String preparedBotScript = this.scriptCompiler.compile(bot);
             Value value = this.scriptExecutor.execute(preparedBotScript);
             value.getArraySize();
 
