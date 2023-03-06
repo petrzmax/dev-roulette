@@ -2,7 +2,7 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-export default function ScriptEditorModal(props: ScriptEditorModalProps) {
+export default function ScriptEditorModal(props: scriptEditorModalProps) {
   const [script, setScript] = useState(props.scriptBody);
 
   return (
@@ -31,7 +31,7 @@ export default function ScriptEditorModal(props: ScriptEditorModalProps) {
   );
 }
 
-interface ScriptEditorModalProps {
+interface scriptEditorModalProps {
   show: boolean;
   name: string;
   scriptBody: string;

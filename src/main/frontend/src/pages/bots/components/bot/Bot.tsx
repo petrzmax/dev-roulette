@@ -5,7 +5,7 @@ import { BotDto } from '../../../../redux/user/user.model';
 import css from './Bot.module.scss';
 import ScriptEditorModal from './components/scriptEditModal/ScriptEditorModal';
 
-export default function Bot(props: BotProps) {
+export default function Bot(props: botProps) {
   const [showScriptModal, setShowScriptModal] = useState(false);
   const handleScriptShow = () => setShowScriptModal(true);
   const handleScriptClose = () => setShowScriptModal(false);
@@ -36,7 +36,7 @@ export default function Bot(props: BotProps) {
   );
 }
 
-interface BotProps {
+interface botProps {
   index: number;
   bot: BotDto;
 }

@@ -5,7 +5,7 @@ import { postRouletteBet } from '../../../../redux/roulette/actions';
 import { useAppDispatch } from '../../../../redux/store';
 import { BetContext } from '../../context/BetContext';
 
-export default function ManualBetPanel(props: ManualBetPanelProps) {
+export default function ManualBetPanel(props: manualBetPanelProps) {
   const dispatch = useAppDispatch();
   const { betAmount } = useContext(BetContext);
 
@@ -39,7 +39,7 @@ export default function ManualBetPanel(props: ManualBetPanelProps) {
   );
 }
 
-interface ManualBetPanelProps {
+interface manualBetPanelProps {
   text: string;
   betType: BetType;
 }
