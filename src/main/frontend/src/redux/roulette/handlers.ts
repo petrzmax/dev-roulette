@@ -1,6 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
+import { toast } from 'react-hot-toast';
 import { call, put } from 'redux-saga/effects';
+import { BET_REGISTERED } from '../../common/messages';
 import { handleAxiosError } from '../common/requestErrorHandler';
 import { reduceBalance } from '../user/actions';
 import { setRouletteData } from './actions';
@@ -20,6 +22,7 @@ export function* handlePostRouletteBet(action: PayloadAction<BetDto, string>) {
   try {
     yield call(requestPostRouletteBet, action.payload);
     yield put(reduceBalance(action.payload.amount));
+    toast.success(BET_REGISTERED);
   } catch (error) {
     handleAxiosError(error);
   }
