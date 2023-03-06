@@ -25,10 +25,12 @@ public class UserRestController {
     @GetMapping()
     public ResponseEntity getUserData() {
         User user = this.authenticatedUserService.getUser();
+        // TODO refactor, maybe move to above service?
+        String role = user.getRole();
         long balance = user.getBalance();
         List<BotDto> bots = this.botQueryService.getUserBots(user.getId());
 
         // TODO Probably querydsl which will return dto
-        return new ResponseEntity(new UserDataDto(balance, bots), HttpStatus.OK);
+        return new ResponseEntity(new UserDataDto(role, balance, bots), HttpStatus.OK);
     }
 }

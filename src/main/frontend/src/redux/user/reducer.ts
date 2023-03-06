@@ -4,6 +4,7 @@ import { BotDto } from './user.model';
 
 const initialState: UserState = {
   isLoggedIn: false,
+  role: '',
   balance: 0,
   bots: []
 };
@@ -13,6 +14,7 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(setUserData, (state, action) => {
       return {
         ...state,
+        role: action.payload.role,
         balance: action.payload.balance,
         bots: action.payload.bots
       };
@@ -32,6 +34,7 @@ const userReducer = createReducer(initialState, (builder) => {
 
 export interface UserState {
   isLoggedIn: boolean;
+  role: string;
   balance: number;
   bots: BotDto[];
 }

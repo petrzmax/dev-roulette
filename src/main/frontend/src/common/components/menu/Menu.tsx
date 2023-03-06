@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../redux/store';
 import { login, logout } from '../../../redux/user/actions';
 import { selectIsLoggedIn } from '../../../redux/user/selectors';
 import { LOGIN_FAILED } from '../../messages';
+import ProtectedElement from '../protectedElement/ProtectedElement';
 
 export default function Menu() {
   const dispatch = useAppDispatch();
@@ -71,10 +72,11 @@ export default function Menu() {
             <Nav.Link as={NavLink} to="/about">
               About
             </Nav.Link>
-            {/* TODO show if user is admin */}
-            <Nav.Link as={NavLink} to="/admin">
-              Admin
-            </Nav.Link>
+            <ProtectedElement>
+              <Nav.Link as={NavLink} to="/admin">
+                Admin
+              </Nav.Link>
+            </ProtectedElement>
           </Nav>
         </Navbar.Collapse>
 
