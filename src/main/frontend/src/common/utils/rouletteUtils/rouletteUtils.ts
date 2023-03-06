@@ -1,3 +1,4 @@
+import { NUMBER_OUT_OF_ROULETTE_RANGE } from '../../messages';
 import css from './rouletteUtils.module.css';
 
 const ROULETTE_NUMBER_SEQUENCE: ReadonlyArray<number> = [
@@ -25,7 +26,7 @@ export function getFieldColor(value: number): string {
   } else if ((value >= 11 && value <= 18) || (value >= 29 && value <= 36)) {
     result = isEven(value) ? css.red : css.black;
   } else {
-    throw new Error('The number is out of roulette range!');
+    throw new Error(NUMBER_OUT_OF_ROULETTE_RANGE);
   }
 
   return result;
