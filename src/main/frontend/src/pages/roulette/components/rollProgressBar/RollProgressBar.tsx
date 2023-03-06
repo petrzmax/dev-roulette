@@ -1,12 +1,11 @@
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { selectNextRollTimeStamp } from '../../../../redux/roulette/selectors';
 import { useAppDispatch } from '../../../../redux/store';
-import { fetchUserData } from '../../../../redux/user/actions';
-import { selectIsLoggedIn } from '../../../../redux/user/selectors';
 import css from './rollProgressBar.module.css';
 
 export default function RollProgressBar() {
@@ -14,7 +13,6 @@ export default function RollProgressBar() {
   const animationController = useAnimation();
 
   const nextRollTimeStamp = useSelector(selectNextRollTimeStamp);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   let expiryTimestamp: Date;
 
@@ -33,8 +31,7 @@ export default function RollProgressBar() {
   }, [nextRollTimeStamp]);
 
   const onTimerExpire = () => {
-    // TODO do also using SSE?
-    if (isLoggedIn) dispatch(fetchUserData());
+    toast.success('Time to roll!');
   };
 
   expiryTimestamp = new Date(nextRollTimeStamp);

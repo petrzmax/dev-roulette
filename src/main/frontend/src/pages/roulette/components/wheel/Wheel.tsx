@@ -7,6 +7,8 @@ import clickSound from '../../../../assets/sounds/click.mp3';
 import { pushLastRollHistory } from '../../../../redux/roulette/actions';
 import { selectLastRoll, selectTileCoverageFactor } from '../../../../redux/roulette/selectors';
 import { useAppDispatch } from '../../../../redux/store';
+import { fetchUserData } from '../../../../redux/user/actions';
+import { selectIsLoggedIn } from '../../../../redux/user/selectors';
 import Tiles from './components/Tiles';
 import css from './Wheel.module.css';
 import { calculateAnimation, rollAnimationData } from './WheelUtils';
@@ -19,6 +21,7 @@ export default function Wheel() {
   const tileContainerRef = useRef<HTMLDivElement>(null);
   const [tempBool, setTempBool] = useState(false);
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const lastRoll = useSelector(selectLastRoll);
   const tileCoverageFactor = useSelector(selectTileCoverageFactor);
 
@@ -66,6 +69,9 @@ export default function Wheel() {
   }
 
   function onComplete() {
+    // TODO do also using SSE?
+    if (isLoggedIn) dispatch(fetchUserData());
+    // TODO Update status bar - No instant roll countdown
     dispatch(pushLastRollHistory());
   }
 
