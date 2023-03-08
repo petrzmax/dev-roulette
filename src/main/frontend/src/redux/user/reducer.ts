@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { clearUserData, reduceBalance, setIsUserLoggedIn, setUserData } from './actions';
-import { BotDto } from './user.model';
+import { BotDto } from './bots/bot.model';
 
 const initialState: UserState = {
   isLoggedIn: false,

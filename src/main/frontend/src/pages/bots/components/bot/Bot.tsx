@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Badge } from 'react-bootstrap';
 import { MdDelete, MdEditNote, MdPlayArrow, MdStop } from 'react-icons/md';
-import { BotDto } from '../../../../redux/user/user.model';
+import { BotDto } from '../../../../redux/user/bots/bot.model';
 import css from './Bot.module.scss';
 import ScriptEditorModal from './components/scriptEditModal/ScriptEditorModal';
 
