@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { clearUserData, reduceBalance, setIsUserLoggedIn, setUserData } from './actions';
+import { addBotToStore, deleteBotFromStore } from './bots/actions';
 import { BotDto } from './bots/bot.model';
 
 const initialState: UserState = {
@@ -28,6 +29,12 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(clearUserData, () => initialState)
     .addCase(reduceBalance, (state, action) => {
       return { ...state, balance: state.balance - action.payload };
+    })
+    .addCase(addBotToStore, (state, action) => {
+      return { ...state, bots: [...state.bots, action.payload] };
+    })
+    .addCase(deleteBotFromStore, (state, action) => {
+      return { ...state, bots: [...state.bots.filter((b) => b.id !== action.payload)] };
     })
     .addDefaultCase(() => undefined);
 });

@@ -35,20 +35,22 @@ public class BotsPanelRestController {
 
     @PostMapping
     public ResponseEntity createBot(@RequestBody BotCreationDto botDto) {
-        this.botService.createBot(botDto);
+        Bot bot = this.botService.createBot(botDto);
 
-        return new ResponseEntity(HttpStatus.OK);
+        // TODO use some model mapper
+        BotDto dto = new BotDto(bot.getId(), bot.getName(), bot.getScriptBody(), bot.getBalance(),
+                bot.isEnabled(), bot.getErrorMessage());
+        return new ResponseEntity(dto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity removeBot(@PathVariable long id) {
+    public ResponseEntity deleteBot(@PathVariable long id) {
 
         Optional<Bot> bot = this.botRepository.findById(id);
 
         if (bot.isPresent()) {
-            // TODO handle cascade settings (currently throws exception)
             this.botRepository.delete(bot.get());
-            return new ResponseEntity(id, HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }

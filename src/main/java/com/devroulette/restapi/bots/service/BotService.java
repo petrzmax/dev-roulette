@@ -13,8 +13,9 @@ public class BotService {
     private final BotFactory botFactory;
     private final BotRepository botRepository;
 
-    public void createBot(BotCreationDto botDto) {
+    public Bot createBot(BotCreationDto botDto) {
         Bot bot = this.botFactory.getBot(botDto);
         this.botRepository.save(bot);
+        return bot;
     }
 }

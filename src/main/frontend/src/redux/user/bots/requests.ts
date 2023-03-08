@@ -11,3 +11,11 @@ export function requestCreateBot(botDto: BotCreationDto) {
     data: botDto
   });
 }
+
+export function requestDeleteBot(botId: number) {
+  return axios.request({
+    method: 'delete',
+    headers: getAuthenticatedHeader(),
+    url: botsUrl + '/' + botId
+  });
+}
