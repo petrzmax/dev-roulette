@@ -12,7 +12,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Table(name = "BOTS")
 public class Bot extends AbstractTransactableEntity {
     // TODO Cascade settings
@@ -25,4 +24,10 @@ public class Bot extends AbstractTransactableEntity {
     private String scriptBody;
     private boolean enabled;
     private String errorMessage;
+
+    public Bot(long balance, User user, String name) {
+        super(balance);
+        this.user = user;
+        this.name = name;
+    }
 }

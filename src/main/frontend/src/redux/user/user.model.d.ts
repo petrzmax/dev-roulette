@@ -12,3 +12,7 @@ export interface BotDto {
   enabled: boolean;
   errorMessage: string;
 }
+
+export interface BotCreationDto {
+  name: string;
+}

@@ -1,8 +1,10 @@
 package com.devroulette.restapi.bots.restController;
 
+import com.devroulette.restapi.bots.dto.BotCreationDto;
 import com.devroulette.restapi.bots.dto.BotDto;
 import com.devroulette.restapi.bots.entity.Bot;
 import com.devroulette.restapi.bots.repository.BotRepository;
+import com.devroulette.restapi.bots.service.BotService;
 import com.devroulette.restapi.bots.service.query.BotQueryService;
 import com.devroulette.restapi.common.constant.Endpoints;
 import com.devroulette.restapi.user.service.AuthenticatedUserService;
@@ -21,6 +23,7 @@ public class BotsPanelRestController {
     private final AuthenticatedUserService authenticatedUserService;
     private final BotQueryService botQueryService;
     private final BotRepository botRepository;
+    private final BotService botService;
 
     @GetMapping
     public ResponseEntity getBots() {
@@ -28,6 +31,13 @@ public class BotsPanelRestController {
         List<BotDto> bots = this.botQueryService.getUserBots(userId);
 
         return new ResponseEntity(bots, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity createBot(@RequestBody BotCreationDto botDto) {
+        this.botService.createBot(botDto);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
