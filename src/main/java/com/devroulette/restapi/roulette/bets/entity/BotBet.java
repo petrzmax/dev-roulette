@@ -7,7 +7,7 @@ import com.devroulette.restapi.common.entity.AbstractBettableEntity;
 import com.mysema.commons.lang.Assert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "BOT_BETS")
 public class BotBet extends AbstractBettableEntity {
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "bot_id")
     private Bot bot;
 

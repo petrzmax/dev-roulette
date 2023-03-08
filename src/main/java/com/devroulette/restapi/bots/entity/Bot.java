@@ -1,12 +1,15 @@
 package com.devroulette.restapi.bots.entity;
 
 import com.devroulette.restapi.common.entity.AbstractTransactableEntity;
+import com.devroulette.restapi.roulette.bets.entity.BotBet;
 import com.devroulette.restapi.user.entity.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,6 +21,9 @@ public class Bot extends AbstractTransactableEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "bot", cascade = CascadeType.REMOVE)
+    private List<BotBet> bets;
 
     @NonNull
     private String name;
