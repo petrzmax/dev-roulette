@@ -16,8 +16,9 @@ public class UserFactory {
     @Value("${roulette.initialbalance}")
     private long initialBalance;
 
-    public User createNewUser(String email) {
+    public User getUser(String email) {
         User user = new User(email, this.initialBalance, Role.USER);
+        // TODO it shouldn't be saved in factory
         this.userRepository.save(user);
         return user;
     }

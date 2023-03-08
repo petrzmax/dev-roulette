@@ -24,7 +24,7 @@ public class JwtToUserConverter implements Converter<Jwt, UsernamePasswordAuthen
         String email = jwt.getClaims().get("email").toString();
 
         Optional<User> optionalUser = this.userRepository.findByUsername(email);
-        User user = optionalUser.isPresent() ? optionalUser.get() : this.userFactory.createNewUser(email);
+        User user = optionalUser.isPresent() ? optionalUser.get() : this.userFactory.getUser(email);
 
         return new UsernamePasswordAuthenticationToken(user, jwt, user.getAuthorities());
     }
