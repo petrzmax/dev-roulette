@@ -27,6 +27,7 @@ public class BotsPanelRestController {
 
     @GetMapping
     public ResponseEntity getBots() {
+        // TODO move to a service
         long userId = this.authenticatedUserService.getUserId();
         List<BotDto> bots = this.botQueryService.getUserBots(userId);
 
@@ -37,7 +38,7 @@ public class BotsPanelRestController {
     public ResponseEntity createBot(@RequestBody BotCreationDto botDto) {
         Bot bot = this.botService.createBot(botDto);
 
-        // TODO use some model mapper
+        // TODO use some model mapper. UPDATE: ModelMapper does not handle records
         BotDto dto = new BotDto(bot.getId(), bot.getName(), bot.getScriptBody(), bot.getBalance(),
                 bot.isEnabled(), bot.getErrorMessage());
         return new ResponseEntity(dto, HttpStatus.OK);
@@ -46,6 +47,7 @@ public class BotsPanelRestController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteBot(@PathVariable long id) {
 
+        // TODO move to a service
         Optional<Bot> bot = this.botRepository.findById(id);
 
         if (bot.isPresent()) {

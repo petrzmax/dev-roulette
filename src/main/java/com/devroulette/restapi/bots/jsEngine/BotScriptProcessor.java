@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.graalvm.polyglot.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class BotScriptProcessor {
@@ -18,9 +21,9 @@ public class BotScriptProcessor {
 
     // TODO Multithreading, CompletableFuture
     // https://www.geeksforgeeks.org/multithreading-in-java/
-
     public void processBots() {
-        Iterable<Bot> botsToProcess = this.botRepository.findAllByEnabledIsTrue();
+        List<Bot> botsToProcess = this.botRepository.findAllByEnabledIsTrue();
+        List<Bot> botsToUpdate = new ArrayList<>();
 
         botsToProcess.forEach(bot -> {
             String preparedBotScript = this.scriptCompiler.compile(bot);
@@ -33,7 +36,17 @@ public class BotScriptProcessor {
             Value test = value.getArrayElement(0);
             long amount = test.getMember("amount").asLong();
             BetType betType = BetType.valueOf(test.getMember("betType").asString());
-            this.betService.bet(bot, amount, betType);
+
+            // TODO Handle it in smarter way
+            try {
+                this.betService.bet(bot, amount, betType);
+            } catch (IllegalArgumentException e) {
+                bot.setEnabled(false);
+                bot.setErrorMessage(e.getMessage());
+                botsToUpdate.add(bot);
+            }
         });
+
+        this.botRepository.saveAll(botsToUpdate);
     }
 }
