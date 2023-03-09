@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @MappedSuperclass
 @NoArgsConstructor
-public abstract class AbstractBettableEntity extends AbstractEntity {
+public abstract class AbstractBetEntity extends AbstractEntity {
     @Enumerated(EnumType.STRING) // It will consume much more db memory. Use only for testing
     private BetType betType;
     private long amount;
@@ -22,7 +22,7 @@ public abstract class AbstractBettableEntity extends AbstractEntity {
     @JoinColumn(name = "roll_id")
     private Roll roll;
 
-    public AbstractBettableEntity(BetType betType, long amount) {
+    public AbstractBetEntity(BetType betType, long amount) {
         Assert.isTrue(betType != null, ErrorMessages.FIELD_IS_NULL);
         Assert.isTrue(amount > 0, ErrorMessages.NEGATIVE_AMOUNT);
 

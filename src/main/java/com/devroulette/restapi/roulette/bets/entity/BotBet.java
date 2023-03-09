@@ -3,7 +3,7 @@ package com.devroulette.restapi.roulette.bets.entity;
 import com.devroulette.restapi.bots.entity.Bot;
 import com.devroulette.restapi.common.constant.BetType;
 import com.devroulette.restapi.common.constant.ErrorMessages;
-import com.devroulette.restapi.common.entity.AbstractBettableEntity;
+import com.devroulette.restapi.common.entity.AbstractBetEntity;
 import com.mysema.commons.lang.Assert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "BOT_BETS")
-public class BotBet extends AbstractBettableEntity {
+public class BotBet extends AbstractBetEntity {
     @ManyToOne
     @JoinColumn(name = "bot_id")
     private Bot bot;

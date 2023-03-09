@@ -13,14 +13,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class AbstractBettableEntityTest {
+class AbstractBetEntityTest {
 
     private final static long BET_AMOUNT = 100;
 
     @Test
     void bettableEntityCreationShouldThrowExceptionWhenBetTypeIsNull() {
         // when & then
-        assertThatThrownBy(() -> new BettableEntity(null, BET_AMOUNT))
+        assertThatThrownBy(() -> new BetEntity(null, BET_AMOUNT))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.FIELD_IS_NULL);
     }
@@ -29,7 +29,7 @@ class AbstractBettableEntityTest {
     @ValueSource(longs = {0, -1})
     void bettableEntityCreationShouldThrowExceptionWhenAmountIsLowerOrEqualZero(long amount) {
         // when & then
-        assertThatThrownBy(() -> new BettableEntity(BetType.GREEN, amount))
+        assertThatThrownBy(() -> new BetEntity(BetType.GREEN, amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessages.NEGATIVE_AMOUNT);
     }
@@ -37,7 +37,7 @@ class AbstractBettableEntityTest {
     @Test
     void isVictoryShouldReturnTrueWhenBetIsWinning() {
         // given
-        BettableEntity bet = new BettableEntity(BetType.GREEN, BET_AMOUNT);
+        BetEntity bet = new BetEntity(BetType.GREEN, BET_AMOUNT);
         Roll roll = mock(Roll.class);
         when(roll.getColor()).thenReturn(BetType.GREEN);
 
@@ -50,7 +50,7 @@ class AbstractBettableEntityTest {
     @Test
     void isVictoryShouldThrowExceptionWhenBetHasNoRollAssigned() {
         // given
-        BettableEntity bet = new BettableEntity();
+        BetEntity bet = new BetEntity();
 
         // when & then
         assertThatThrownBy(() -> bet.isVictory())
@@ -62,7 +62,7 @@ class AbstractBettableEntityTest {
     @CsvSource({"GREEN,36", "EVEN,2", "ODD,2", "RED,2", "BLACK,2"})
     void getPrizeShouldReturnProperlyCalculatedPrize(BetType betType, int prizeMultiplier) {
         // given
-        BettableEntity bet = new BettableEntity(betType, BET_AMOUNT);
+        BetEntity bet = new BetEntity(betType, BET_AMOUNT);
         long expectedPrize = BET_AMOUNT * prizeMultiplier;
 
         // when
@@ -72,11 +72,11 @@ class AbstractBettableEntityTest {
         assertThat(result).isEqualTo(expectedPrize);
     }
 
-    private class BettableEntity extends AbstractBettableEntity {
-        public BettableEntity() {
+    private class BetEntity extends AbstractBetEntity {
+        public BetEntity() {
         }
 
-        public BettableEntity(BetType betType, long amount) {
+        public BetEntity(BetType betType, long amount) {
             super(betType, amount);
         }
     }
