@@ -3,34 +3,25 @@ package com.devroulette.restapi.bots.restController;
 import com.devroulette.restapi.bots.dto.BotCreationDto;
 import com.devroulette.restapi.bots.dto.BotDto;
 import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.repository.BotRepository;
 import com.devroulette.restapi.bots.service.BotService;
-import com.devroulette.restapi.bots.service.query.BotQueryService;
 import com.devroulette.restapi.common.constant.Endpoints;
-import com.devroulette.restapi.user.service.AuthenticatedUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(Endpoints.BOTS)
 @RequiredArgsConstructor
 public class BotsPanelRestController {
-    private final AuthenticatedUserService authenticatedUserService;
-    private final BotQueryService botQueryService;
-    private final BotRepository botRepository;
     private final BotService botService;
 
     @GetMapping
-    public ResponseEntity getBots() {
-        // TODO move to a service
-        long userId = this.authenticatedUserService.getUserId();
-        List<BotDto> bots = this.botQueryService.getUserBots(userId);
-
+    public ResponseEntity getUserBots() {
+        List<BotDto> bots = this.botService.getUserBots();
         return new ResponseEntity(bots, HttpStatus.OK);
     }
 
@@ -46,14 +37,12 @@ public class BotsPanelRestController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteBot(@PathVariable long id) {
+        this.botService.deleteBot(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
-        // TODO move to a service
-        Optional<Bot> bot = this.botRepository.findById(id);
-
-        if (bot.isPresent()) {
-            this.botRepository.delete(bot.get());
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
+    @ExceptionHandler
+    public ResponseEntity handleException(NoSuchElementException e) {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 }
