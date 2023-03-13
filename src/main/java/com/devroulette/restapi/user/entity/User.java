@@ -2,6 +2,7 @@ package com.devroulette.restapi.user.entity;
 
 import com.devroulette.restapi.bots.entity.Bot;
 import com.devroulette.restapi.common.entity.AbstractTransactableEntity;
+import com.devroulette.restapi.roulette.bets.entity.UserBet;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -27,6 +28,9 @@ public class User extends AbstractTransactableEntity implements UserDetails {
     // TODO Cascade settings
     @OneToMany(mappedBy = "user")
     private List<Bot> bots;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserBet> userBets;
 
     public User(String username, long balance, String role) {
         super(balance);
