@@ -2,6 +2,7 @@ package com.devroulette.restapi.bots.service;
 
 import com.devroulette.restapi.bots.dto.BotCreationDto;
 import com.devroulette.restapi.bots.dto.BotDto;
+import com.devroulette.restapi.bots.dto.BotPatchDto;
 import com.devroulette.restapi.bots.entity.Bot;
 import com.devroulette.restapi.bots.factory.BotFactory;
 import com.devroulette.restapi.bots.repository.BotRepository;
@@ -34,7 +35,17 @@ public class BotService {
     }
 
     public void deleteBot(long id) {
-        Bot bot = this.botRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        Bot bot = this.getBotById(id);
         this.botRepository.delete(bot);
+    }
+
+    public void updateBotScript(long id, BotPatchDto botDto) {
+        Bot bot = this.getBotById(id);
+        bot.setScriptBody(botDto.scriptBody());
+        this.botRepository.save(bot);
+    }
+
+    private Bot getBotById(long id) {
+        return this.botRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 }

@@ -2,6 +2,7 @@ package com.devroulette.restapi.bots.restController;
 
 import com.devroulette.restapi.bots.dto.BotCreationDto;
 import com.devroulette.restapi.bots.dto.BotDto;
+import com.devroulette.restapi.bots.dto.BotPatchDto;
 import com.devroulette.restapi.bots.entity.Bot;
 import com.devroulette.restapi.bots.service.BotService;
 import com.devroulette.restapi.common.constant.Endpoints;
@@ -38,6 +39,12 @@ public class BotsPanelRestController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteBot(@PathVariable long id) {
         this.botService.deleteBot(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity patchBotScript(@PathVariable long id, @RequestBody BotPatchDto botDto) {
+        this.botService.updateBotScript(id, botDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
