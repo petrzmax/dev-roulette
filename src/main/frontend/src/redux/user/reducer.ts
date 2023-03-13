@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { clearUserData, reduceBalance, setIsUserLoggedIn, setUserData } from './actions';
-import { addBotToStore, deleteBotFromStore } from './bots/actions';
+import { addBotToStore, deleteBotFromStore, patchBotInStore } from './bots/actions';
 import { BotDto } from './bots/bot.model';
 
 const initialState: UserState = {
@@ -35,6 +35,16 @@ const userReducer = createReducer(initialState, (builder) => {
     })
     .addCase(deleteBotFromStore, (state, action) => {
       return { ...state, bots: [...state.bots.filter((b) => b.id !== action.payload)] };
+    })
+    .addCase(patchBotInStore, (state, action) => {
+      return {
+        ...state,
+        bots: [
+          ...state.bots.map((bot) =>
+            bot.id === action.payload.id ? { ...bot, scriptBody: action.payload.scriptBody } : bot
+          )
+        ]
+      };
     })
     .addDefaultCase(() => undefined);
 });

@@ -10,3 +10,8 @@ export interface BotDto {
 export interface BotCreationDto {
   name: string;
 }
+
+export interface BotPatchDto {
+  id: number;
+  scriptBody: string;
+}

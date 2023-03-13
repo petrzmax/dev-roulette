@@ -4,8 +4,9 @@ import { handleDispatchMessage } from './admin/handlers';
 import RouletteActionTypes from './roulette/actionTypes';
 import { handleFetchRouletteData, handlePostRouletteBet } from './roulette/handlers';
 import UserActionTypes from './user/actionTypes';
+import { patchBotScript } from './user/bots/actions';
 import BotActionTypes from './user/bots/actionTypes';
-import { handleCreateBot, handleDeleteBot } from './user/bots/handlers';
+import { handleCreateBot, handleDeleteBot, handlePatchBotScript } from './user/bots/handlers';
 import {
   handleFetchUserData,
   handleLogin,
@@ -27,6 +28,7 @@ export function* watcherSaga() {
   // Bots
   yield takeEvery(BotActionTypes.CREATE_BOT, handleCreateBot);
   yield takeEvery(BotActionTypes.DELETE_BOT, handleDeleteBot);
+  yield takeEvery(BotActionTypes.PATCH_BOT_SCRIPT, handlePatchBotScript);
 
   // Admin
   yield takeEvery(AdminActionTypes.DISPATCH_MESSAGE, handleDispatchMessage);

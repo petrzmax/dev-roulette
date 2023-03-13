@@ -33,12 +33,7 @@ export default function Bot(props: botProps) {
           <MdDelete className={css.delete} title="Delete bot" onClick={handleDelete} />
         </td>
       </tr>
-      <ScriptEditorModal
-        name={props.bot.name}
-        handleClose={handleScriptClose}
-        show={showScriptModal}
-        scriptBody={props.bot.scriptBody}
-      />
+      <ScriptEditorModal show={showScriptModal} bot={props.bot} handleClose={handleScriptClose} />
     </>
   );
 }

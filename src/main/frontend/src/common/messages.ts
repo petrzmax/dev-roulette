@@ -8,8 +8,9 @@ export const NUMBER_OUT_OF_ROULETTE_RANGE = 'The number is out of roulette range
 export const BET_REGISTERED = 'Bet registered!';
 
 // Bots
-export const BET_CREATED = 'Bot created!';
-export const BET_DELETED = 'Bot deleted!';
+export const BOT_CREATED = 'Bot created!';
+export const BOT_DELETED = 'Bot deleted!';
+export const BOT_PATCHED = 'Bot script updated!';
 
 // Admin
 export const MESSAGE_SENT = 'Message sent!';
