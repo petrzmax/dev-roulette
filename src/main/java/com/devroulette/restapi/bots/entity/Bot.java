@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "BOTS")
 public class Bot extends AbstractTransactableEntity {
-    // TODO Cascade settings
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
