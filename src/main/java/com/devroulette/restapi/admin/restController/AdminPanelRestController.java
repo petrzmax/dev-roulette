@@ -2,9 +2,9 @@ package com.devroulette.restapi.admin.restController;
 
 import com.devroulette.restapi.admin.dto.MessageDto;
 import com.devroulette.restapi.common.constant.Endpoints;
-import com.devroulette.restapi.common.constant.RouletteWorkflowState;
 import com.devroulette.restapi.events.service.EventsEmitterService;
 import com.devroulette.restapi.roulette.controller.RouletteController;
+import com.devroulette.restapi.roulette.enums.RouletteState;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,14 +26,14 @@ public class AdminPanelRestController {
 
     @PostMapping("start")
     public ResponseEntity start() {
-        this.rouletteController.setState(RouletteWorkflowState.ROLLING);
+        this.rouletteController.setState(RouletteState.ROLLING);
         LOG.info("Roulette started!");
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @PostMapping("stop")
     public ResponseEntity stop() {
-        this.rouletteController.setState(RouletteWorkflowState.STOPPED);
+        this.rouletteController.setState(RouletteState.STOPPED);
         LOG.info("Roulette stopped!");
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }

@@ -1,4 +1,4 @@
-package com.devroulette.restapi.common.constant;
+package com.devroulette.restapi.roulette.bets.enums;
 
 import lombok.RequiredArgsConstructor;
 

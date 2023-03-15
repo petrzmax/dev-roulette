@@ -1,4 +1,4 @@
-package com.devroulette.restapi.common.constant;
+package com.devroulette.restapi.user.constant;
 
 public class Role {
     public static final String ADMIN = "ADMIN";

@@ -1,6 +1,6 @@
 package com.devroulette.restapi.user.bots.jsEngine;
 
-import com.devroulette.restapi.common.constant.BetType;
+import com.devroulette.restapi.roulette.bets.enums.BetType;
 import com.devroulette.restapi.roulette.bets.service.BetService;
 import com.devroulette.restapi.user.bots.entity.Bot;
 import com.devroulette.restapi.user.bots.repository.BotRepository;

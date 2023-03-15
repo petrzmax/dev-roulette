@@ -1,10 +1,10 @@
 package com.devroulette.restapi.roulette.controller;
 
-import com.devroulette.restapi.common.constant.RouletteWorkflowState;
 import com.devroulette.restapi.events.dto.RollEventDto;
 import com.devroulette.restapi.events.service.EventsEmitterService;
 import com.devroulette.restapi.roulette.bets.service.BetProcessorService;
 import com.devroulette.restapi.roulette.entity.Roll;
+import com.devroulette.restapi.roulette.enums.RouletteState;
 import com.devroulette.restapi.roulette.factory.RollFactory;
 import com.devroulette.restapi.roulette.repository.RollRepository;
 import com.devroulette.restapi.user.bots.jsEngine.BotScriptProcessor;
@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 public class RouletteController {
     private static String nextRollTimeStamp;
-    private static RouletteWorkflowState rouletteWorkflowState = RouletteWorkflowState.ROLLING;
+    private static RouletteState rouletteState = RouletteState.ROLLING;
 
     private final BotScriptProcessor botScriptProcessor;
     private final CacheManager cacheManager;
@@ -34,13 +34,13 @@ public class RouletteController {
         return nextRollTimeStamp;
     }
 
-    public void setState(RouletteWorkflowState state) {
-        this.rouletteWorkflowState = state;
+    public void setState(RouletteState state) {
+        this.rouletteState = state;
     }
 
     @Scheduled(cron = "*/30 * * * * *")
     protected void startRollWorkflow() {
-        if (this.rouletteWorkflowState == RouletteWorkflowState.ROLLING) {
+        if (this.rouletteState == RouletteState.ROLLING) {
             this.cacheManager.getCache("getCurrentRouletteState").clear();
 
             this.botScriptProcessor.processBots();

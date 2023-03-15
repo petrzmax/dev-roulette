@@ -1,7 +1,7 @@
 package com.devroulette.restapi.common.entity;
 
-import com.devroulette.restapi.common.constant.BetType;
 import com.devroulette.restapi.common.constant.ErrorMessages;
+import com.devroulette.restapi.roulette.bets.enums.BetType;
 import com.devroulette.restapi.roulette.entity.Roll;
 import com.mysema.commons.lang.Assert;
 import jakarta.persistence.*;

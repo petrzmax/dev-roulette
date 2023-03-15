@@ -1,8 +1,8 @@
 package com.devroulette.restapi.roulette.bets.service;
 
-import com.devroulette.restapi.common.constant.BetType;
 import com.devroulette.restapi.roulette.bets.entity.BotBet;
 import com.devroulette.restapi.roulette.bets.entity.UserBet;
+import com.devroulette.restapi.roulette.bets.enums.BetType;
 import com.devroulette.restapi.roulette.bets.repository.BotBetRepository;
 import com.devroulette.restapi.roulette.bets.repository.UserBetRepository;
 import com.devroulette.restapi.roulette.dto.BetDto;

@@ -1,6 +1,6 @@
 package com.devroulette.restapi.user.factory;
 
-import com.devroulette.restapi.common.constant.Role;
+import com.devroulette.restapi.user.constant.Role;
 import com.devroulette.restapi.user.entity.User;
 import com.devroulette.restapi.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

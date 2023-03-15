@@ -1,9 +1,9 @@
 package com.devroulette.restapi.spring.config;
 
 import com.devroulette.restapi.common.constant.Endpoints;
-import com.devroulette.restapi.common.constant.Role;
 import com.devroulette.restapi.spring.security.CORSCustomizer;
 import com.devroulette.restapi.spring.security.JwtToUserConverter;
+import com.devroulette.restapi.user.constant.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

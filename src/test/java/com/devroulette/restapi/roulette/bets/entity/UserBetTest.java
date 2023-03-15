@@ -1,7 +1,7 @@
 package com.devroulette.restapi.roulette.bets.entity;
 
-import com.devroulette.restapi.common.constant.BetType;
 import com.devroulette.restapi.common.constant.ErrorMessages;
+import com.devroulette.restapi.roulette.bets.enums.BetType;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
