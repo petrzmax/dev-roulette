@@ -13,7 +13,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Getter
@@ -36,15 +38,6 @@ public class User extends AbstractTransactableEntity implements UserDetails {
         super(balance);
         this.username = username;
         this.role = role;
-    }
-
-    public void addBot(Bot bot) {
-        if (Objects.isNull(this.bots)) {
-            this.bots = new ArrayList<>();
-        }
-
-        this.bots.add(bot);
-        bot.setUser(this);
     }
 
     @Override
