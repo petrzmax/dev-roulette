@@ -1,8 +1,8 @@
 package com.devroulette.restapi.user.restController;
 
-import com.devroulette.restapi.bots.dto.BotDto;
-import com.devroulette.restapi.bots.service.query.BotQueryService;
 import com.devroulette.restapi.common.constant.Endpoints;
+import com.devroulette.restapi.user.bots.dto.BotDto;
+import com.devroulette.restapi.user.bots.service.query.BotQueryService;
 import com.devroulette.restapi.user.dto.UserDataDto;
 import com.devroulette.restapi.user.entity.User;
 import com.devroulette.restapi.user.service.AuthenticatedUserService;

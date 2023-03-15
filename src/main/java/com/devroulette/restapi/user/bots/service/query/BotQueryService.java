@@ -1,7 +1,7 @@
-package com.devroulette.restapi.bots.service.query;
+package com.devroulette.restapi.user.bots.service.query;
 
-import com.devroulette.restapi.bots.dto.BotDto;
-import com.devroulette.restapi.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.dto.BotDto;
+import com.devroulette.restapi.user.bots.entity.Bot;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

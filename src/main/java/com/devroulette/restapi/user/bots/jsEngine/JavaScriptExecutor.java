@@ -1,4 +1,4 @@
-package com.devroulette.restapi.bots.jsEngine;
+package com.devroulette.restapi.user.bots.jsEngine;
 
 import org.graalvm.polyglot.*;
 

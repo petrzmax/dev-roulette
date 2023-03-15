@@ -1,9 +1,9 @@
-package com.devroulette.restapi.bots.jsEngine;
+package com.devroulette.restapi.user.bots.jsEngine;
 
-import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.repository.BotRepository;
 import com.devroulette.restapi.common.constant.BetType;
 import com.devroulette.restapi.roulette.bets.service.BetService;
+import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.repository.BotRepository;
 import lombok.RequiredArgsConstructor;
 import org.graalvm.polyglot.Value;
 import org.springframework.stereotype.Component;

@@ -1,12 +1,12 @@
-package com.devroulette.restapi.bots.service;
+package com.devroulette.restapi.user.bots.service;
 
-import com.devroulette.restapi.bots.dto.BotCreationDto;
-import com.devroulette.restapi.bots.dto.BotDto;
-import com.devroulette.restapi.bots.dto.BotPatchDto;
-import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.factory.BotFactory;
-import com.devroulette.restapi.bots.repository.BotRepository;
-import com.devroulette.restapi.bots.service.query.BotQueryService;
+import com.devroulette.restapi.user.bots.dto.BotCreationDto;
+import com.devroulette.restapi.user.bots.dto.BotDto;
+import com.devroulette.restapi.user.bots.dto.BotPatchDto;
+import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.factory.BotFactory;
+import com.devroulette.restapi.user.bots.repository.BotRepository;
+import com.devroulette.restapi.user.bots.service.query.BotQueryService;
 import com.devroulette.restapi.user.service.AuthenticatedUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,5 @@
 package com.devroulette.restapi.roulette.controller;
 
-import com.devroulette.restapi.bots.jsEngine.BotScriptProcessor;
 import com.devroulette.restapi.common.constant.RouletteWorkflowState;
 import com.devroulette.restapi.events.dto.RollEventDto;
 import com.devroulette.restapi.events.service.EventsEmitterService;
@@ -8,6 +7,7 @@ import com.devroulette.restapi.roulette.bets.service.BetProcessorService;
 import com.devroulette.restapi.roulette.entity.Roll;
 import com.devroulette.restapi.roulette.factory.RollFactory;
 import com.devroulette.restapi.roulette.repository.RollRepository;
+import com.devroulette.restapi.user.bots.jsEngine.BotScriptProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Scheduled;

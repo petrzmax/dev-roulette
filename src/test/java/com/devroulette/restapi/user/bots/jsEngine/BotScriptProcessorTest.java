@@ -1,8 +1,8 @@
-package com.devroulette.restapi.bots.jsEngine;
+package com.devroulette.restapi.user.bots.jsEngine;
 
-import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.repository.BotRepository;
 import com.devroulette.restapi.roulette.bets.service.BetService;
+import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.repository.BotRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,10 +1,10 @@
-package com.devroulette.restapi.bots.service.query.impl;
+package com.devroulette.restapi.user.bots.service.query.impl;
 
-import com.devroulette.restapi.bots.dto.BotDto;
-import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.entity.QBot;
-import com.devroulette.restapi.bots.service.query.BotQueryService;
 import com.devroulette.restapi.common.service.query.AbstractQueryService;
+import com.devroulette.restapi.user.bots.dto.BotDto;
+import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.entity.QBot;
+import com.devroulette.restapi.user.bots.service.query.BotQueryService;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
 import jakarta.persistence.EntityManager;

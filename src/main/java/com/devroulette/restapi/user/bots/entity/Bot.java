@@ -1,4 +1,4 @@
-package com.devroulette.restapi.bots.entity;
+package com.devroulette.restapi.user.bots.entity;
 
 import com.devroulette.restapi.common.entity.AbstractTransactableEntity;
 import com.devroulette.restapi.roulette.bets.entity.BotBet;

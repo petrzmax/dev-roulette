@@ -1,8 +1,8 @@
 package com.devroulette.restapi.user.entity;
 
-import com.devroulette.restapi.bots.entity.Bot;
 import com.devroulette.restapi.common.entity.AbstractTransactableEntity;
 import com.devroulette.restapi.roulette.bets.entity.UserBet;
+import com.devroulette.restapi.user.bots.entity.Bot;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;

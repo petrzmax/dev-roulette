@@ -1,13 +1,13 @@
 package com.devroulette.restapi.roulette.bets.service;
 
-import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.repository.BotRepository;
 import com.devroulette.restapi.common.constant.BetType;
 import com.devroulette.restapi.roulette.bets.entity.BotBet;
 import com.devroulette.restapi.roulette.bets.entity.UserBet;
 import com.devroulette.restapi.roulette.bets.repository.BotBetRepository;
 import com.devroulette.restapi.roulette.bets.repository.UserBetRepository;
 import com.devroulette.restapi.roulette.dto.BetDto;
+import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.repository.BotRepository;
 import com.devroulette.restapi.user.entity.User;
 import com.devroulette.restapi.user.repository.UserRepository;
 import com.devroulette.restapi.user.service.AuthenticatedUserService;

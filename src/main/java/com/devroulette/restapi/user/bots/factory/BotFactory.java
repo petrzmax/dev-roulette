@@ -1,7 +1,7 @@
-package com.devroulette.restapi.bots.factory;
+package com.devroulette.restapi.user.bots.factory;
 
-import com.devroulette.restapi.bots.dto.BotCreationDto;
-import com.devroulette.restapi.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.dto.BotCreationDto;
+import com.devroulette.restapi.user.bots.entity.Bot;
 import com.devroulette.restapi.user.service.AuthenticatedUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

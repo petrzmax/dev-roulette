@@ -1,11 +1,11 @@
-package com.devroulette.restapi.bots.restController;
+package com.devroulette.restapi.user.bots.restController;
 
-import com.devroulette.restapi.bots.dto.BotCreationDto;
-import com.devroulette.restapi.bots.dto.BotDto;
-import com.devroulette.restapi.bots.dto.BotPatchDto;
-import com.devroulette.restapi.bots.entity.Bot;
-import com.devroulette.restapi.bots.service.BotService;
 import com.devroulette.restapi.common.constant.Endpoints;
+import com.devroulette.restapi.user.bots.dto.BotCreationDto;
+import com.devroulette.restapi.user.bots.dto.BotDto;
+import com.devroulette.restapi.user.bots.dto.BotPatchDto;
+import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.service.BotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

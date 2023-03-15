@@ -1,6 +1,6 @@
-package com.devroulette.restapi.bots.repository;
+package com.devroulette.restapi.user.bots.repository;
 
-import com.devroulette.restapi.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.entity.Bot;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
