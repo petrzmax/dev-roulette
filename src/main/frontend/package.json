@@ -38,7 +38,8 @@
     "prettier-format": "prettier --config .prettierrc ./src/**/*.{ts,tsx} --write",
     "lint": "eslint . --ext .ts,.tsx",
     "lint-and-fix": "eslint . --ext .ts,.tsx --fix",
-    "upgrade-packages": "ncu -u && npm install"
+    "upgrade-packages": "ncu -u && npm install",
+    "install-flat": "npm i --prefer-dedupe --loglevel=error --no-fund"
   },
   "eslintConfig": {
     "extends": [
