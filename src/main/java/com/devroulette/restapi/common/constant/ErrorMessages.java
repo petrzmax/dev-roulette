@@ -7,6 +7,7 @@ public class ErrorMessages {
     public static final String NUMBER_OUT_OF_ROULETTE_RANGE = "The number is out of roulette range!";
     public static final String FIELD_IS_NULL = "Field is null";
     public static final String NO_AUTHENTICATED_USER = "There is no authenticated user";
+    public static final String ILLEGAL_STATUS = "Failed status can not be set manually";
 
     private ErrorMessages() {
     }

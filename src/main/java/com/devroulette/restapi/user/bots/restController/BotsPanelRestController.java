@@ -3,7 +3,8 @@ package com.devroulette.restapi.user.bots.restController;
 import com.devroulette.restapi.common.constant.Endpoints;
 import com.devroulette.restapi.user.bots.dto.BotCreationDto;
 import com.devroulette.restapi.user.bots.dto.BotDto;
-import com.devroulette.restapi.user.bots.dto.BotPatchDto;
+import com.devroulette.restapi.user.bots.dto.BotPatchScriptDto;
+import com.devroulette.restapi.user.bots.dto.BotPatchStatusDto;
 import com.devroulette.restapi.user.bots.entity.Bot;
 import com.devroulette.restapi.user.bots.service.BotService;
 import lombok.RequiredArgsConstructor;
@@ -43,8 +44,14 @@ public class BotsPanelRestController {
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity patchBotScript(@PathVariable long id, @RequestBody BotPatchDto botDto) {
-        this.botService.updateBotScript(id, botDto);
+    public ResponseEntity patchBotScript(@PathVariable long id, @RequestBody BotPatchScriptDto botDto) {
+        this.botService.patchBotScript(id, botDto.scriptBody());
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping(value = "/{id}/status")
+    public ResponseEntity patchBotStatus(@PathVariable long id, @RequestBody BotPatchStatusDto botDto) {
+        this.botService.patchBotStatus(id, botDto.status());
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
