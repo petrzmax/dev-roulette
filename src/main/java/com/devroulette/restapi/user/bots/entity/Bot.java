@@ -2,12 +2,13 @@ package com.devroulette.restapi.user.bots.entity;
 
 import com.devroulette.restapi.common.entity.AbstractTransactableEntity;
 import com.devroulette.restapi.roulette.bets.entity.BotBet;
+import com.devroulette.restapi.user.bots.enums.BotStatus;
 import com.devroulette.restapi.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 
@@ -27,7 +28,8 @@ public class Bot extends AbstractTransactableEntity {
     @NonNull
     private String name;
     private String scriptBody;
-    private boolean enabled;
+    @Enumerated(EnumType.STRING) // It will consume much more db memory. Use only for testing
+    private BotStatus status;
     private String errorMessage;
 
     public Bot(long balance, User user, String name) {

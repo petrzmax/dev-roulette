@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Badge } from 'react-bootstrap';
 import { MdDelete, MdEditNote, MdPlayArrow, MdStop } from 'react-icons/md';
 import { useAppDispatch } from '../../../../redux/store';
 import { deleteBot } from '../../../../redux/user/bots/actions';
 import { BotDto } from '../../../../redux/user/bots/bot.model';
 import css from './Bot.module.scss';
+import BotStatusBadge from './components/botStatusBadge/BotStatusBadge';
 import ScriptEditorModal from './components/scriptEditModal/ScriptEditorModal';
 
 export default function Bot(props: botProps) {
@@ -24,7 +24,7 @@ export default function Bot(props: botProps) {
         <td>{props.bot.name}</td>
         <td>{props.bot.balance}</td>
         <td>
-          <Badge bg="success">Stable</Badge>
+          <BotStatusBadge status={props.bot.status} errorMessage={props.bot.errorMessage} />
         </td>
         <td>
           <MdPlayArrow className={css.start} title="Start bot processing" />

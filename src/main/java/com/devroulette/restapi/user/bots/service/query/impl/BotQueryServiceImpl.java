@@ -32,6 +32,6 @@ public class BotQueryServiceImpl extends AbstractQueryService<Bot> implements Bo
 
     private ConstructorExpression<BotDto> getBotDtoProjection() {
         return Projections.constructor(BotDto.class,
-                BOT.id, BOT.name, BOT.scriptBody, BOT.balance, BOT.enabled, BOT.errorMessage);
+                BOT.id, BOT.name, BOT.scriptBody, BOT.balance, BOT.status, BOT.errorMessage);
     }
 }

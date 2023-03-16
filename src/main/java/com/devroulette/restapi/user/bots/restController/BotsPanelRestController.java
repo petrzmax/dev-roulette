@@ -32,7 +32,7 @@ public class BotsPanelRestController {
 
         // TODO use some model mapper. UPDATE: ModelMapper does not handle records
         BotDto dto = new BotDto(bot.getId(), bot.getName(), bot.getScriptBody(), bot.getBalance(),
-                bot.isEnabled(), bot.getErrorMessage());
+                bot.getStatus(), bot.getErrorMessage());
         return new ResponseEntity(dto, HttpStatus.OK);
     }
 

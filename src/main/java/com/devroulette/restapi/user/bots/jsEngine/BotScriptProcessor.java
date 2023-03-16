@@ -3,6 +3,7 @@ package com.devroulette.restapi.user.bots.jsEngine;
 import com.devroulette.restapi.roulette.bets.enums.BetType;
 import com.devroulette.restapi.roulette.bets.service.BetService;
 import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.enums.BotStatus;
 import com.devroulette.restapi.user.bots.repository.BotRepository;
 import lombok.RequiredArgsConstructor;
 import org.graalvm.polyglot.Value;
@@ -22,7 +23,7 @@ public class BotScriptProcessor {
     // TODO Multithreading, CompletableFuture
     // https://www.geeksforgeeks.org/multithreading-in-java/
     public void processBots() {
-        List<Bot> botsToProcess = this.botRepository.findAllByEnabledIsTrue();
+        List<Bot> botsToProcess = this.botRepository.findAllByStatus(BotStatus.RUNNING);
         List<Bot> botsToUpdate = new ArrayList<>();
 
         botsToProcess.forEach(bot -> {
@@ -41,7 +42,7 @@ public class BotScriptProcessor {
             try {
                 this.betService.bet(bot, amount, betType);
             } catch (IllegalArgumentException e) {
-                bot.setEnabled(false);
+                bot.setStatus(BotStatus.FAILED);
                 bot.setErrorMessage(e.getMessage());
                 botsToUpdate.add(bot);
             }

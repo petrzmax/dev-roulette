@@ -11,3 +11,10 @@ export enum BetType {
   ODD,
   CUSTOM
 }
+
+// TODO should be in bot.model.d.ts but for some reason it is not properly resolved
+export enum BotStatus {
+  READY = 'READY',
+  RUNNING = 'RUNNING',
+  FAILED = 'FAILED'
+}

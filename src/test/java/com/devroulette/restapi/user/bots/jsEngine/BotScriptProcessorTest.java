@@ -2,6 +2,7 @@ package com.devroulette.restapi.user.bots.jsEngine;
 
 import com.devroulette.restapi.roulette.bets.service.BetService;
 import com.devroulette.restapi.user.bots.entity.Bot;
+import com.devroulette.restapi.user.bots.enums.BotStatus;
 import com.devroulette.restapi.user.bots.repository.BotRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class BotScriptProcessorTest {
         bot.setScriptBody(script);
 
         List<Bot> bots = List.of(bot);
-        when(this.botRepository.findAllByEnabledIsTrue()).thenReturn(bots);
+        when(this.botRepository.findAllByStatus(BotStatus.RUNNING)).thenReturn(bots);
 
         // when
         this.scriptProcessor.processBots();

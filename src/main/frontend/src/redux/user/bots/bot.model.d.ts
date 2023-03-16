@@ -1,9 +1,11 @@
+import { BotStatus } from '../../../../src/common/constants';
+
 export interface BotDto {
   id: number;
   name: string;
   scriptBody: string;
   balance: number;
-  enabled: boolean;
+  status: BotStatus;
   errorMessage: string;
 }
 
