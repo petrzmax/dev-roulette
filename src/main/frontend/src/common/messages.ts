@@ -10,7 +10,8 @@ export const BET_REGISTERED = 'Bet registered!';
 // Bots
 export const BOT_CREATED = 'Bot created!';
 export const BOT_DELETED = 'Bot deleted!';
-export const BOT_PATCHED = 'Bot script updated!';
+export const BOT_SCRIPT_UPDATED = 'Bot script updated!';
+export const BOT_STATUS_UPDATED = 'Bot status updated!';
 
 // Admin
 export const MESSAGE_SENT = 'Message sent!';

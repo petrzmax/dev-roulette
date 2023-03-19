@@ -1,5 +1,5 @@
 package com.devroulette.restapi.user.bots.dto;
 
-public record BotPatchScriptDto(
+public record BotScriptDto(
         String scriptBody) {
 }

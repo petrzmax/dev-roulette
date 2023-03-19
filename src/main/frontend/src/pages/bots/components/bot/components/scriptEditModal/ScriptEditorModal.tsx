@@ -2,7 +2,7 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useAppDispatch } from '../../../../../../redux/store';
-import { patchBotScript } from '../../../../../../redux/user/bots/actions';
+import { updateBotScript } from '../../../../../../redux/user/bots/actions';
 import { BotDto } from '../../../../../../redux/user/bots/bot.model';
 
 export default function ScriptEditorModal(props: scriptEditorModalProps) {
@@ -10,7 +10,7 @@ export default function ScriptEditorModal(props: scriptEditorModalProps) {
   const [script, setScript] = useState(props.bot.scriptBody);
 
   const handleScriptSave = () => {
-    dispatch(patchBotScript({ id: props.bot.id, scriptBody: script }));
+    dispatch(updateBotScript({ id: props.bot.id, scriptBody: script }));
     props.handleClose();
   };
 

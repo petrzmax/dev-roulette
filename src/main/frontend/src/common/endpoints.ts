@@ -10,6 +10,10 @@ export const rouletteBetUrl = `${apiURL}/roulette/bet`;
 
 // Bots
 export const botsUrl = `${apiURL}/bots`;
+export const getBotUrl = (id: number): string => `${botsUrl}/${id}`;
+
+export const getBotScriptUrl = (id: number): string => `${getBotUrl(id)}/script`;
+export const getBotStatusUrl = (id: number): string => `${getBotUrl(id)}/status`;
 
 // Roll
 export const rollHistoryUrl = `${apiURL}/roll/history`;

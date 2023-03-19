@@ -41,18 +41,20 @@ public class BotService {
         this.botRepository.delete(bot);
     }
 
-    public void patchBotScript(long id, String scriptBody) {
+    public Bot updateBotScript(long id, String scriptBody) {
         Bot bot = this.getBotById(id);
         bot.setScriptBody(scriptBody);
         this.botRepository.save(bot);
+        return bot;
     }
 
-    public void patchBotStatus(long id, BotStatus status) {
+    public Bot updateBotStatus(long id, BotStatus status) {
         Assert.isTrue(status != BotStatus.FAILED, ErrorMessages.ILLEGAL_STATUS);
 
         Bot bot = this.getBotById(id);
         bot.setStatus(status);
         this.botRepository.save(bot);
+        return bot;
     }
 
     private Bot getBotById(long id) {

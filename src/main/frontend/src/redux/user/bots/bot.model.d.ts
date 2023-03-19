@@ -13,7 +13,12 @@ export interface BotCreationDto {
   name: string;
 }
 
-export interface BotPatchDto {
+export interface BotScriptDto {
   id: number;
   scriptBody: string;
+}
+
+export interface BotStatusDto {
+  id: number;
+  status: BotStatus;
 }

@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../redux/store';
 import { selectBots } from '../../redux/user/selectors';
 import css from './Bots.module.scss';
 import AddBotModal from './components/addBotModal/AddBotModal';
 import Bot from './components/bot/Bot';
 
 export default function Bots() {
-  const dispatch = useAppDispatch();
   const bots = useSelector(selectBots);
 
   const [showAddBotModal, setAddBotModal] = useState(false);
