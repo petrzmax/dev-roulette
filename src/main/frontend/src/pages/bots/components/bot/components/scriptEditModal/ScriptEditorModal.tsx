@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { useAppDispatch } from '../../../../../../redux/store';
 import { updateBotScript } from '../../../../../../redux/user/bots/actions';
 import { BotDto } from '../../../../../../redux/user/bots/bot.model';
+import css from './ScriptEditorModal.module.scss';
 
 export default function ScriptEditorModal(props: scriptEditorModalProps) {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ export default function ScriptEditorModal(props: scriptEditorModalProps) {
       </Modal.Header>
       <Modal.Body>
         <CodeEditor
+          className={css.editor}
           value={script}
           onChange={(event) => setScript(event.target.value)}
           language="js"
