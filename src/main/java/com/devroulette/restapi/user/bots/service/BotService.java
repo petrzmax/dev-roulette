@@ -43,6 +43,8 @@ public class BotService {
 
     public Bot updateBotScript(long id, String scriptBody) {
         Bot bot = this.getBotById(id);
+        Assert.isTrue(bot.getStatus() == BotStatus.READY, ErrorMessages.ILLEGAL_SCRIPT_UPDATE);
+
         bot.setScriptBody(scriptBody);
         this.botRepository.save(bot);
         return bot;

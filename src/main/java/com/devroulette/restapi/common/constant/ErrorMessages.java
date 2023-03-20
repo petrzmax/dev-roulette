@@ -8,6 +8,7 @@ public class ErrorMessages {
     public static final String FIELD_IS_NULL = "Field is null";
     public static final String NO_AUTHENTICATED_USER = "There is no authenticated user";
     public static final String ILLEGAL_STATUS = "Failed status can not be set manually";
+    public static final String ILLEGAL_SCRIPT_UPDATE = "Bot script can only be modified for bots in READY status";
 
     private ErrorMessages() {
     }
