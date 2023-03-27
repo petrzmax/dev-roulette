@@ -1,11 +1,9 @@
 package com.devroulette.restapi.user.bots.jsEngine;
 
 import org.graalvm.polyglot.*;
+import org.springframework.stereotype.Component;
 
-
-// https://www.graalvm.org/javascript/
-// https://www.graalvm.org/22.2/reference-manual/js/RunOnJDK/
-
+@Component
 public class JavaScriptExecutor {
 
     private static final String JS = "js";
@@ -30,7 +28,7 @@ public class JavaScriptExecutor {
         }
     }
 
-    public Value execute(String script) {
+    public Value execute(String script) throws PolyglotException {
         Engine engine = Engine.newBuilder()
                 .option("js.ecmascript-version", "2020")
                 .option("engine.WarnInterpreterOnly", "false")

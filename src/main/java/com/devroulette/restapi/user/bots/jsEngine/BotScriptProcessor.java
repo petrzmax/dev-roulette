@@ -6,6 +6,7 @@ import com.devroulette.restapi.user.bots.entity.Bot;
 import com.devroulette.restapi.user.bots.enums.BotStatus;
 import com.devroulette.restapi.user.bots.repository.BotRepository;
 import lombok.RequiredArgsConstructor;
+import org.graalvm.polyglot.PolyglotException;
 import org.graalvm.polyglot.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,8 @@ import java.util.List;
 public class BotScriptProcessor {
     private final BotRepository botRepository;
     private final BetService betService;
-    private final BotScriptCompiler scriptCompiler = new BotScriptCompiler();
-    private final JavaScriptExecutor scriptExecutor = new JavaScriptExecutor();
+    private final BotScriptAssembler scriptCompiler;
+    private final JavaScriptExecutor scriptExecutor;
 
     // TODO Multithreading, CompletableFuture
     // https://www.geeksforgeeks.org/multithreading-in-java/
@@ -27,21 +28,22 @@ public class BotScriptProcessor {
         List<Bot> botsToUpdate = new ArrayList<>();
 
         botsToProcess.forEach(bot -> {
-            String preparedBotScript = this.scriptCompiler.compile(bot);
-            Value value = this.scriptExecutor.execute(preparedBotScript);
-            value.getArraySize();
-
-            // TODO Handle many array elements, exceptions & refactor
-            // Empty array as bet skip,
-
-            Value test = value.getArrayElement(0);
-            long amount = test.getMember("amount").asLong();
-            BetType betType = BetType.valueOf(test.getMember("betType").asString());
-
+            String preparedBotScript = this.scriptCompiler.assemble(bot);
             // TODO Handle it in smarter way
             try {
+                Value value = this.scriptExecutor.execute(preparedBotScript);
+                value.getArraySize();
+
+                // TODO Handle many array elements, exceptions & refactor
+                // Empty array as bet skip,
+
+                Value test = value.getArrayElement(0);
+                long amount = test.getMember("amount").asLong();
+                BetType betType = BetType.valueOf(test.getMember("betType").asString());
+
+
                 this.betService.bet(bot, amount, betType);
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | PolyglotException e) {
                 bot.setStatus(BotStatus.FAILED);
                 bot.setErrorMessage(e.getMessage());
                 botsToUpdate.add(bot);
