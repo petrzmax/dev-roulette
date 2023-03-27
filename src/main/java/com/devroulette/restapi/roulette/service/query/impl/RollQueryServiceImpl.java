@@ -12,9 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class RollQueryServiceImpl extends AbstractQueryService<Roll> implements RollQueryService {
@@ -24,18 +22,15 @@ public class RollQueryServiceImpl extends AbstractQueryService<Roll> implements 
         super(Roll.class, em);
     }
 
+    // TODO Cache
     @Override
-    public List<Integer> getRollHistory() {
+    public List<Integer> getRollHistory(int limit) {
         return this.getQueryFactory()
                 .select(this.ROLL.result)
                 .from(this.ROLL)
                 .orderBy(this.ROLL.id.desc())
-                .limit(10)
-                .stream()
-                .collect(Collectors.collectingAndThen(Collectors.toList(), result -> {
-                    Collections.reverse(result);
-                    return result;
-                }));
+                .limit(limit)
+                .fetch();
     }
 
     @Override

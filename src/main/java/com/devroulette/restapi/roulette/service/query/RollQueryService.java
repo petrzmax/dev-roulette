@@ -10,11 +10,12 @@ import java.util.List;
 
 public interface RollQueryService extends JpaRepository<Roll, Long> {
     /**
-     * Gets last 10 results in order suitable for FE roll history bar.
+     * Gets last results in descending by id order.
      *
-     * @return list of last 10 roll results
+     * @param limit results amount
+     * @return list of last roll results
      */
-    List<Integer> getRollHistory();
+    List<Integer> getRollHistory(int limit);
 
     /**
      * Returns tile coverage of a last roll
