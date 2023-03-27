@@ -27,6 +27,7 @@ public class Bot extends AbstractTransactableEntity {
 
     @NonNull
     private String name;
+    @Column(columnDefinition = "text")
     private String scriptBody;
     @Enumerated(EnumType.STRING) // It will consume much more db memory. Use only for testing
     private BotStatus status;
