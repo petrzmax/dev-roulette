@@ -2,8 +2,6 @@ package com.devroulette.restapi.user.bots.jsEngine;
 
 import com.devroulette.restapi.roulette.bets.entity.BotBet;
 import com.devroulette.restapi.roulette.bets.enums.BetType;
-import com.devroulette.restapi.roulette.bets.mapper.BotBetMapper;
-import com.devroulette.restapi.roulette.bets.mapper.BotBetMapperImpl;
 import com.devroulette.restapi.roulette.bets.service.query.BotBetQueryService;
 import com.devroulette.restapi.roulette.entity.Roll;
 import com.devroulette.restapi.roulette.service.query.RollQueryService;
@@ -14,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -33,8 +30,8 @@ class BotScriptAssemblerTest {
     RollQueryService rollQueryService;
     @Mock
     BotBetQueryService betQueryService;
-    @Spy
-    BotBetMapper betMapper = new BotBetMapperImpl();
+//    @Spy
+//    BotBetMapper betMapper = new BotBetMapperImpl();
 
     // TODO WIP
     @Test

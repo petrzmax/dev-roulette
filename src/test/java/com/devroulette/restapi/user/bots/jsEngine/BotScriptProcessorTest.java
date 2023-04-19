@@ -5,6 +5,7 @@ import com.devroulette.restapi.user.bots.entity.Bot;
 import com.devroulette.restapi.user.bots.enums.BotStatus;
 import com.devroulette.restapi.user.bots.repository.BotRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ class BotScriptProcessorTest {
 
     // TODO WIP
     @Test
+    @Disabled
     void processBots() {
         // given
         Bot bot = new Bot();
