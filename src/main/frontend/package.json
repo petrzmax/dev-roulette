@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
     "prettier-format": "prettier --config .prettierrc ./src/**/*.{ts,tsx} --write",
     "lint": "eslint . --ext .ts,.tsx",

@@ -40,7 +40,7 @@ jobs:
         working-directory: ./src/main/frontend
 
       - name: Run the tests
-        run: npm run test --passWithNoTests
+        run: npm run test
         working-directory: ./src/main/frontend
 
       - name: Build
