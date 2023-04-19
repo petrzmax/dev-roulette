@@ -7,7 +7,9 @@ jobs:
     name: Maven verify
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
@@ -16,3 +18,31 @@ jobs:
           cache: 'maven'
       - name: Run the Maven verify phase
         run: mvn --batch-mode --update-snapshots verify
+
+  buildFront:
+    name: Front-end verify
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm run install-flat
+        working-directory: ./src/main/frontend
+
+      - name: Run the tests
+        run: npm run test
+        working-directory: ./src/main/frontend
+
+      - name: Build
+        run: npm run build
+        working-directory: ./src/main/frontend
