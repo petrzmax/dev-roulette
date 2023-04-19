@@ -1,4 +1,4 @@
-export function isEmpty(array: any[]): boolean {
+export function isEmpty(array: unknown[]): boolean {
   return !(Array.isArray(array) && array.length);
 }
 

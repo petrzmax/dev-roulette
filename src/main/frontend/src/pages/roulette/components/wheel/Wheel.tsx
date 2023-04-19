@@ -2,8 +2,6 @@ import { motion, ResolvedValues, Transition, useAnimation } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import useSound from 'use-sound';
-import clickSound from '../../../../assets/sounds/click.mp3';
 import { pushLastRollHistory } from '../../../../redux/roulette/actions';
 import { selectLastRoll, selectTileCoverageFactor } from '../../../../redux/roulette/selectors';
 import { useAppDispatch } from '../../../../redux/store';
@@ -15,7 +13,7 @@ import { calculateAnimation, rollAnimationData } from './WheelUtils';
 
 export default function Wheel() {
   const dispatch = useAppDispatch();
-  const [playClick] = useSound(clickSound);
+  // const [playClick] = useSound(clickSound);
   const animationController = useAnimation();
   const rouletteBarRef = useRef<HTMLDivElement>(null);
   const tileContainerRef = useRef<HTMLDivElement>(null);
@@ -48,20 +46,22 @@ export default function Wheel() {
 
   function updateRoulettePosition(): void {
     animationController.set(calculateAnimation(getAnimationData()));
-    console.log(getAnimationData());
-    const styles = getComputedStyle(tileContainerRef.current!);
-    console.log(styles.transform);
+    // const styles = getComputedStyle(tileContainerRef.current!);
+    // console.log(styles.transform);
   }
 
   function getAnimationData(offset?: number): rollAnimationData {
     return {
       offset: offset,
       roll: lastRoll,
+      // TODO
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rouletteBarWidth: rouletteBarRef.current!.clientWidth,
       tileCoverageFactor: tileCoverageFactor
     };
   }
-
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onUpdate(latest: ResolvedValues) {
     //Todo use to play sound
     //playClick();

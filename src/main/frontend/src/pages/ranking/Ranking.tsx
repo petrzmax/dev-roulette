@@ -31,11 +31,6 @@ export default function Ranking() {
     }
   ];
 
-  const column = [
-    { title: '#', field: 'position' },
-    { title: 'Username', field: 'username' }
-  ];
-
   return (
     <Table striped bordered hover>
       <thead>

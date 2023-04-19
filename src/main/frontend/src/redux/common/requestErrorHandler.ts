@@ -6,6 +6,6 @@ export function handleAxiosError(error: unknown): void {
   if (axios.isAxiosError(error)) {
     toast.error(error.message);
   } else {
-    console.log(error);
+    // Handle non axios error
   }
 }

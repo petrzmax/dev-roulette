@@ -26,7 +26,7 @@ const rouletteReducer = createReducer(initialState, (builder) => {
         nextRollTimeStamp: action.payload.nextRollTimeStamp
       };
     })
-    .addCase(pushLastRollHistory, (state, action) => {
+    .addCase(pushLastRollHistory, (state) => {
       return {
         ...state,
         rollHistory: [...state.rollHistory.slice(1), state.lastRoll]

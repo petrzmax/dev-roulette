@@ -5,11 +5,9 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useTimer } from 'react-timer-hook';
 import { selectNextRollTimeStamp } from '../../../../redux/roulette/selectors';
-import { useAppDispatch } from '../../../../redux/store';
 import css from './rollProgressBar.module.css';
 
 export default function RollProgressBar() {
-  const dispatch = useAppDispatch();
   const animationController = useAnimation();
 
   const nextRollTimeStamp = useSelector(selectNextRollTimeStamp);
@@ -35,7 +33,7 @@ export default function RollProgressBar() {
   };
 
   expiryTimestamp = new Date(nextRollTimeStamp);
-  const { seconds, isRunning, start, pause, resume, restart } = useTimer({
+  const { seconds, restart } = useTimer({
     expiryTimestamp,
     onExpire: onTimerExpire
   });

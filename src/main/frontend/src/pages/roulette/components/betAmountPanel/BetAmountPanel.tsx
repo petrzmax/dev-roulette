@@ -8,7 +8,8 @@ export default function BetAmountPanel() {
   const { betAmount, setBetAmount } = useContext(BetContext);
 
   const balance = useSelector(selectBalance);
-
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const amountInputRef = useRef<any>();
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
