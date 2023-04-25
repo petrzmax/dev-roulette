@@ -4,7 +4,7 @@ on: push
 
 jobs:
   verify:
-    name: Maven verify
+    name: Back-end verify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -16,8 +16,8 @@ jobs:
           java-version: '18'
           distribution: 'temurin'
           cache: 'maven'
-      - name: Run the Maven verify phase
-        run: mvn --batch-mode --no-transfer-progress --update-snapshots verify
+      - name: Run Maven verify
+        run: mvn verify --batch-mode --no-transfer-progress --update-snapshots
 
   buildFront:
     name: Front-end verify
@@ -36,7 +36,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm run install-flat
+        run: npm ci
         working-directory: ./src/main/frontend
 
       - name: Run the tests
