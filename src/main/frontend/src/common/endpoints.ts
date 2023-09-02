@@ -1,4 +1,4 @@
-const baseURL = process.env.REACT_APP_BE_URL;
+const baseURL = import.meta.env.VITE_BE_URL;
 const apiURL = baseURL + '/api';
 
 // SSE

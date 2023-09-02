@@ -32,7 +32,7 @@ function App() {
 
   return (
     <>
-      <GoogleOAuthProvider clientId={String(process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID)}>
+      <GoogleOAuthProvider clientId={String(import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID)}>
         <BrowserRouter>
           <Menu />
           <Container>

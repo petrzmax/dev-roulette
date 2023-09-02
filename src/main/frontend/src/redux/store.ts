@@ -15,7 +15,7 @@ const reducer = {
 const store = configureStore({
   reducer,
   middleware: [sagaMiddleware],
-  devTools: process.env.NODE_ENV !== 'production'
+  devTools: import.meta.env.DEV
 });
 
 sagaMiddleware.run(watcherSaga);
