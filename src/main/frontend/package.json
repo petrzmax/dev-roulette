@@ -70,6 +70,7 @@
     "react-hot-toast": "^2.4.1",
     "sass": "^1.66.1",
     "vite": "^4.4.9",
+    "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.2.0"
   }
 }
