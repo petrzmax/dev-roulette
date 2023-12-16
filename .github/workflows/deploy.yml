@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Build backend jar
-        run: mvn package -Dmaven.test.skip=true -B -U -ntp
+        run: mvn package -Dmaven.test.skip=true --no-transfer-progress --update-snapshots
 
       - name: Install Front-end dependencies
         run: npm ci --no-fund
