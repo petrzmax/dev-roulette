@@ -33,7 +33,7 @@ jobs:
         run: mvn package -Dmaven.test.skip=true -B -U -ntp
 
       - name: Install Front-end dependencies
-        run: npm ci
+        run: npm ci --no-fund
         working-directory: ./src/main/frontend
 
       - name: Build Front-end
