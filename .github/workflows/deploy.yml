@@ -1,7 +1,6 @@
 # Assumptions:
 # 1. Runner has installed:
 #     - Java 21
-#     - Maven 3.9.x
 #     - Node 20.x.x
 
 name: Deploy app
@@ -15,6 +14,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.9.3
 
       - name: Build backend jar
         run: mvn package -Dmaven.test.skip=true -B -U -ntp
