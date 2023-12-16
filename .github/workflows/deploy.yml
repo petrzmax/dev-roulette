@@ -1,0 +1,21 @@
+name: Deploy app
+
+on:
+    workflow_dispatch:
+
+jobs:
+    deploy:
+        runs-on: self-hosted
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+      
+            - name: Set up JDK 21
+              uses: actions/setup-java@v4
+              with:
+                java-version: '21'
+                distribution: 'oracle'
+                architecture: 'aarch64'
+                cache: 'maven'
+            - name: Build backend jar
+              run: mvn package -Dmaven.test.skip=true -B -U -ntp
