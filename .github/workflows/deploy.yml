@@ -1,6 +1,8 @@
 # Assumptions:
-# 1. Runner has Java 21 installed
-# 2. Runner has Maven installed
+# 1. Runner has installed:
+#     - Java 21
+#     - Maven 3.9.x
+#     - Node 20.x.x
 
 name: Deploy app
 
@@ -16,3 +18,11 @@ jobs:
 
       - name: Build backend jar
         run: mvn package -Dmaven.test.skip=true -B -U -ntp
+
+      - name: Install Front-end dependencies
+        run: npm ci
+        working-directory: ./src/main/frontend
+
+      - name: Build Front-end
+        run: npm run build
+        working-directory: ./src/main/frontend
