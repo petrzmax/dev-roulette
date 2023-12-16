@@ -10,24 +10,20 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        maven-version: [ 3.9.x ]
-        node-version: [ 20.x ]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Maven ${{ matrix.maven-version }}
+      - name: Set up Maven ${{ vars.MAVENVERSION }}
         uses: stCarolas/setup-maven@v4.5
         with:
-          maven-version: ${{ matrix.maven-version }}
+          maven-version: ${{ vars.MAVENVERSION }}
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ vars.NODEVERSION }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ vars.NODEVERSION }}
 
       - name: Build backend jar
         run: mvn package -Dmaven.test.skip=true --no-transfer-progress --update-snapshots
