@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.11.1",
-    "@reduxjs/toolkit": "^1.9.5",
+    "@reduxjs/toolkit": "^2.1.0",
     "@types/jest": "^29.5.7",
     "@types/node": "^20.8.0",
     "@types/react": "^18.2.24",
