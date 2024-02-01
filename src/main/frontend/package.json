@@ -60,7 +60,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.13.1",
-    "@uiw/react-textarea-code-editor": "^2.1.7",
+    "@uiw/react-textarea-code-editor": "^3.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.0.0",
