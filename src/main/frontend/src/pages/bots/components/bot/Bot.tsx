@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MdDelete, MdEditNote, MdPlayArrow, MdStop } from 'react-icons/md';
+import { MdDelete, MdEditNote, MdPlayArrow, MdRestartAlt, MdStop } from 'react-icons/md';
 import { BotStatus } from '../../../../common/constants';
 import { useAppDispatch } from '../../../../redux/store';
 import { deleteBot, updateBotStatus } from '../../../../redux/user/bots/actions';
@@ -27,6 +27,29 @@ export default function Bot(props: botProps) {
     status: status
   });
 
+  function getStatusChangeButton() {
+    switch (props.bot.status) {
+      case BotStatus.READY:
+        return (
+          <MdPlayArrow
+            className={css.start}
+            title="Start processing"
+            onClick={() => handleUpdateStatus(BotStatus.RUNNING)}
+          />
+        );
+      case BotStatus.RUNNING:
+        return (
+          <MdStop
+            className={css.stop}
+            title="Stop processing"
+            onClick={() => handleUpdateStatus(BotStatus.READY)}
+          />
+        );
+      case BotStatus.FAILED:
+        return <MdRestartAlt className={css.reset} title="Reset"></MdRestartAlt>;
+    }
+  }
+
   return (
     <>
       <tr>
@@ -37,18 +60,14 @@ export default function Bot(props: botProps) {
           <BotStatusBadge status={props.bot.status} errorMessage={props.bot.errorMessage} />
         </td>
         <td>
-          <MdPlayArrow
-            className={css.start}
-            title="Start bot processing"
-            onClick={() => handleUpdateStatus(BotStatus.RUNNING)}
-          />
-          <MdStop
-            className={css.stop}
-            title="Stop bot processing"
-            onClick={() => handleUpdateStatus(BotStatus.READY)}
-          />
-          <MdEditNote className={css.edit} title="Edit bot script" onClick={handleScriptShow} />
-          <MdDelete className={css.delete} title="Delete bot" onClick={handleDelete} />
+          {getStatusChangeButton()}
+
+          {props.bot.status === BotStatus.READY && (
+            <>
+              <MdEditNote className={css.edit} title="Edit script" onClick={handleScriptShow} />
+              <MdDelete className={css.delete} title="Delete" onClick={handleDelete} />
+            </>
+          )}
         </td>
       </tr>
       <ScriptEditorModal show={showScriptModal} bot={props.bot} handleClose={handleScriptClose} />

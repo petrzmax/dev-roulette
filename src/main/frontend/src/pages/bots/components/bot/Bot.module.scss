@@ -25,6 +25,11 @@
   background-color: orange;
 }
 
+.reset {
+  @extend .button-base;
+  background-color: brown;
+}
+
 .delete {
   @extend .button-base;
   background-color: crimson;
