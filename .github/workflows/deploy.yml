@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ vars.NODEVERSION }}
 
       - name: Build backend jar
-        run: mvn package -Dmaven.test.skip=true --no-transfer-progress --update-snapshots
+        run: mvn package --batch-mode -Dmaven.test.skip=true --no-transfer-progress --update-snapshots
 
       - name: Install Front-end dependencies
         run: npm ci --no-fund

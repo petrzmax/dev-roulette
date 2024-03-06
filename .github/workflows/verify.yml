@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Run Maven verify
-        run: mvn verify --no-transfer-progress --update-snapshots
+        run: mvn verify --batch-mode --no-transfer-progress --update-snapshots
 
   buildFront:
     name: Front-end verify
