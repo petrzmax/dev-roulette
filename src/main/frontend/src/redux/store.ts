@@ -14,7 +14,7 @@ const reducer = {
 
 const store = configureStore({
   reducer,
-  middleware: [sagaMiddleware],
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
   devTools: import.meta.env.DEV
 });
 
