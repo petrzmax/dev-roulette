@@ -24,6 +24,7 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
+        <h2database.version>2.2.224</h2database.version>
 
         <!-- Maven plugins versions -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -54,8 +55,9 @@
         </dependency>
         <!-- Spring Boot - End -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2database.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
