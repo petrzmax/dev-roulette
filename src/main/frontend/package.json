@@ -23,7 +23,7 @@
     "redux-saga": "^1.2.3",
     "typescript": "^5.4.3",
     "universal-cookie": "^6.1.0",
-    "use-sound": "^4.0.1",
+    "use-sound": "^4.0.3",
     "web-vitals": "^3.5.0"
   },
   "scripts": {
