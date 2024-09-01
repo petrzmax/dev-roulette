@@ -24,7 +24,7 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
-        <h2database.version>2.3.230</h2database.version>
+        <h2database.version>2.3.232</h2database.version>
 
         <!-- Maven plugins versions -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
