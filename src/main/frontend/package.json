@@ -22,7 +22,7 @@
     "react-timer-hook": "^3.0.7",
     "redux-saga": "^1.2.3",
     "typescript": "^5.4.3",
-    "universal-cookie": "^6.1.0",
+    "universal-cookie": "^7.2.1",
     "use-sound": "^4.0.3",
     "web-vitals": "^4.2.3"
   },
